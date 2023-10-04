@@ -29,6 +29,10 @@ application {
     mainClass = 'Lab29.Huaicheng.Group1.A2.App'
 }
 
+run{
+    standardInput = System.in
+}
+
 tasks.named('test') {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
