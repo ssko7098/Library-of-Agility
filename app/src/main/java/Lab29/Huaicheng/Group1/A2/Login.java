@@ -13,34 +13,7 @@ public class Login {
     private static String userType;
     private static User user;
 
-    public static boolean askForLogin(){
-        Scanner scanner = new Scanner(System.in);
-        boolean isUser = false;
-
-        System.out.println("\nWelcome back user!");
-        System.out.print("Enter username: ");
-        String username = null;
-        if(scanner.hasNextLine()) {
-            username = scanner.nextLine();
-        }
-
-        System.out.print("Enter password: ");
-        String password = null;
-        if(scanner.hasNextLine()) {
-            password = scanner.nextLine();
-        }
-
-        if (username != null && password != null && login(username, password)) {
-            System.out.println("Login successful!");
-            isUser = true;
-        } else {
-            System.out.println("Invalid username or password. Please try again.");
-        }
-
-        return isUser;
-    }
-
-    private static boolean login(String username, String password){
+    public static boolean login(String username, String password){
 
         JSONParser parser = new JSONParser();
         JSONArray users = null;
@@ -56,25 +29,27 @@ public class Login {
         for(int i=0; i<users.size(); i++) {
             JSONObject iUser = (JSONObject) users.get(i);
 
-            user = new User(iUser.get("username").toString(), iUser.get("password").toString(),
-                    iUser.get("phone number").toString(), iUser.get("email address").toString(),
-                    iUser.get("full name").toString());
+            if(username.equals(iUser.get("username").toString())) {
+                user = new User(iUser.get("username").toString(), iUser.get("password").toString(),
+                        iUser.get("phone number").toString(), iUser.get("email address").toString(),
+                        iUser.get("full name").toString());
 
-            if(Boolean.parseBoolean(iUser.get("isAdmin").toString())) {
-                user.setAdmin();
-            }
-
-            if(username.equals(user.getUsername()) && password.equals(user.getPassword())) {
-                name = user.getFullName();
-
-                if(user.isAdmin()) {
-                    userType = "admin";
-                }
-                else {
-                    userType = "non-admin";
+                if(Boolean.parseBoolean(iUser.get("isAdmin").toString())) {
+                    user.setAdmin();
                 }
 
-                return true;
+                if(username.equals(user.getUsername()) && password.equals(user.getPassword())) {
+                    name = user.getFullName();
+
+                    if(user.isAdmin()) {
+                        userType = "admin";
+                    }
+                    else {
+                        userType = "non-admin";
+                    }
+
+                    return true;
+                }
             }
         }
 
