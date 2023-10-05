@@ -10,27 +10,4 @@ import java.io.IOException;
 
 public class Admin {
 
-    public static void viewAllUsers() {
-        JSONParser parser = new JSONParser();
-        JSONArray users = null;
-
-        try {
-            users = (JSONArray) parser.parse(new FileReader("users.json"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
-
-        for(int i=0; i<users.size(); i++) {
-            JSONObject user = (JSONObject) users.get(i);
-
-            for(Object entry: user.entrySet()) {
-                System.out.println(entry.toString());
-            }
-
-            System.out.println("\n");
-        }
-    }
-
 }

@@ -175,7 +175,7 @@ public class App {
 
             switch (selection) {
                 case 1:
-                    Admin.viewAllUsers();
+                    ViewUtils.viewAllUsers();
                     selection = -1;
                     break;
                 case 2:
