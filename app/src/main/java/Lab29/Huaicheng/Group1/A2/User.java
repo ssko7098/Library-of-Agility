@@ -9,10 +9,10 @@ public class User {
     private String fullName;
     private boolean isAdmin = false;
 
-    public User(String username, String password, Long phoneNumber, String emailAddress, String fullname) {
+    public User(String username, String password, String phoneNumber, String emailAddress, String fullname) {
         this.username = username;
         this.password = password;
-        this.phoneNumber = phoneNumber;
+        this.phoneNumber = Long.parseLong(phoneNumber);
         this.emailAddress = emailAddress;
         this.fullName = fullname;
     }
@@ -61,7 +61,7 @@ public class User {
         this.fullName = fullName;
     }
 
-    public void setAdmin(boolean admin) {
-        isAdmin = admin;
+    public void setAdmin() {
+        isAdmin = true;
     }
 }
