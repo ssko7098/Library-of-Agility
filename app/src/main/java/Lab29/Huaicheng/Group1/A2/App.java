@@ -1,5 +1,7 @@
 package Lab29.Huaicheng.Group1.A2;
 
+import java.util.Scanner;
+
 public class App {
     private static String[] nonAdmin = new String[]{
             "Manage my Profile",
@@ -48,13 +50,40 @@ public class App {
     }
 
     private static void loginMenu() {
-        boolean isUser = Login.askForLogin();
+        boolean isUser = askForLogin();
 
         while(!isUser) {
-            isUser = Login.askForLogin();
+            isUser = askForLogin();
         }
 
         initMenu();
+    }
+
+    public static boolean askForLogin(){
+        Scanner scanner = new Scanner(System.in);
+        boolean isUser = false;
+
+        System.out.println("\nWelcome back user!");
+        System.out.print("Enter username: ");
+        String username = null;
+        if(scanner.hasNextLine()) {
+            username = scanner.nextLine();
+        }
+
+        System.out.print("Enter password: ");
+        String password = null;
+        if(scanner.hasNextLine()) {
+            password = scanner.nextLine();
+        }
+
+        if (username != null && password != null && Login.login(username, password)) {
+            System.out.println("Login successful!");
+            isUser = true;
+        } else {
+            System.out.println("Invalid username or password. Please try again.");
+        }
+
+        return isUser;
     }
 
     private static void initMenu() {
