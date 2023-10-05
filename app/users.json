@@ -1,0 +1,19 @@
+
+[
+  {
+    "username": "ssko7098",
+    "password": "1234",
+    "phone number": "0418987298",
+    "email address": "sebastian.skontos@gmail.com",
+    "full name": "Sebastian Skontos",
+    "isAdmin": false
+  },
+  {
+    "username": "admin",
+    "password": "123",
+    "phone number": "0401033239",
+    "email address": "huaicheng.liu@gmail.com",
+    "full name": "Huaicheng Liu",
+    "isAdmin": true
+  }
+]
