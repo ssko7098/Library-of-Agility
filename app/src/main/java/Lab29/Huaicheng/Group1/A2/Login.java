@@ -2,7 +2,6 @@ package Lab29.Huaicheng.Group1.A2;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Scanner;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -16,13 +15,11 @@ public class Login {
     public static boolean login(String username, String password){
 
         JSONParser parser = new JSONParser();
-        JSONArray users = null;
+        JSONArray users;
 
         try {
             users = (JSONArray) parser.parse(new FileReader("users.json"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ParseException e) {
+        } catch (IOException | ParseException e) {
             throw new RuntimeException(e);
         }
 

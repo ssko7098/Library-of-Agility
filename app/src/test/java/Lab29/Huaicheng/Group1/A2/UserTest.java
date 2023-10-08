@@ -1,15 +1,15 @@
 package Lab29.Huaicheng.Group1.A2;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
 public class UserTest {
 
-    private User user;
+    private static User user;
 
-    @Before
-    public void setUser() {
+    @BeforeAll
+    public static void setUser() {
         user = new User(
                 "ssko7098",
                 "1234",
@@ -21,11 +21,14 @@ public class UserTest {
 
 
     @Test
-    public void changeUsername() {
+    public void changeUsernameCorrect() {
         // change username to one that doesn't already exist
         Assertions.assertTrue(user.setUsername("doesn't exist"));
         Assertions.assertEquals("doesn't exist", user.getUsername());
+    }
 
+    @Test
+    public void changeUsernameWrong() {
         // change username to one that already exists --> this shouldn't be allowed
         Assertions.assertFalse(user.setUsername("admin"));
         Assertions.assertEquals("ssko7098", user.getUsername());
