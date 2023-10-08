@@ -11,7 +11,7 @@ public class UserTest {
         user = new User(
                 "ssko7098",
                 "1234",
-                "04010332333",
+                "0401033233",
                 "sebastian.skontos@gmail.com",
                 "Sebastian Skontos"
                 );
@@ -21,7 +21,7 @@ public class UserTest {
     public void resetUser() {
         user.setUsername("ssko7098");
         user.setPassword("1234");
-        user.setPhoneNumber(0401033233L);
+        user.setPhoneNumber("0401033233");
         user.setEmailAddress("sebastian.skontos@gmail.com");
         user.setFullName("Sebastian Skontos");
     }
@@ -48,9 +48,16 @@ public class UserTest {
 
     @Test
     public void changePhoneNumber() {
-        Long number = 0401033233L;
+        String number = "0401033233";
         user.setPhoneNumber(number);
-        Assertions.assertEquals(number, user.getPhoneNumber());
+        Assertions.assertEquals(Long.parseLong(number), user.getPhoneNumber());
+    }
+
+    @Test
+    public void changePhoneNumberWrong() {
+        String number = "0401033230942";
+        user.setPhoneNumber(number);
+        Assertions.assertEquals(Long.parseLong("0401033233"), user.getPhoneNumber());
     }
 
     @Test
