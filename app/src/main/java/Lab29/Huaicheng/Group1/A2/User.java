@@ -1,5 +1,13 @@
 package Lab29.Huaicheng.Group1.A2;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import java.io.FileReader;
+import java.io.IOException;
+
 public class User {
 
     private String username;
@@ -41,8 +49,38 @@ public class User {
         return isAdmin;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public boolean setUsername(String username) {
+        // the username is meant to be a primary key, so we need to check
+        // whether it already exists.
+
+        JSONParser parser = new JSONParser();
+        JSONArray users = null;
+
+        try {
+            users = (JSONArray) parser.parse(new FileReader("users.json"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+
+        boolean alreadyExists = false;
+        for(int i=0; i<users.size(); i++) {
+            JSONObject iUser = (JSONObject) users.get(i);
+
+            if(username.equals(iUser.get("username").toString())) {
+                alreadyExists = true;
+            }
+        }
+
+        if(alreadyExists) {
+            System.out.println("This username is already taken. Please choose a different one.");
+        }
+        else {
+            this.username = username;
+        }
+
+        return alreadyExists;
     }
 
     public void setPassword(String password) {
