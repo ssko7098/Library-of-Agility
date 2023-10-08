@@ -24,7 +24,6 @@ public class App {
 
     private static void existingUserMenu() {
         int selection = -1;
-
         do {
             selection = ViewUtils.displayMenu("Welcome to the Library of Agility!",
                     new String[]{
@@ -38,6 +37,8 @@ public class App {
                     loginMenu();
                     break;
                 case 2:
+                    createUser();
+
                     //TODO change to new user registration screen
                     break;
 
@@ -55,6 +56,14 @@ public class App {
         }
 
         initMenu();
+    }
+
+    private static void createUser() {
+        boolean userCreated = NewUser.createUser();
+        while (!userCreated) {
+            userCreated = NewUser.createUser();
+        }
+        existingUserMenu();
     }
 
     private static void initMenu() {

@@ -40,7 +40,7 @@ public class Login {
         return isUser;
     }
 
-    private static boolean login(String username, String password){
+    static boolean login(String username, String password){
 
         JSONParser parser = new JSONParser();
         JSONArray users = null;
