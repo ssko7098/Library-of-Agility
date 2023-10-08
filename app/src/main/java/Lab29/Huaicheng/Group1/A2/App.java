@@ -26,7 +26,6 @@ public class App {
 
     private static void existingUserMenu() {
         int selection = -1;
-
         do {
             selection = ViewUtils.displayMenu("Welcome to the Library of Agility!",
                     new String[]{
@@ -41,6 +40,8 @@ public class App {
                     loginMenu();
                     break;
                 case 2:
+                    createUser();
+
                     //TODO change to new user registration screen
                     break;
                 case 3:
@@ -63,6 +64,15 @@ public class App {
         initMenu();
     }
 
+
+    private static void createUser() {
+        boolean userCreated = NewUser.createUser();
+        while (!userCreated) {
+            userCreated = NewUser.createUser();
+        }
+        existingUserMenu();
+    }
+    
     public static boolean askForLogin(){
         Scanner scanner = new Scanner(System.in);
         boolean isUser = false;
