@@ -149,21 +149,41 @@ public class App {
 
             switch (selection) {
                 case 1:
-                    Login.getUser().setUsername("TEST");
+                    String username = ViewUtils.checkUsernameInput();
+                    Login.getUser().updateUsernameToJSONFile(username);
+
                     selection = -1;
                     break;
                 case 2:
-//                    listVehicles();
+                    ViewUtils.checkPasswordInput();
                     selection = -1;
                     break;
                 case 3:
-                    return;
+                    boolean validNumber = Login.getUser().setPhoneNumber(ViewUtils.getString("Your current phone number is " + Login.getUser().getPhoneNumber() +
+                            ". Please enter your new Phone Number:"));
+
+                    while(!validNumber) {
+                        validNumber = Login.getUser().setPhoneNumber(ViewUtils.getString("Your current phone number is " + Login.getUser().getPhoneNumber() +
+                                ". Please enter your new Phone Number:"));
+                    }
+                    selection = -1;
+                    break;
 
                 case 4:
+                    boolean validEmail = Login.getUser().setEmailAddress(ViewUtils.getString("Your current email address is " + Login.getUser().getEmailAddress() +
+                            ". Please enter your new Email Address:"));
+
+                    while(!validEmail) {
+                        validEmail = Login.getUser().setEmailAddress(ViewUtils.getString("Your current email address is " + Login.getUser().getEmailAddress() +
+                                ". Please enter your new Email Address:"));
+                    }
+
                     selection = -1;
                     break;
 
                 case 5:
+                    Login.getUser().setFullName(ViewUtils.getString("Your current name is " + Login.getUser().getFullName() +
+                            ". Please enter your new name:"));
                     selection = -1;
                     break;
 

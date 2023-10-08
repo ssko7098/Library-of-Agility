@@ -53,6 +53,37 @@ public class Login {
         return false;
     }
 
+    public static boolean checkUsernameExists(String username) {
+        // the username is meant to be a primary key, so we need to check
+        // whether it already exists.
+
+        JSONParser parser = new JSONParser();
+        JSONArray users;
+
+        try {
+            users = (JSONArray) parser.parse(new FileReader("users.json"));
+        } catch (IOException | ParseException e) {
+            throw new RuntimeException(e);
+        }
+
+        boolean alreadyExists = false;
+        for(int i=0; i<users.size(); i++) {
+            JSONObject iUser = (JSONObject) users.get(i);
+
+            if(username.equals(iUser.get("username").toString())) {
+                alreadyExists = true;
+                break;
+            }
+        }
+
+        if(alreadyExists) {
+            // if username already exists, do nothing
+            System.out.println("This username is already taken. Please choose a different one.");
+        }
+
+        return !alreadyExists;
+    }
+
     public static String getName() {
         return name;
     }

@@ -29,14 +29,14 @@ public class UserTest {
     @Test
     public void changeUsernameCorrect() {
         // change username to one that doesn't already exist
-        Assertions.assertTrue(user.setUsername("doesn't exist"));
+        user.setUsername("doesn't exist");
         Assertions.assertEquals("doesn't exist", user.getUsername());
     }
 
     @Test
     public void changeUsernameWrong() {
         // change username to one that already exists --> this shouldn't be allowed
-        Assertions.assertFalse(user.setUsername("admin"));
+        user.setUsername("admin");
         Assertions.assertEquals("ssko7098", user.getUsername());
     }
 
@@ -50,19 +50,22 @@ public class UserTest {
     public void changePhoneNumber() {
         String number = "0401033233";
         user.setPhoneNumber(number);
-        Assertions.assertEquals(Long.parseLong(number), user.getPhoneNumber());
+        Assertions.assertEquals(number, user.getPhoneNumber());
     }
 
     @Test
     public void changePhoneNumberWrong() {
         String number = "0401033230942";
         user.setPhoneNumber(number);
-        Assertions.assertEquals(Long.parseLong("0401033233"), user.getPhoneNumber());
+        Assertions.assertEquals("0401033233", user.getPhoneNumber());
     }
 
     @Test
     public void changeEmailAddress() {
         user.setEmailAddress("john.smith@gmail.com");
+        Assertions.assertEquals("john.smith@gmail.com", user.getEmailAddress());
+
+        user.setEmailAddress("thisShouldntWork");
         Assertions.assertEquals("john.smith@gmail.com", user.getEmailAddress());
     }
 
