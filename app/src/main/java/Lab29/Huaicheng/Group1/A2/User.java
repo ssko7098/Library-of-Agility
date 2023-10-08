@@ -6,6 +6,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class User {
@@ -66,8 +67,9 @@ public class User {
         for(int i=0; i<users.size(); i++) {
             JSONObject iUser = (JSONObject) users.get(i);
 
-            if(iUser.get("username").toString().equals(username)) {
+            if(username.equals(iUser.get("username").toString())) {
                 alreadyExists = true;
+                break;
             }
         }
 
@@ -76,7 +78,10 @@ public class User {
             System.out.println("This username is already taken. Please choose a different one.");
         }
         else {
-            this.username = username;
+//            if(this.username.equals(iUser.get("username").toString())) {
+//                updateUsernameToJSONFile(username);
+//            }
+            updateUsernameToJSONFile(username);
         }
 
         return !alreadyExists;
@@ -100,5 +105,34 @@ public class User {
 
     public void setAdmin() {
         isAdmin = true;
+    }
+
+    public void updateUsernameToJSONFile(String username) {
+        JSONParser parser = new JSONParser();
+        JSONArray users;
+
+        try {
+            users = (JSONArray) parser.parse(new FileReader("users.json"));
+        } catch (IOException | ParseException e) {
+            throw new RuntimeException(e);
+        }
+
+        for(int i=0; i<users.size(); i++) {
+            JSONObject iUser = (JSONObject) users.get(i);
+
+            if(iUser.get("username").toString().equals(this.username)) {
+                iUser.replace("username", this.username, username);
+                this.username = username;
+            }
+        }
+
+        try {
+            FileWriter file = new FileWriter("users.json");
+            file.write(users.toJSONString());
+            file.flush();
+            file.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

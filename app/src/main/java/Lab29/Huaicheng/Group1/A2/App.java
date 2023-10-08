@@ -32,6 +32,7 @@ public class App {
                     new String[]{
                             "Existing User",
                             "New User",
+                            "EXIT",
                     },
                     "Are you an existing user or a new user?");
 
@@ -42,6 +43,9 @@ public class App {
                 case 2:
                     //TODO change to new user registration screen
                     break;
+                case 3:
+                    // exit the application
+                    return;
 
                 default:
                     // Can't get here
@@ -139,12 +143,13 @@ public class App {
                             "Update my phone number",
                             "Update my email address",
                             "Update my name",
+                            "GO BACK",
                     },
                     "Please enter a selection");
 
             switch (selection) {
                 case 1:
-//                    Login.getUser().setUsername("admin");
+                    Login.getUser().setUsername("TEST");
                     selection = -1;
                     break;
                 case 2:
@@ -153,6 +158,19 @@ public class App {
                     break;
                 case 3:
                     return;
+
+                case 4:
+                    selection = -1;
+                    break;
+
+                case 5:
+                    selection = -1;
+                    break;
+
+                case 6:
+                    initMenu();
+                    break;
+
                 default:
                     // Can't get here
             }
@@ -169,6 +187,7 @@ public class App {
                             "Add another user",
                             "Delete a user",
                             "View scroll statistics",
+                            "GO BACK",
                     },
                     "Please enter a selection");
 
@@ -182,7 +201,17 @@ public class App {
                     selection = -1;
                     break;
                 case 3:
-                    return;
+                    selection = -1;
+                    break;
+
+                case 4:
+                    selection = -1;
+                    break;
+
+                case 5:
+                    initMenu();
+                    break;
+
                 default:
                     // Can't get here
             }
