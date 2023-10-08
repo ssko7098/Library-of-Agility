@@ -54,13 +54,11 @@ public class User {
         // whether it already exists.
 
         JSONParser parser = new JSONParser();
-        JSONArray users = null;
+        JSONArray users;
 
         try {
             users = (JSONArray) parser.parse(new FileReader("users.json"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ParseException e) {
+        } catch (IOException | ParseException e) {
             throw new RuntimeException(e);
         }
 
@@ -68,19 +66,20 @@ public class User {
         for(int i=0; i<users.size(); i++) {
             JSONObject iUser = (JSONObject) users.get(i);
 
-            if(username.equals(iUser.get("username").toString())) {
+            if(iUser.get("username").toString().equals(username)) {
                 alreadyExists = true;
             }
         }
 
         if(alreadyExists) {
+            // if username already exists, do nothing
             System.out.println("This username is already taken. Please choose a different one.");
         }
         else {
             this.username = username;
         }
 
-        return alreadyExists;
+        return !alreadyExists;
     }
 
     public void setPassword(String password) {

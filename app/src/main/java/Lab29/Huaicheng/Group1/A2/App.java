@@ -134,18 +134,17 @@ public class App {
         do {
             selection = ViewUtils.displayMenu("\nWelcome " + Login.getName() + " (" + userType + ")",
                     new String[]{
+                            "Update my username",
+                            "Update my password",
                             "Update my phone number",
                             "Update my email address",
                             "Update my name",
-                            "Update my ID Key",
-                            "Update my username",
-                            "Update my password",
                     },
                     "Please enter a selection");
 
             switch (selection) {
                 case 1:
-//                    create();
+//                    Login.getUser().setUsername("admin");
                     selection = -1;
                     break;
                 case 2:
