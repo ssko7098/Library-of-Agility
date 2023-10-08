@@ -1,24 +1,30 @@
 package Lab29.Huaicheng.Group1.A2;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.*;
 
 public class UserTest {
 
-    private static User user;
+    private User user;
 
-    @BeforeAll
-    public static void setUser() {
+    @BeforeEach
+    public void setUser() {
         user = new User(
                 "ssko7098",
                 "1234",
-                "0401033232",
-                "ssko7098@uni.sydney.edu.au",
+                "04010332333",
+                "sebastian.skontos@gmail.com",
                 "Sebastian Skontos"
                 );
     }
 
+    @AfterEach
+    public void resetUser() {
+        user.setUsername("ssko7098");
+        user.setPassword("1234");
+        user.setPhoneNumber(0401033233L);
+        user.setEmailAddress("sebastian.skontos@gmail.com");
+        user.setFullName("Sebastian Skontos");
+    }
 
     @Test
     public void changeUsernameCorrect() {
