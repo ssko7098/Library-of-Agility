@@ -91,8 +91,15 @@ public class User {
         this.password = password;
     }
 
-    public void setPhoneNumber(Long phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setPhoneNumber(String phoneNumber) {
+        // phone numbers can only have 10 digits
+        // e.g. 0401 033 232
+        if(phoneNumber.split("").length == 10) {
+            this.phoneNumber = Long.parseLong(phoneNumber);
+        }
+        else {
+            System.out.println("Phone number may have too many digits. Please try again");
+        }
     }
 
     public void setEmailAddress(String emailAddress) {
