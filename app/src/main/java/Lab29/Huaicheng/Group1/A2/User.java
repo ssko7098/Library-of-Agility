@@ -54,6 +54,7 @@ public class User {
         boolean check = Login.checkUsernameExists(username);
 
         if(check) {
+            updateUsernameToJSONFile(this.username);
             this.username = username;
         }
     }
