@@ -13,7 +13,7 @@ public class User {
 
     private String username;
     private String password;
-    private Long phoneNumber;
+    private String phoneNumber;
     private String emailAddress;
     private String fullName;
     private boolean isAdmin = false;
@@ -21,7 +21,7 @@ public class User {
     public User(String username, String password, String phoneNumber, String emailAddress, String fullname) {
         this.username = username;
         this.password = password;
-        this.phoneNumber = Long.parseLong(phoneNumber);
+        this.phoneNumber = phoneNumber;
         this.emailAddress = emailAddress;
         this.fullName = fullname;
     }
@@ -34,7 +34,7 @@ public class User {
         return password;
     }
 
-    public Long getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
@@ -50,70 +50,56 @@ public class User {
         return isAdmin;
     }
 
-    public boolean setUsername(String username) {
-        // the username is meant to be a primary key, so we need to check
-        // whether it already exists.
+    public void setUsername(String username) {
+        boolean check = Login.checkUsernameExists(username);
 
-        JSONParser parser = new JSONParser();
-        JSONArray users;
-
-        try {
-            users = (JSONArray) parser.parse(new FileReader("users.json"));
-        } catch (IOException | ParseException e) {
-            throw new RuntimeException(e);
+        if(check) {
+            this.username = username;
         }
-
-        boolean alreadyExists = false;
-        for(int i=0; i<users.size(); i++) {
-            JSONObject iUser = (JSONObject) users.get(i);
-
-            if(username.equals(iUser.get("username").toString())) {
-                alreadyExists = true;
-                break;
-            }
-        }
-
-        if(alreadyExists) {
-            // if username already exists, do nothing
-            System.out.println("This username is already taken. Please choose a different one.");
-        }
-        else {
-//            if(this.username.equals(iUser.get("username").toString())) {
-//                updateUsernameToJSONFile(username);
-//            }
-            updateUsernameToJSONFile(username);
-        }
-
-        return !alreadyExists;
     }
 
     public void setPassword(String password) {
         this.password = password;
+        updateUserToJSONFile();
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        // phone numbers can only have 10 digits
-        // e.g. 0401 033 232
+    public boolean setPhoneNumber(String phoneNumber) {
+        // phone numbers can only have 10 digits --> e.g. 0401 033 232
         if(phoneNumber.split("").length == 10) {
-            this.phoneNumber = Long.parseLong(phoneNumber);
+            this.phoneNumber = phoneNumber;
+            updateUserToJSONFile();
+            return true;
         }
         else {
             System.out.println("Phone number may have too many digits. Please try again");
+            return false;
         }
     }
 
-    public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
+    public boolean setEmailAddress(String emailAddress) {
+        // email address must contain '@' character
+        if(emailAddress.contains("@")) {
+            this.emailAddress = emailAddress;
+            updateUserToJSONFile();
+            return true;
+        }
+        else {
+            System.out.println("Your email address must contain the '@' symbol. Please try again");
+            return false;
+        }
     }
 
     public void setFullName(String fullName) {
         this.fullName = fullName;
+        updateUserToJSONFile();
     }
 
     public void setAdmin() {
         isAdmin = true;
+        updateUserToJSONFile();
     }
 
+    @SuppressWarnings("unchecked")
     public void updateUsernameToJSONFile(String username) {
         JSONParser parser = new JSONParser();
         JSONArray users;
@@ -128,8 +114,41 @@ public class User {
             JSONObject iUser = (JSONObject) users.get(i);
 
             if(iUser.get("username").toString().equals(this.username)) {
-                iUser.replace("username", this.username, username);
+                iUser.replace("username", username);
                 this.username = username;
+            }
+        }
+
+        try {
+            FileWriter file = new FileWriter("users.json");
+            file.write(users.toJSONString());
+            file.flush();
+            file.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    public void updateUserToJSONFile() {
+        JSONParser parser = new JSONParser();
+        JSONArray users;
+
+        try {
+            users = (JSONArray) parser.parse(new FileReader("users.json"));
+        } catch (IOException | ParseException e) {
+            throw new RuntimeException(e);
+        }
+
+        for(int i=0; i<users.size(); i++) {
+            JSONObject iUser = (JSONObject) users.get(i);
+
+            if(iUser.get("username").toString().equals(this.username)) {
+                iUser.replace("password", password);
+                iUser.replace("email address", emailAddress);
+                iUser.replace("phone number", phoneNumber);
+                iUser.replace("full name", fullName);
+                iUser.replace("isAdmin", isAdmin);
             }
         }
 

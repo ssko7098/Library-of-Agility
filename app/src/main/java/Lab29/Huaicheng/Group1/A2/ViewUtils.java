@@ -64,26 +64,68 @@ public class ViewUtils {
     }
 
     static boolean getBoolean(String prompt) {
-        prompt = prompt + "(y/n) ";
-        Boolean response;
+        prompt = prompt + " (y/n) ";
+        Boolean response = null;
+
         do {
             String str = getString(prompt);
-            if ("y".equals(str.toLowerCase())) {
-                return true;
+            if ("y".equalsIgnoreCase(str)) {
+                response = true;
+            }
+            else if ("n".equalsIgnoreCase((str))) {
+                response = false;
+            }
+            else {
+                System.out.println("Invalid input - must be y or n");
             }
 
-            if ("n".equals((str.toLowerCase()))) {
-                return false;
+        } while (null == response);
+
+        return response;
+    }
+
+    public static String checkUsernameInput() {
+
+        boolean check;
+        String test = null;
+
+        do {
+            boolean validUsername = false;
+
+            while(!validUsername) {
+
+                test = ViewUtils.getString("Your current username is " + Login.getUser().getUsername() +
+                        ". Please enter your new Username:");
+
+                validUsername = Login.checkUsernameExists(test);
             }
 
-            System.out.println("Invalid input - must be y or n");
+            check = getBoolean("Are you sure you want your new Username to be: " + test + "?");
 
-        } while (true);
+        }while(!check);
+
+        return test;
+    }
+
+    public static void checkPasswordInput() {
+
+        boolean check;
+        String test;
+
+        do {
+            test = ViewUtils.getString("Your current password is " + Login.getUser().getPassword() +
+                    ". Please enter your new Password:");
+
+            check = getBoolean("Are you sure you want your new Password to be: " + test + "?");
+
+        }while(!check);
+
+        Login.getUser().setPassword(test);
     }
 
     public static void viewAllUsers() {
         JSONParser parser = new JSONParser();
-        JSONArray users = null;
+        JSONArray users;
 
         try {
             users = (JSONArray) parser.parse(new FileReader("users.json"));
