@@ -131,25 +131,6 @@ public class User {
         }
     }
 
-//    public static void createNewUser(String username, String password){
-//        JSONParser parser = new JSONParser();
-//        JSONArray userList;
-//        try {
-//            userList = (JSONArray) parser.parse(new FileReader("users.json"));
-//        } catch (IOException | ParseException e) {
-//            throw new RuntimeException(e);
-//        }
-//        JSONObject userDetails = new JSONObject();
-//
-//        userDetails.put("password", password);
-//        userDetails.put("email address", null);
-//        userDetails.put("isAdmin", false);
-//        userDetails.put("phone number", null);
-//        userDetails.put("full name", null);
-//        userDetails.put("username", username);
-//
-//        userList.add(userDetails);
-//    }
     @SuppressWarnings("unchecked")
     public void updateUserToJSONFile() {
         JSONParser parser = new JSONParser();
