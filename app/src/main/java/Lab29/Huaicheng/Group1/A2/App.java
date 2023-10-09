@@ -40,7 +40,7 @@ public class App {
                     loginMenu();
                     break;
                 case 2:
-                    createUser();
+                    createUserMenu();
 
                     //TODO change to new user registration screen
                     break;
@@ -65,12 +65,42 @@ public class App {
     }
 
 
-    private static void createUser() {
-        boolean userCreated = NewUser.createUser();
+    private static void createUserMenu() {
+        boolean userCreated = createUser();
+
         while (!userCreated) {
-            userCreated = NewUser.createUser();
+            userCreated = createUser();
         }
+
         existingUserMenu();
+    }
+
+    public static boolean createUser() {
+        Scanner scanner = new Scanner(System.in);
+        boolean userCreated = false;
+
+        System.out.println("\nUser Registration");
+        System.out.print("Enter username: ");
+        String username = null;
+        if (scanner.hasNextLine()) {
+            username = scanner.nextLine();
+        }
+
+        System.out.print("Enter password: ");
+        String password = null;
+        if (scanner.hasNextLine()) {
+            password = scanner.nextLine();
+        }
+
+        if (username != null && password != null && Login.checkUsernameExists(username)) {
+            userCreated = true;
+            System.out.println("Registration successful!");
+        }
+        else if (username == null || password == null) {
+            System.out.println("username or password cannot be blank");
+        }
+
+        return userCreated;
     }
     
     public static boolean askForLogin(){
