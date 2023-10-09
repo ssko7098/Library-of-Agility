@@ -57,8 +57,6 @@ public class Login {
     public static boolean checkUsernameExists(String username) {
         // the username is meant to be a primary key, so we need to check
         // whether it already exists.
-
-
         JSONParser parser = new JSONParser();
         JSONArray users;
 
