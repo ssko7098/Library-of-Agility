@@ -3,6 +3,8 @@ package Lab29.Huaicheng.Group1.A2;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+
 class LoginTest {
 
     @Test
@@ -29,6 +31,19 @@ class LoginTest {
         Assertions.assertTrue(Login.login(nonAdminUsername, nonAdminPassword));
         Assertions.assertFalse(Login.getUser().isAdmin());
         Assertions.assertEquals("Sebastian Skontos", Login.getName());
+    }
+
+    @Test
+    public void createNewUserTest() {
+        String newUsername = "test";
+        String newPassword = "1234";
+
+        try {
+            Login.createNewUser(newUsername, newPassword);
+            Assertions.assertFalse(Login.checkUsernameExists(newUsername));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }
