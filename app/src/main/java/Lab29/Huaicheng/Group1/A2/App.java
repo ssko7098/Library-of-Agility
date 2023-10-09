@@ -1,5 +1,13 @@
 package Lab29.Huaicheng.Group1.A2;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class App {
@@ -20,11 +28,11 @@ public class App {
 
     private static String userType = "non-admin";
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         existingUserMenu();
     }
 
-    private static void existingUserMenu() {
+    private static void existingUserMenu() throws IOException {
         int selection = -1;
         do {
             selection = ViewUtils.displayMenu("Welcome to the Library of Agility!",
@@ -54,7 +62,7 @@ public class App {
         } while (-1 == selection);
     }
 
-    private static void loginMenu() {
+    private static void loginMenu() throws IOException {
         boolean isUser = askForLogin();
 
         while(!isUser) {
@@ -65,7 +73,7 @@ public class App {
     }
 
 
-    private static void createUserMenu() {
+    private static void createUserMenu() throws IOException {
         boolean userCreated = createUser();
 
         while (!userCreated) {
@@ -75,7 +83,7 @@ public class App {
         existingUserMenu();
     }
 
-    public static boolean createUser() {
+    public static boolean createUser() throws IOException {
         Scanner scanner = new Scanner(System.in);
         boolean userCreated = false;
 
@@ -93,8 +101,9 @@ public class App {
         }
 
         if (username != null && password != null && Login.checkUsernameExists(username)) {
-            userCreated = true;
             System.out.println("Registration successful!");
+            createNewUser(username, password);
+            userCreated = true;
         }
         else if (username == null || password == null) {
             System.out.println("username or password cannot be blank");
@@ -102,7 +111,33 @@ public class App {
 
         return userCreated;
     }
-    
+
+    public static void createNewUser(String username, String password) throws IOException {
+        JSONParser parser = new JSONParser();
+        JSONArray userList;
+        try {
+            userList = (JSONArray) parser.parse(new FileReader("users.json"));
+        } catch (IOException | ParseException e) {
+            throw new RuntimeException(e);
+        }
+        JSONObject userDetails = new JSONObject();
+
+        userDetails.put("password", password);
+        userDetails.put("email address", null);
+        userDetails.put("isAdmin", false);
+        userDetails.put("phone number", null);
+        userDetails.put("full name", null);
+        userDetails.put("username", username);
+
+        userList.add(userDetails);
+
+
+        FileWriter file = new FileWriter("users.json");
+        file.write(userList.toJSONString());
+        file.flush();
+        file.close();
+    }
+
     public static boolean askForLogin(){
         Scanner scanner = new Scanner(System.in);
         boolean isUser = false;
@@ -130,7 +165,7 @@ public class App {
         return isUser;
     }
 
-    private static void initMenu() {
+    private static void initMenu() throws IOException {
         int selection = -1;
         String[] access;
 
@@ -172,7 +207,7 @@ public class App {
         } while (-1 == selection);
     }
 
-    private static void updateUserMenu() {
+    private static void updateUserMenu() throws IOException {
         int selection;
 
         do {
@@ -237,7 +272,7 @@ public class App {
         } while (-1 == selection);
     }
 
-    private static void adminMenu() {
+    private static void adminMenu() throws IOException {
         int selection;
 
         do {
