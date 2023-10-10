@@ -1,11 +1,14 @@
 package Lab29.Huaicheng.Group1.A2;
 
+import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LoginTest {
 
@@ -45,6 +48,16 @@ class LoginTest {
             Assertions.assertFalse(Login.checkUsernameExists(newUsername));
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    String encryptedPass = Encryptor.encryptString("123");
+    @Test
+    public void invalidAlgorithm(){
+        try {
+            assertEquals(encryptedPass, Encryptor.encryptString("123"));
+        } catch (AssertionError e){
+            Assertions.fail();
         }
     }
 

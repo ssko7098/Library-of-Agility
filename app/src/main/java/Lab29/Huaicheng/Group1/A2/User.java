@@ -5,12 +5,9 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import javax.crypto.NoSuchPaddingException;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
 
 public class User {
 
@@ -67,7 +64,7 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = Encryptor.encrptyString(password);
+        this.password = Encryptor.encryptString(password);
         updateUserToJSONFile();
     }
 

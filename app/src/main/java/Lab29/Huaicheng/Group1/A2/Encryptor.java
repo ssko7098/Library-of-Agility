@@ -6,7 +6,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class Encryptor {
 
-    public static String encrptyString(String password){
+    public static String encryptString(String password){
 
         MessageDigest md;
         try {
