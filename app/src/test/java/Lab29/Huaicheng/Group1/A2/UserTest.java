@@ -43,7 +43,7 @@ public class UserTest {
     @Test
     public void changePassword() {
         user.setPassword("new password");
-        Assertions.assertEquals("new password", user.getPassword());
+        Assertions.assertEquals(Encryptor.encrptyString("new password"), user.getPassword());
     }
 
     @Test
