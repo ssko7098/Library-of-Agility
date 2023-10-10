@@ -123,9 +123,10 @@ public class ViewUtils {
         Login.getUser().setPassword(test);
     }
 
-    public static void viewAllUsers() {
+    public static void viewAllUsers(int displayKey) {
         JSONParser parser = new JSONParser();
         JSONArray users;
+        System.out.println("\n\nList Of Users: ");
 
         try {
             users = (JSONArray) parser.parse(new FileReader("users.json"));
