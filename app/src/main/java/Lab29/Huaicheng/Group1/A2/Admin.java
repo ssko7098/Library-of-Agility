@@ -13,7 +13,6 @@ public class Admin {
     public static boolean checkDelete(String username) {
         JSONParser parser = new JSONParser();
         JSONArray users;
-        boolean isUserDeleted = false;
 
         try {
             users = (JSONArray) parser.parse(new FileReader("users.json"));
@@ -21,22 +20,37 @@ public class Admin {
                 JSONObject user = (JSONObject) users.get(i);
 
                 if (username.equals(user.get("username").toString()) && !(boolean) user.get("isAdmin")) {
-                    users.remove(i);
-                    isUserDeleted = true;
-                    break;
-                }
-            }
-
-            // Writing back to file if user is deleted
-            if (isUserDeleted) {
-                try (FileWriter file = new FileWriter("users.json")) {
-                    file.write(users.toJSONString());
+                    return true;
                 }
             }
         } catch (IOException | ParseException e) {
             throw new RuntimeException(e);
         }
 
-        return isUserDeleted;
+        // User does not exist or is an admin, so cannot be deleted.
+        return false;
+    }
+
+    public static void deleteUser(String username) {
+        JSONParser parser = new JSONParser();
+        JSONArray users;
+
+        try {
+            users = (JSONArray) parser.parse(new FileReader("users.json"));
+            for (int i = 0; i < users.size(); i++) {
+                JSONObject user = (JSONObject) users.get(i);
+
+                if (username.equals(user.get("username").toString())) {
+                    users.remove(i);
+
+                    try (FileWriter file = new FileWriter("users.json")) {
+                        file.write(users.toJSONString());
+                    }
+                    return;
+                }
+            }
+        } catch (IOException | ParseException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

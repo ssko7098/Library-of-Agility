@@ -66,7 +66,7 @@ public class App {
     private static void loginMenu() throws IOException {
         boolean isUser = askForLogin();
 
-        while(!isUser) {
+        while (!isUser) {
             isUser = askForLogin();
         }
 
@@ -136,13 +136,13 @@ public class App {
 
             //enter email prompt
             String email = ViewUtils.getStringOnSameLine("Enter Email: ");
-            while(!user.setEmailAddress(email)) {
+            while (!user.setEmailAddress(email)) {
                 email = ViewUtils.getStringOnSameLine("Enter Email: ");
             }
 
             //enter phone prompt
             String phone = ViewUtils.getStringOnSameLine("Enter Phone Number: ");
-            while(!user.setPhoneNumber(phone)) {
+            while (!user.setPhoneNumber(phone)) {
                 phone = ViewUtils.getStringOnSameLine("Enter Phone Number: ");
             }
 
@@ -159,20 +159,20 @@ public class App {
         return userCreated;
     }
 
-    public static boolean askForLogin(){
+    public static boolean askForLogin() {
         Scanner scanner = new Scanner(System.in);
         boolean isUser = false;
 
         System.out.println("\nWelcome back user!");
         System.out.print("Enter username: ");
         String username = null;
-        if(scanner.hasNextLine()) {
+        if (scanner.hasNextLine()) {
             username = scanner.nextLine();
         }
 
         System.out.print("Enter password: ");
         String password = null;
-        if(scanner.hasNextLine()) {
+        if (scanner.hasNextLine()) {
             password = scanner.nextLine();
         }
 
@@ -190,11 +190,10 @@ public class App {
         int selection = -1;
         String[] access;
 
-        if(Login.getUser().isAdmin()) {
+        if (Login.getUser().isAdmin()) {
             access = admin;
             userType = "admin";
-        }
-        else {
+        } else {
             access = nonAdmin;
             userType = "non-admin";
         }
@@ -355,20 +354,45 @@ public class App {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter Username For Deletion: ");
         String username = null;
-        if(scanner.hasNextLine()) {
+        if (scanner.hasNextLine()) {
             username = scanner.nextLine();
         }
 
-        if(username != null) {
-            boolean isUserDeleted = Admin.checkDelete(username);
+        if (username != null) {
+            boolean deletable = Admin.checkDelete(username);
 
-            if(isUserDeleted) {
-                System.out.println("User deleted successfully!");
-            } else {
+            if (!deletable) {
                 System.out.println("\nUser not found or is an admin, and cannot be deleted!");
                 deleteUser();
+            } else {
+                if (confirmDeletion(username)) {
+                    Admin.deleteUser(username);
+                    System.out.println("User deleted successfully!");
+                } else {
+                    System.out.println("User deletion cancelled.");
+                }
             }
         }
+    }
 
+    private static boolean confirmDeletion(String username) {
+        int selection;
+        do {
+            selection = ViewUtils.displayMenu("\nMake Selection:",
+                    new String[]{
+                            "Yes",
+                            "No",
+                    },
+                    "Are you sure you want to delete user: '" + username + "'?");
+
+            switch (selection) {
+                case 1:
+                    return true;
+                case 2:
+                    return false;
+                default:
+                    System.out.println("Invalid selection, please choose 1 for Yes or 2 for No.");
+            }
+        } while (true);
     }
 }
