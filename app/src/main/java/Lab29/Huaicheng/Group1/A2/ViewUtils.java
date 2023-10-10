@@ -48,6 +48,26 @@ public class ViewUtils {
         return response;
     }
 
+    static String getStringOnSameLine(String prompt) {
+        Scanner s = new Scanner(System.in);
+        String response = null;
+
+        do {
+            System.out.print(prompt);
+            if(s.hasNextLine()) {
+                response = s.nextLine();
+
+                if ("".equals(response)) {
+                    response = null;
+                    System.out.println("Blank entry is not allowed.");
+                }
+            }
+
+        } while (null == response);
+
+        return response;
+    }
+
     static int getInt(String prompt) {
 
         int response;

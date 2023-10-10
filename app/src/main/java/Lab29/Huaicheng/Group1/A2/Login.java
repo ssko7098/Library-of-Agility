@@ -98,7 +98,7 @@ public class Login {
     }
 
     @SuppressWarnings("unchecked")
-    public static void createNewUser(String username, String password, String name, String email, String phone) throws IOException {
+    public static void createNewUser(User user) throws IOException {
         JSONParser parser = new JSONParser();
         JSONArray userList;
         try {
@@ -108,12 +108,12 @@ public class Login {
         }
         JSONObject userDetails = new JSONObject();
 
-        userDetails.put("password", password);
-        userDetails.put("email address", email);
-        userDetails.put("isAdmin", false);
-        userDetails.put("phone number", phone);
-        userDetails.put("full name", name);
-        userDetails.put("username", username);
+        userDetails.put("password", user.getPassword());
+        userDetails.put("email address", user.getEmailAddress());
+        userDetails.put("isAdmin", user.isAdmin());
+        userDetails.put("phone number", user.getPassword());
+        userDetails.put("full name", user.getFullName());
+        userDetails.put("username", user.getUsername());
 
         userList.add(userDetails);
 
