@@ -3,10 +3,14 @@ package Lab29.Huaicheng.Group1.A2;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+
+import javax.crypto.NoSuchPaddingException;
 
 public class Login {
     private static String name;
@@ -112,7 +116,6 @@ public class Login {
         userDetails.put("username", username);
 
         userList.add(userDetails);
-
 
         FileWriter file = new FileWriter("users.json");
         file.write(userList.toJSONString());
