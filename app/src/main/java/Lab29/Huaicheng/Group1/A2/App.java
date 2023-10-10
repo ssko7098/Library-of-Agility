@@ -139,6 +139,9 @@ public class App {
                 phone = ViewUtils.getStringOnSameLine("Enter Phone Number: ");
             }
 
+            //update user as per admin
+            user.setAdmin(isAdmin);
+
             System.out.println("Registration Successful");
 
             Login.createNewUser(user);
@@ -186,6 +189,7 @@ public class App {
         }
         else {
             access = nonAdmin;
+            userType = "non-admin";
         }
 
         do {

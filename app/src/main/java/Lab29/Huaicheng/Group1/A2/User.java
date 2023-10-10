@@ -102,8 +102,8 @@ public class User {
         updateUserToJSONFile();
     }
 
-    public void setAdmin() {
-        isAdmin = true;
+    public void setAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
         updateUserToJSONFile();
     }
 
