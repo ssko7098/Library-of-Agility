@@ -27,10 +27,7 @@ class LoginTest {
 
     @Test
     public void nonAdminLoginTest() {
-        String nonAdminUsername = "ssko7098";
-        String nonAdminPassword = "1234";
-
-        Assertions.assertTrue(Login.login(nonAdminUsername, nonAdminPassword));
+        Assertions.assertTrue(Login.login("ssko7098", "1234"));
         Assertions.assertFalse(Login.getUser().isAdmin());
         Assertions.assertEquals("Sebastian Skontos", Login.getName());
     }
@@ -44,7 +41,7 @@ class LoginTest {
         String newPhone = "0412343891";
 
         try {
-            Login.createNewUser(newUsername, newPassword, newName, newEmail, newPhone);
+            Login.createNewUser(new User(newUsername, newPassword, newPhone, newEmail, newName));
             Assertions.assertFalse(Login.checkUsernameExists(newUsername));
         } catch (IOException e) {
             throw new RuntimeException(e);
