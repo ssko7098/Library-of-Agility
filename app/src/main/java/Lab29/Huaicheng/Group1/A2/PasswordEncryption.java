@@ -32,20 +32,34 @@ public class PasswordEncryption {
     }
 
     private byte[] encrypt(String user, String input, Key key) throws Exception {
-
         cipher.init(Cipher.ENCRYPT_MODE,key);
         byte[] iBytes = input.getBytes();
         byte[] encryption = cipher.doFinal(iBytes);
         keyList.put(user,key);
         passwordList.put(user,encryption);
-
         return encryption;
     }
-
     public String decrypt(byte[] encrypted, Key key) throws Exception {
         cipher.init(Cipher.DECRYPT_MODE, key);
         byte[] unencryptedBytes = cipher.doFinal(encrypted);
         return new String(unencryptedBytes);
+    }
+
+    public String retrieveDecryption(String user){
+        try {
+            cipher.init(cipher.DECRYPT_MODE,keyList.get(user));
+        } catch (InvalidKeyException e) {
+            throw new RuntimeException(e);
+        }
+        byte[] unecryptedBytes;
+        try {
+            unecryptedBytes = cipher.doFinal(passwordList.get(user));
+        } catch (IllegalBlockSizeException e) {
+            throw new RuntimeException(e);
+        } catch (BadPaddingException e) {
+            throw new RuntimeException(e);
+        }
+        return new String(unecryptedBytes);
     }
 
 }
