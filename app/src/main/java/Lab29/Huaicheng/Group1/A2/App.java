@@ -117,47 +117,31 @@ public class App {
         boolean userCreated = false;
 
         System.out.println("\nUser Registration");
-        System.out.print("Enter username: ");
-        String username = null;
-        if (scanner.hasNextLine()) {
-            username = scanner.nextLine();
-        }
+        String username = ViewUtils.getStringOnSameLine("Enter Username: ");
+        User user = new User(username);
 
-        System.out.print("Enter password: ");
-        String password = null;
-        if (scanner.hasNextLine()) {
-            password = scanner.nextLine();
-        }
-
-        if (username != null && password != null && Login.checkUsernameExists(username)) {
-            System.out.println("Please Enter New Details.");
+        if (Login.checkUsernameExists(username)) {
+            //enter password prompt
+            user.setPassword(ViewUtils.getStringOnSameLine("Enter Password: "));
 
             //enter name prompt
-            System.out.print("Enter Full Name: ");
-            String name = null;
-            if (scanner.hasNextLine()) {
-                name = scanner.nextLine();
-            }
+            user.setFullName(ViewUtils.getStringOnSameLine("Enter Full Name: "));
 
             //enter email prompt
-            System.out.print("Enter Email: ");
-            String email = null;
-            if (scanner.hasNextLine()) {
-                email = scanner.nextLine();
+            String email = ViewUtils.getStringOnSameLine("Enter Email: ");
+            while(!user.setEmailAddress(email)) {
+                email = ViewUtils.getStringOnSameLine("Enter Email: ");
             }
+
             //enter phone prompt
-            System.out.print("Enter Phone Number: ");
-            String phone = null;
-            if (scanner.hasNextLine()) {
-                phone = scanner.nextLine();
+            String phone = ViewUtils.getStringOnSameLine("Enter Phone Number: ");
+            while(!user.setPhoneNumber(phone)) {
+                phone = ViewUtils.getStringOnSameLine("Enter Phone Number: ");
             }
 
             System.out.println("Registration Successful");
-            Login.createNewUser(username, password, name, email, phone);
+            Login.createNewUser(user);
             userCreated = true;
-        }
-        else if (username == null || password == null) {
-            System.out.println("username or password cannot be blank");
         }
 
         return userCreated;

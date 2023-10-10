@@ -29,6 +29,10 @@ public class User {
         this.fullName = fullname;
     }
 
+    public User(String username) {
+        this.username = username;
+    }
+
     public String getUsername() {
         return username;
     }
@@ -75,7 +79,7 @@ public class User {
             return true;
         }
         else {
-            System.out.println("Phone number may have too many digits. Please try again");
+            System.out.println("Phone number must have 10 digits. Please enter without spaces and try again");
             return false;
         }
     }
