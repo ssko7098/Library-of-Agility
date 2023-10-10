@@ -83,6 +83,11 @@ public class App {
         existingUserMenu();
     }
 
+    private static void viewUsers() throws IOException {
+        ViewUtils.viewAllUsers();
+        adminMenu();
+    }
+
     public static boolean createUser() throws IOException {
         Scanner scanner = new Scanner(System.in);
         boolean userCreated = false;
@@ -262,7 +267,8 @@ public class App {
 
             switch (selection) {
                 case 1:
-                    ViewUtils.viewAllUsers();
+                    viewUsers();
+
                     selection = -1;
                     break;
                 case 2:
