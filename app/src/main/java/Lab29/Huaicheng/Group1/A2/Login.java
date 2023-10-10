@@ -37,7 +37,7 @@ public class Login {
                         iUser.get("full name").toString());
 
                 if(Boolean.parseBoolean(iUser.get("isAdmin").toString())) {
-                    user.setAdmin();
+                    user.setAdmin(true);
                 }
 
                 if(username.equals(user.getUsername()) && password.equals(user.getPassword())) {
