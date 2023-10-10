@@ -20,7 +20,6 @@ public class User {
     private String emailAddress;
     private String fullName;
     private boolean isAdmin = false;
-    private PasswordEncryption encryption;
 
     public User(String username, String password, String phoneNumber, String emailAddress, String fullname) {
         this.username = username;
@@ -28,12 +27,6 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.emailAddress = emailAddress;
         this.fullName = fullname;
-
-        try {
-            this.encryption = new PasswordEncryption();
-        } catch (NoSuchPaddingException | NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     public String getUsername() {
@@ -155,14 +148,7 @@ public class User {
             JSONObject iUser = (JSONObject) users.get(i);
 
             if(iUser.get("username").toString().equals(this.username)) {
-                byte[] encryptedPassword;
-                try {
-                    encryptedPassword = encryption.ReplaceMethod(username, password);
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
-
-                iUser.replace("password", encryptedPassword.toString());
+                iUser.replace("password", password);
                 iUser.replace("email address", emailAddress);
                 iUser.replace("phone number", phoneNumber);
                 iUser.replace("full name", fullName);
@@ -180,7 +166,4 @@ public class User {
         }
     }
 
-//    public String getDecryptedPassword() {
-//        encryption.decrypt(password);
-//    }
 }
