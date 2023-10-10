@@ -137,12 +137,19 @@ public class ViewUtils {
 
         for(int i=0; i<users.size(); i++) {
             JSONObject user = (JSONObject) users.get(i);
+            String name = (String) user.get("full name");
+            String password = (String) user.get("password");
+            String email = (String) user.get("email address");
+            boolean isAdmin = (boolean) user.get("isAdmin");
+            String phoneNumber = (String) user.get("phone number");
+            String username = (String) user.get("username");
 
-            for(Object entry: user.entrySet()) {
-                System.out.println(entry.toString());
-            }
+//            for(Object entry: user.entrySet()) {
+//                System.out.println(entry.toString());
+//            }
+            System.out.println(name + ": " + phoneNumber);
 
-            System.out.println("\n");
+//            System.out.println("\n");
         }
     }
 }
