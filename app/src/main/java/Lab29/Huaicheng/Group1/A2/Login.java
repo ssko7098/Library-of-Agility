@@ -39,22 +39,17 @@ public class Login {
                 if(Boolean.parseBoolean(iUser.get("isAdmin").toString())) {
                     user.setAdmin(true);
                 }
+                if(username.equals(user.getUsername()) && Encryptor.encrptyString(password).equals(user.getPassword())) {
+                    name = user.getFullName();
 
-                try {
-                    if(username.equals(user.getUsername()) && Encryptor.encrptyString(password).equals(user.getPassword())) {
-                        name = user.getFullName();
-
-                        if(user.isAdmin()) {
-                            userType = "admin";
-                        }
-                        else {
-                            userType = "non-admin";
-                        }
-
-                        return true;
+                    if(user.isAdmin()) {
+                        userType = "admin";
                     }
-                } catch (NoSuchAlgorithmException e) {
-                    throw new RuntimeException(e);
+                    else {
+                        userType = "non-admin";
+                    }
+
+                    return true;
                 }
             }
         }
@@ -112,11 +107,7 @@ public class Login {
         }
         JSONObject userDetails = new JSONObject();
 
-        try {
-            userDetails.put("password", Encryptor.encrptyString(user.getPassword()));
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        }
+        userDetails.put("password", Encryptor.encrptyString(user.getPassword()));
         userDetails.put("email address", user.getEmailAddress());
         userDetails.put("isAdmin", user.isAdmin());
         userDetails.put("phone number", user.getPassword());

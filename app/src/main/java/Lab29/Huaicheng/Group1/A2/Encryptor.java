@@ -6,9 +6,14 @@ import java.security.NoSuchAlgorithmException;
 
 public class Encryptor {
 
-    public static String encrptyString(String password) throws NoSuchAlgorithmException {
+    public static String encrptyString(String password){
 
-        MessageDigest md = MessageDigest.getInstance("MD5");
+        MessageDigest md;
+        try {
+            md = MessageDigest.getInstance("MD5");
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
 
         byte[] messageDigest = md.digest(password.getBytes());
 
