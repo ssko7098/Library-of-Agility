@@ -3,14 +3,11 @@ package Lab29.Huaicheng.Group1.A2;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-
-import javax.crypto.NoSuchPaddingException;
 
 public class Login {
     private static String name;
@@ -39,7 +36,7 @@ public class Login {
                 if(Boolean.parseBoolean(iUser.get("isAdmin").toString())) {
                     user.setAdmin(true);
                 }
-                if(username.equals(user.getUsername()) && Encryptor.encrptyString(password).equals(user.getPassword())) {
+                if(username.equals(user.getUsername()) && Encryptor.encryptString(password).equals(user.getPassword())) {
                     name = user.getFullName();
 
                     if(user.isAdmin()) {
@@ -107,7 +104,7 @@ public class Login {
         }
         JSONObject userDetails = new JSONObject();
 
-        userDetails.put("password", Encryptor.encrptyString(user.getPassword()));
+        userDetails.put("password", Encryptor.encryptString(user.getPassword()));
         userDetails.put("email address", user.getEmailAddress());
         userDetails.put("isAdmin", user.isAdmin());
         userDetails.put("phone number", user.getPassword());

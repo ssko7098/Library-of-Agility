@@ -43,9 +43,8 @@ public class UserTest {
     @Test
     public void changePassword() {
         user.setPassword("new password");
-        Assertions.assertEquals(Encryptor.encrptyString("new password"), user.getPassword());
+        Assertions.assertEquals(Encryptor.encryptString("new password"), user.getPassword());
     }
-
     @Test
     public void changePhoneNumber() {
         String number = "0401033233";
