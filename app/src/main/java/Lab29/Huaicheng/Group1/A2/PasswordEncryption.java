@@ -23,15 +23,29 @@ public class PasswordEncryption {
 
         Key key = KeyGenerator.getInstance(alg).generateKey();
 
+        byte[] encryptedBytes = encrypt(user, unEncrypted, key);
+        System.out.println("The Key is: " + key);
+        System.out.println("Encrypted text " + encrypt(user, unEncrypted, key));
+        System.out.println("Decrypted text " + decrypt(encryptedBytes, key));
+
+        return encryptedBytes;
+    }
+
+    private byte[] encrypt(String user, String input, Key key) throws Exception {
+
         cipher.init(Cipher.ENCRYPT_MODE,key);
-        byte[] iBytes = unEncrypted.getBytes();
+        byte[] iBytes = input.getBytes();
         byte[] encryption = cipher.doFinal(iBytes);
         keyList.put(user,key);
         passwordList.put(user,encryption);
-        cipher.init(Cipher.DECRYPT_MODE, key);
-        byte[] unencryptedBytes = cipher.doFinal(encryption);
 
-        return unencryptedBytes;
+        return encryption;
+    }
+
+    public String decrypt(byte[] encrypted, Key key) throws Exception {
+        cipher.init(Cipher.DECRYPT_MODE, key);
+        byte[] unencryptedBytes = cipher.doFinal(encrypted);
+        return new String(unencryptedBytes);
     }
 
 }
