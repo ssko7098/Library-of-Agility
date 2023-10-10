@@ -83,6 +83,41 @@ public class App {
         existingUserMenu();
     }
 
+    private static void viewUsers(int displayKey) throws IOException {
+        ViewUtils.viewAllUsers(displayKey);
+
+        int selection = -1;
+        do {
+            selection = ViewUtils.displayMenu("\nMake Selection",
+                    new String[]{
+                            "Show Email Adresses",
+                            "Show Phone Numbers",
+                            "Show Passwords",
+                            "Go Back",
+                    },
+                    "Please enter a selection");
+
+            switch (selection) {
+                case 1:
+                    viewUsers(2);
+                    break;
+                case 2:
+                    viewUsers(3);
+                    break;
+                case 3:
+                    viewUsers(4);
+                    return;
+                case 4:
+                    adminMenu();
+                    return;
+
+                default:
+                    // Can't get here
+            }
+        } while (-1 == selection);
+
+    }
+
     public static boolean createUser() throws IOException {
         Scanner scanner = new Scanner(System.in);
         boolean userCreated = false;
@@ -185,7 +220,7 @@ public class App {
         int selection;
 
         do {
-            selection = ViewUtils.displayMenu("\nWelcome " + Login.getName() + " (" + userType + ")",
+            selection = ViewUtils.displayMenu("\nMake Selection:",
                     new String[]{
                             "Update my username",
                             "Update my password",
@@ -250,7 +285,7 @@ public class App {
         int selection;
 
         do {
-            selection = ViewUtils.displayMenu("\nWelcome " + Login.getName() + " (" + userType + ")",
+            selection = ViewUtils.displayMenu("\nMake Selection:",
                     new String[]{
                             "View all users",
                             "Add another user",
@@ -262,7 +297,8 @@ public class App {
 
             switch (selection) {
                 case 1:
-                    ViewUtils.viewAllUsers();
+                    viewUsers(1);
+
                     selection = -1;
                     break;
                 case 2:

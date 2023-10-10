@@ -123,9 +123,10 @@ public class ViewUtils {
         Login.getUser().setPassword(test);
     }
 
-    public static void viewAllUsers() {
+    public static void viewAllUsers(int displayKey) {
         JSONParser parser = new JSONParser();
         JSONArray users;
+        System.out.println("\n\nList Of Users: ");
 
         try {
             users = (JSONArray) parser.parse(new FileReader("users.json"));
@@ -137,12 +138,35 @@ public class ViewUtils {
 
         for(int i=0; i<users.size(); i++) {
             JSONObject user = (JSONObject) users.get(i);
+            String name = (String) user.get("full name");
+            String password = (String) user.get("password");
+            String email = (String) user.get("email address");
+            boolean isAdmin = (boolean) user.get("isAdmin");
+            String phoneNumber = (String) user.get("phone number");
+            String username = (String) user.get("username");
 
-            for(Object entry: user.entrySet()) {
-                System.out.println(entry.toString());
+            String extra = null;
+            if (isAdmin) {
+                extra = "Admin";
+            } else {
+                extra = "Not Admin";
             }
 
-            System.out.println("\n");
+            if (displayKey == 2) {
+                extra = email;
+            } else if (displayKey == 3) {
+                extra = phoneNumber;
+            } else if (displayKey == 4){
+                extra = password;
+            }
+
+            System.out.println(name + " (" + username + "): " + extra);
+
+//            for(Object entry: user.entrySet()) {
+//                System.out.println(entry.toString());
+//            }
+
+//            System.out.println("\n");
         }
     }
 }
