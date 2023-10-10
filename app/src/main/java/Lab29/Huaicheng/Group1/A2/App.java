@@ -1,6 +1,13 @@
 package Lab29.Huaicheng.Group1.A2;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 import javax.swing.text.View;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -298,6 +305,7 @@ public class App {
                     selection = -1;
                     break;
                 case 3:
+                    deleteUser();
                     selection = -1;
                     break;
 
@@ -314,6 +322,8 @@ public class App {
             }
         } while (-1 == selection);
     }
+
+
     private static void adminOrUser() throws IOException {
         int selection;
 
@@ -338,6 +348,27 @@ public class App {
                     // Can't get here
             }
         } while (-1 == selection);
+
+    }
+
+    private static void deleteUser() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter Username For Deletion: ");
+        String username = null;
+        if(scanner.hasNextLine()) {
+            username = scanner.nextLine();
+        }
+
+        if(username != null) {
+            boolean isUserDeleted = Admin.checkDelete(username);
+
+            if(isUserDeleted) {
+                System.out.println("User deleted successfully!");
+            } else {
+                System.out.println("\nUser not found or is an admin, and cannot be deleted!");
+                deleteUser();
+            }
+        }
 
     }
 }
