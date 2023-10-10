@@ -1,5 +1,6 @@
 package Lab29.Huaicheng.Group1.A2;
 
+import javax.swing.text.View;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -116,47 +117,33 @@ public class App {
         boolean userCreated = false;
 
         System.out.println("\nUser Registration");
-        System.out.print("Enter username: ");
-        String username = null;
-        if (scanner.hasNextLine()) {
-            username = scanner.nextLine();
-        }
+        String username = ViewUtils.getStringOnSameLine("Enter Username: ");
+        User user = new User(username);
 
-        System.out.print("Enter password: ");
-        String password = null;
-        if (scanner.hasNextLine()) {
-            password = scanner.nextLine();
-        }
-
-        if (username != null && password != null && Login.checkUsernameExists(username)) {
-            System.out.println("Please Enter New Details.");
+        if (Login.checkUsernameExists(username)) {
+            //enter password prompt
+            user.setPassword(ViewUtils.getStringOnSameLine("Enter Password: "));
 
             //enter name prompt
-            System.out.print("Enter Full Name: ");
-            String name = null;
-            if (scanner.hasNextLine()) {
-                name = scanner.nextLine();
-            }
+            user.setFullName(ViewUtils.getStringOnSameLine("Enter Full Name: "));
 
             //enter email prompt
-            System.out.print("Enter Email: ");
-            String email = null;
-            if (scanner.hasNextLine()) {
-                email = scanner.nextLine();
+            String email = ViewUtils.getStringOnSameLine("Enter Email: ");
+            while(!user.setEmailAddress(email)) {
+                email = ViewUtils.getStringOnSameLine("Enter Email: ");
             }
+
             //enter phone prompt
-            System.out.print("Enter Phone Number: ");
-            String phone = null;
-            if (scanner.hasNextLine()) {
-                phone = scanner.nextLine();
+            String phone = ViewUtils.getStringOnSameLine("Enter Phone Number: ");
+            while(!user.setPhoneNumber(phone)) {
+                phone = ViewUtils.getStringOnSameLine("Enter Phone Number: ");
             }
 
             System.out.println("Registration Successful");
-            Login.createNewUser(username, password, name, email, phone, isAdmin);
+
+            Login.createNewUser(user);
+
             userCreated = true;
-        }
-        else if (username == null || password == null) {
-            System.out.println("username or password cannot be blank");
         }
 
         return userCreated;
@@ -258,31 +245,17 @@ public class App {
                     selection = -1;
                     break;
                 case 3:
-                    boolean validNumber = Login.getUser().setPhoneNumber(ViewUtils.getString("Your current phone number is " + Login.getUser().getPhoneNumber() +
-                            ". Please enter your new Phone Number:"));
-
-                    while(!validNumber) {
-                        validNumber = Login.getUser().setPhoneNumber(ViewUtils.getString("Your current phone number is " + Login.getUser().getPhoneNumber() +
-                                ". Please enter your new Phone Number:"));
-                    }
+                    ViewUtils.checkNumberInput();
                     selection = -1;
                     break;
 
                 case 4:
-                    boolean validEmail = Login.getUser().setEmailAddress(ViewUtils.getString("Your current email address is " + Login.getUser().getEmailAddress() +
-                            ". Please enter your new Email Address:"));
-
-                    while(!validEmail) {
-                        validEmail = Login.getUser().setEmailAddress(ViewUtils.getString("Your current email address is " + Login.getUser().getEmailAddress() +
-                                ". Please enter your new Email Address:"));
-                    }
-
+                    ViewUtils.checkEmailInput();
                     selection = -1;
                     break;
 
                 case 5:
-                    Login.getUser().setFullName(ViewUtils.getString("Your current name is " + Login.getUser().getFullName() +
-                            ". Please enter your new name:"));
+                    ViewUtils.checkNameInput();
                     selection = -1;
                     break;
 

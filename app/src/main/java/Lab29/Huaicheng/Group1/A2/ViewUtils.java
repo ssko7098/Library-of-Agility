@@ -48,6 +48,26 @@ public class ViewUtils {
         return response;
     }
 
+    static String getStringOnSameLine(String prompt) {
+        Scanner s = new Scanner(System.in);
+        String response = null;
+
+        do {
+            System.out.print(prompt);
+            if(s.hasNextLine()) {
+                response = s.nextLine();
+
+                if ("".equals(response)) {
+                    response = null;
+                    System.out.println("Blank entry is not allowed.");
+                }
+            }
+
+        } while (null == response);
+
+        return response;
+    }
+
     static int getInt(String prompt) {
 
         int response;
@@ -121,6 +141,54 @@ public class ViewUtils {
         }while(!check);
 
         Login.getUser().setPassword(test);
+    }
+
+    public static void checkNumberInput() {
+
+        boolean check;
+        String test;
+
+        do {
+            test = ViewUtils.getString("Your current phone number is " + Login.getUser().getPhoneNumber() +
+                    ". Please enter your new Phone Number:");
+
+            check = getBoolean("Are you sure you want your new Phone Number to be: " + test + "?");
+
+        }while(!check);
+
+        Login.getUser().setPhoneNumber(test);
+    }
+
+    public static void checkEmailInput() {
+
+        boolean check;
+        String test;
+
+        do {
+            test = ViewUtils.getString("Your current email address is " + Login.getUser().getEmailAddress() +
+                    ". Please enter your new Email Address:");
+
+            check = getBoolean("Are you sure you want your new Email to be: " + test + "?");
+
+        }while(!check);
+
+        Login.getUser().setEmailAddress(test);
+    }
+
+    public static void checkNameInput() {
+
+        boolean check;
+        String test;
+
+        do {
+            test = ViewUtils.getString("Your current name is " + Login.getUser().getFullName() +
+                    ". Please enter your new name:");
+
+            check = getBoolean("Are you sure you want your new Fullname to be: " + test + "?");
+
+        }while(!check);
+
+        Login.getUser().setFullName(test);
     }
 
     public static void viewAllUsers(int displayKey) {
