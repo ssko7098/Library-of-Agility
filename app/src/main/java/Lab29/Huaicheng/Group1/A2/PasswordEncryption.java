@@ -13,7 +13,7 @@ public class PasswordEncryption {
 
 
 
-    public PasswordEncryption(String alg) throws NoSuchPaddingException, NoSuchAlgorithmException {
+    public PasswordEncryption() throws NoSuchPaddingException, NoSuchAlgorithmException {
         this.keyList = new HashMap<String, Key>();
         this.passwordList = new HashMap<String, byte[]>();
         this.cipher = Cipher.getInstance(alg);
