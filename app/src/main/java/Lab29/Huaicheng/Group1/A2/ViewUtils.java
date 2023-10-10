@@ -145,11 +145,22 @@ public class ViewUtils {
             String phoneNumber = (String) user.get("phone number");
             String username = (String) user.get("username");
 
+            String extra = null;
             if (isAdmin) {
-                System.out.println(name + " (Username: " + username + ") ");
+                extra = "Admin";
             } else {
-                System.out.println(name + " (Username: " + username + ") ");
+                extra = "Not Admin";
             }
+
+            if (displayKey == 2) {
+                extra = email;
+            } else if (displayKey == 3) {
+                extra = phoneNumber;
+            } else if (displayKey == 4){
+                extra = password;
+            }
+
+            System.out.println(name + " (" + username + "): " + extra);
 
 //            for(Object entry: user.entrySet()) {
 //                System.out.println(entry.toString());
