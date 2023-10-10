@@ -130,8 +130,30 @@ public class App {
         }
 
         if (username != null && password != null && Login.checkUsernameExists(username)) {
-            System.out.println("Registration successful!");
-            Login.createNewUser(username, password);
+            System.out.println("Please Enter New Details.");
+
+            //enter name prompt
+            System.out.print("Enter Full Name: ");
+            String name = null;
+            if (scanner.hasNextLine()) {
+                name = scanner.nextLine();
+            }
+
+            //enter email prompt
+            System.out.print("Enter Email: ");
+            String email = null;
+            if (scanner.hasNextLine()) {
+                email = scanner.nextLine();
+            }
+            //enter phone prompt
+            System.out.print("Enter Phone Number: ");
+            String phone = null;
+            if (scanner.hasNextLine()) {
+                phone = scanner.nextLine();
+            }
+
+            System.out.println("Registration Successful");
+            Login.createNewUser(username, password, name, email, phone);
             userCreated = true;
         }
         else if (username == null || password == null) {

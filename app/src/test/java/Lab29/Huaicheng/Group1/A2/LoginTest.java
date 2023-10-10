@@ -37,9 +37,12 @@ class LoginTest {
     public void createNewUserTest() {
         String newUsername = "test";
         String newPassword = "1234";
+        String newName = "test name";
+        String newEmail = "test@email.com";
+        String newPhone = "0412343891";
 
         try {
-            Login.createNewUser(newUsername, newPassword);
+            Login.createNewUser(newUsername, newPassword, newName, newEmail, newPhone);
             Assertions.assertFalse(Login.checkUsernameExists(newUsername));
         } catch (IOException e) {
             throw new RuntimeException(e);
