@@ -42,7 +42,7 @@ public class App {
                     loginMenu();
                     break;
                 case 2:
-                    createUserMenu();
+                    createUserMenu(false);
 
                     //TODO change to new user registration screen
                     break;
@@ -67,11 +67,11 @@ public class App {
     }
 
 
-    private static void createUserMenu() throws IOException {
-        boolean userCreated = createUser();
+    private static void createUserMenu(boolean isAdmin) throws IOException {
+        boolean userCreated = createUser(isAdmin);
 
         while (!userCreated) {
-            userCreated = createUser();
+            userCreated = createUser(isAdmin);
         }
 
         existingUserMenu();
@@ -112,7 +112,7 @@ public class App {
 
     }
 
-    public static boolean createUser() throws IOException {
+    public static boolean createUser(boolean isAdmin) throws IOException {
         Scanner scanner = new Scanner(System.in);
         boolean userCreated = false;
 
@@ -140,7 +140,9 @@ public class App {
             }
 
             System.out.println("Registration Successful");
+
             Login.createNewUser(user);
+
             userCreated = true;
         }
 
@@ -288,7 +290,7 @@ public class App {
                     selection = -1;
                     break;
                 case 2:
-                    createUserMenu();
+                    adminOrUser();
                     selection = -1;
                     break;
                 case 3:
@@ -307,5 +309,31 @@ public class App {
                     // Can't get here
             }
         } while (-1 == selection);
+    }
+    private static void adminOrUser() throws IOException {
+        int selection;
+
+        do {
+            selection = ViewUtils.displayMenu("\nMake Selection:",
+                    new String[]{
+                            "Create Regular User",
+                            "Create Admin",
+                    },
+                    "Please enter a selection");
+
+            switch (selection) {
+                case 1:
+                    createUserMenu(false);
+
+                    selection = -1;
+                    break;
+                case 2:
+                    createUserMenu(true);
+
+                default:
+                    // Can't get here
+            }
+        } while (-1 == selection);
+
     }
 }

@@ -107,7 +107,7 @@ public class Login {
             throw new RuntimeException(e);
         }
         JSONObject userDetails = new JSONObject();
-
+        
         userDetails.put("password", user.getPassword());
         userDetails.put("email address", user.getEmailAddress());
         userDetails.put("isAdmin", user.isAdmin());
