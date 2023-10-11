@@ -10,7 +10,6 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 public class Login {
-    private static String name;
     private static String userType;
     private static User user;
 
@@ -37,10 +36,11 @@ public class Login {
                     user.setAdmin(true);
                 }
                 if(username.equals(user.getUsername()) && Encryptor.encryptString(password).equals(user.getPassword())) {
-                    name = user.getFullName();
-
                     if(user.isAdmin()) {
                         userType = "admin";
+                    }
+                    else if(user.getUsername().equals("guest")) {
+                        userType = "guest";
                     }
                     else {
                         userType = "non-admin";
@@ -86,7 +86,7 @@ public class Login {
     }
 
     public static String getName() {
-        return name;
+        return user.getFullName();
     }
 
     public static User getUser() {
@@ -107,7 +107,7 @@ public class Login {
         userDetails.put("password", Encryptor.encryptString(user.getPassword()));
         userDetails.put("email address", user.getEmailAddress());
         userDetails.put("isAdmin", user.isAdmin());
-        userDetails.put("phone number", user.getPassword());
+        userDetails.put("phone number", user.getPhoneNumber());
         userDetails.put("full name", user.getFullName());
         userDetails.put("username", user.getUsername());
 

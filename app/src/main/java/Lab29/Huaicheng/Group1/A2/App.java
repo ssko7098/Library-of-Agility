@@ -1,13 +1,5 @@
 package Lab29.Huaicheng.Group1.A2;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-
-import javax.swing.text.View;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -27,6 +19,11 @@ public class App {
             "User Management (Special admin access)"
     };
 
+    private static String[] guest = new String[]{
+            "Scroll Seeker",
+            "Log Out"
+    };
+
     private static String userType = "non-admin";
 
     public static void main(String[] args) throws IOException {
@@ -40,6 +37,7 @@ public class App {
                     new String[]{
                             "Existing User",
                             "New User",
+                            "Guest User",
                             "EXIT",
                     },
                     "Are you an existing user or a new user?");
@@ -54,6 +52,11 @@ public class App {
                     //TODO change to new user registration screen
                     break;
                 case 3:
+                    Login.login("guest", "guest");
+                    System.out.println(Encryptor.encryptString("guest").equals(Login.getUser().getPassword()));
+                    initMenu();
+
+                case 4:
                     // exit the application
                     return;
 
@@ -182,7 +185,12 @@ public class App {
         if (Login.getUser().isAdmin()) {
             access = admin;
             userType = "admin";
-        } else {
+        }
+        else if(Login.getUser().getUsername().equals("guest")) {
+            access = guest;
+            userType = "guest";
+        }
+        else {
             access = nonAdmin;
             userType = "non-admin";
         }
@@ -195,9 +203,16 @@ public class App {
             switch (selection) {
                 case 1:
                     //TODO change to user profile screen
+                    if(userType.equals("guest")) {
+                        //TODO change to scroll seeker screen
+                    }
+
                     updateUserMenu();
                     break;
                 case 2:
+                    if(userType.equals("guest")) {
+                        existingUserMenu();
+                    }
                     //TODO change to digital scroll management screen
                     break;
                 case 3:
