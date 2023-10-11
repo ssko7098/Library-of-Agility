@@ -1,9 +1,7 @@
 package Lab29.Huaicheng.Group1.A2;
 
-import org.junit.Assert;
-import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -11,6 +9,11 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LoginTest {
+
+    @AfterAll
+    public static void tearDown() {
+        Admin.deleteUser("test");
+    }
 
     @Test
     public void IncorrectLoginTest() {
@@ -30,7 +33,7 @@ class LoginTest {
 
     @Test
     public void nonAdminLoginTest() {
-        Assertions.assertTrue(Login.login("ssko7098", "1234"));
+        Assertions.assertTrue(Login.login("seb", "1234"));
         Assertions.assertFalse(Login.getUser().isAdmin());
         Assertions.assertEquals("Sebastian Skontos", Login.getName());
     }
@@ -52,6 +55,8 @@ class LoginTest {
     }
 
     String encryptedPass = Encryptor.encryptString("123");
+
+
     @Test
     public void invalidAlgorithm(){
         try {
