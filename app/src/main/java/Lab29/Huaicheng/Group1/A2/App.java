@@ -53,7 +53,6 @@ public class App {
                     break;
                 case 3:
                     Login.login("guest", "guest");
-                    System.out.println(Encryptor.encryptString("guest").equals(Login.getUser().getPassword()));
                     initMenu();
 
                 case 4:
