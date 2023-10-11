@@ -120,7 +120,6 @@ public class App {
     }
 
     public static boolean createUser(boolean isAdmin) throws IOException {
-        Scanner scanner = new Scanner(System.in);
         boolean userCreated = false;
 
         System.out.println("\nUser Registration");
@@ -160,21 +159,11 @@ public class App {
     }
 
     public static boolean askForLogin() {
-        Scanner scanner = new Scanner(System.in);
         boolean isUser = false;
 
         System.out.println("\nWelcome back user!");
-        System.out.print("Enter username: ");
-        String username = null;
-        if (scanner.hasNextLine()) {
-            username = scanner.nextLine();
-        }
-
-        System.out.print("Enter password: ");
-        String password = null;
-        if (scanner.hasNextLine()) {
-            password = scanner.nextLine();
-        }
+        String username = ViewUtils.getStringOnSameLine("Enter username: ");
+        String password = ViewUtils.getStringOnSameLine("Enter password: ");
 
         if (username != null && password != null && Login.login(username, password)) {
             System.out.println("Login successful!");

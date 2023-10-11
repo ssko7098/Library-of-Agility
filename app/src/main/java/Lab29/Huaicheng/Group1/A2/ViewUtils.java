@@ -146,11 +146,17 @@ public class ViewUtils {
     public static void checkNumberInput() {
 
         boolean check;
-        String test;
+        String test = null;
 
         do {
-            test = ViewUtils.getString("Your current phone number is " + Login.getUser().getPhoneNumber() +
-                    ". Please enter your new Phone Number:");
+            boolean validNumber = false;
+
+            while(!validNumber) {
+                test = ViewUtils.getString("Your current phone number is " + Login.getUser().getPhoneNumber() +
+                        ". Please enter your new Phone Number:");
+
+                validNumber = Login.getUser().setPhoneNumber(test);
+            }
 
             check = getBoolean("Are you sure you want your new Phone Number to be: " + test + "?");
 
@@ -162,11 +168,17 @@ public class ViewUtils {
     public static void checkEmailInput() {
 
         boolean check;
-        String test;
+        String test = null;
 
         do {
-            test = ViewUtils.getString("Your current email address is " + Login.getUser().getEmailAddress() +
-                    ". Please enter your new Email Address:");
+            boolean validEmail = false;
+
+            while(!validEmail) {
+                test = ViewUtils.getString("Your current email address is " + Login.getUser().getEmailAddress() +
+                        ". Please enter your new Email Address:");
+
+                validEmail = Login.getUser().setEmailAddress(test);
+            }
 
             check = getBoolean("Are you sure you want your new Email to be: " + test + "?");
 
