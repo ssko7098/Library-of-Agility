@@ -1,3 +1,5 @@
 # Lab29-Huaicheng-Group1-A2
 
-read me test
+## admin login
+username = `admin`
+password = `123`
