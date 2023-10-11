@@ -1,11 +1,6 @@
 package Lab29.Huaicheng.Group1.A2;
 
-import org.junit.Assert;
 import org.junit.Test;
-
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class EncryptorTest {
