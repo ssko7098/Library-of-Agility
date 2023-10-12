@@ -5,23 +5,23 @@ import java.util.Scanner;
 
 public class App {
     private static String[] nonAdmin = new String[]{
+            "LOG OUT",
             "Manage my Profile",
             "Digital Scroll Management",
             "Scroll Seeker",
-            "Log Out"
     };
 
     private static String[] admin = new String[]{
+            "LOG OUT",
             "Manage my Profile",
             "Digital Scroll Management",
             "Scroll Seeker",
-            "Log Out",
             "User Management (Special admin access)"
     };
 
     private static String[] guest = new String[]{
+            "LOG OUT",
             "Scroll Seeker",
-            "Log Out"
     };
 
     private static String userType = "non-admin";
@@ -35,14 +35,17 @@ public class App {
         do {
             selection = ViewUtils.displayMenu("Welcome to the Library of Agility!",
                     new String[]{
+                            "EXIT",
                             "Existing User",
                             "New User",
                             "Guest User",
-                            "EXIT",
                     },
                     "Are you an existing user or a new user?");
 
             switch (selection) {
+                case 0:
+                    // exit the application
+                    return;
                 case 1:
                     loginMenu();
                     break;
@@ -54,10 +57,6 @@ public class App {
                 case 3:
                     Login.login("guest", "guest");
                     initMenu();
-
-                case 4:
-                    // exit the application
-                    return;
 
                 default:
                     // Can't get here
@@ -93,14 +92,16 @@ public class App {
         do {
             selection = ViewUtils.displayMenu("\nMake Selection",
                     new String[]{
+                            "GO BACK",
                             "Show Email Adresses",
                             "Show Phone Numbers",
                             "Show Passwords",
-                            "Go Back",
                     },
                     "Please enter a selection");
 
             switch (selection) {
+                case 0:
+                    adminMenu();
                 case 1:
                     viewUsers(2);
                     break;
@@ -109,10 +110,7 @@ public class App {
                     break;
                 case 3:
                     viewUsers(4);
-                    return;
-                case 4:
-                    adminMenu();
-                    return;
+                    break;
 
                 default:
                     // Can't get here
@@ -200,6 +198,9 @@ public class App {
                     "Please select what you would like to do");
 
             switch (selection) {
+                case 0:
+                    existingUserMenu();
+
                 case 1:
                     //TODO change to user profile screen
                     if(userType.equals("guest")) {
@@ -210,17 +211,15 @@ public class App {
                     break;
                 case 2:
                     if(userType.equals("guest")) {
-                        existingUserMenu();
+                        //TODO change to scroll seeker screen
                     }
+
                     //TODO change to digital scroll management screen
                     break;
                 case 3:
                     //TODO change to scroll seeker screen
                     break;
                 case 4:
-                    existingUserMenu();
-                    break;
-                case 5:
                     //TODO change to user management screen
                     adminMenu();
                     break;
@@ -237,16 +236,20 @@ public class App {
         do {
             selection = ViewUtils.displayMenu("\nMake Selection:",
                     new String[]{
+                            "GO BACK",
                             "Update my username",
                             "Update my password",
                             "Update my phone number",
                             "Update my email address",
                             "Update my name",
-                            "GO BACK",
                     },
                     "Please enter a selection");
 
             switch (selection) {
+                case 0:
+                    initMenu();
+                    break;
+
                 case 1:
                     String username = ViewUtils.checkUsernameInput();
                     Login.getUser().updateUsernameToJSONFile(username);
@@ -272,10 +275,6 @@ public class App {
                     selection = -1;
                     break;
 
-                case 6:
-                    initMenu();
-                    break;
-
                 default:
                     // Can't get here
             }
@@ -288,15 +287,19 @@ public class App {
         do {
             selection = ViewUtils.displayMenu("\nMake Selection:",
                     new String[]{
+                            "GO BACK",
                             "View all users",
                             "Add another user",
                             "Delete a user",
                             "View scroll statistics",
-                            "GO BACK",
                     },
                     "Please enter a selection");
 
             switch (selection) {
+                case 0:
+                    initMenu();
+                    break;
+
                 case 1:
                     viewUsers(1);
 
@@ -315,10 +318,6 @@ public class App {
                     selection = -1;
                     break;
 
-                case 5:
-                    initMenu();
-                    break;
-
                 default:
                     // Can't get here
             }
@@ -332,12 +331,17 @@ public class App {
         do {
             selection = ViewUtils.displayMenu("\nMake Selection:",
                     new String[]{
+                            "GO BACK",
                             "Create Regular User",
                             "Create Admin",
                     },
                     "Please enter a selection");
 
             switch (selection) {
+                case 0:
+                    adminMenu();
+                    break;
+
                 case 1:
                     createUserMenu(false);
 

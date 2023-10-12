@@ -66,4 +66,11 @@ class LoginTest {
         }
     }
 
+    @Test
+    public void guestUserTest() {
+        boolean check = Login.login("guest", "guest");
+        Assertions.assertTrue(check);
+        Assertions.assertEquals("guest", Login.getName());
+    }
+
 }
