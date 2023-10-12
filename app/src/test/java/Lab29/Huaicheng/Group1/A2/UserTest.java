@@ -9,7 +9,7 @@ public class UserTest {
     @BeforeEach
     public void setUser() {
         user = new User(
-                "ssko7098",
+                "seb",
                 "1234",
                 "0401033233",
                 "sebastian.skontos@gmail.com",
@@ -19,7 +19,7 @@ public class UserTest {
 
     @AfterEach
     public void resetUser() {
-        user.setUsername("ssko7098");
+        user.setUsername("seb");
         user.setPassword("1234");
         user.setPhoneNumber("0401033233");
         user.setEmailAddress("sebastian.skontos@gmail.com");
@@ -37,7 +37,7 @@ public class UserTest {
     public void changeUsernameWrong() {
         // change username to one that already exists --> this shouldn't be allowed
         user.setUsername("admin");
-        Assertions.assertEquals("ssko7098", user.getUsername());
+        Assertions.assertEquals("seb", user.getUsername());
     }
 
     @Test

@@ -14,13 +14,13 @@ public class ViewUtils {
         System.out.println("\n" + header);
 
         for (int i = 0; i < options.length; i++) {
-            System.out.println((i+1) + ". " + options[i]);
+            System.out.println((i) + ". " + options[i]);
         }
 
         while (true) {
             int selection = getInt(prompt);
 
-            if (selection > 0 && selection <= options.length) {
+            if (selection >= 0 && selection <= options.length) {
                 return selection;
             } else {
                 System.out.println("Invalid menu selection");
