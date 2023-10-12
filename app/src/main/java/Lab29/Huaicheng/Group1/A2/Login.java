@@ -104,7 +104,7 @@ public class Login {
         }
         JSONObject userDetails = new JSONObject();
 
-        userDetails.put("password", Encryptor.encryptString(user.getPassword()));
+        userDetails.put("password", user.getPassword());
         userDetails.put("email address", user.getEmailAddress());
         userDetails.put("isAdmin", user.isAdmin());
         userDetails.put("phone number", user.getPhoneNumber());
