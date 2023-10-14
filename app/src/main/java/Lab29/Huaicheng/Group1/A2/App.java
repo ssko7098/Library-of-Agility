@@ -119,9 +119,6 @@ public class App {
 
     }
 
-    private static void changePassword() {
-
-    }
 
     public static boolean createUser(boolean isAdmin) throws IOException {
         boolean userCreated = false;
@@ -397,12 +394,62 @@ public class App {
                     "Are you sure you want to delete user: '" + username + "'?");
 
             switch (selection) {
-                case 1:
+                case 0:
                     return true;
-                case 2:
+                case 1:
                     return false;
                 default:
-                    System.out.println("Invalid selection, please choose 1 for Yes or 2 for No.");
+                    System.out.println("Invalid selection, please choose 0 for Yes or 1 for No.");
+            }
+        } while (true);
+    }
+
+    private static void changePassword() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter Username to update password: ");
+        String username = null;
+        if (scanner.hasNextLine()) {
+            username = scanner.nextLine();
+        }
+        if (username != null) {
+            boolean deletable = Admin.checkUsername(username);
+
+            if (!deletable) {
+                System.out.println("\nUser not found!");
+                changePassword();
+            }else {
+                System.out.println("Enter new password for user: " + username);
+                String password = null;
+                if (scanner.hasNextLine()) {
+                    password = scanner.nextLine();
+                }
+                if (confirmChangePassword(username)) {
+                    Admin.updatePassword(username, password);
+                    System.out.println("User password updated successfully!");
+                } else {
+                    System.out.println("User password update cancelled.");
+                }
+            }
+        }
+
+    }
+    private static boolean confirmChangePassword(String username) {
+        int selection;
+        do {
+            selection = ViewUtils.displayMenu("\nMake Selection:",
+                    new String[]{
+                            "Yes",
+                            "No",
+                    },
+                    "Are you sure you want to update user '" + username + "' password?");
+
+            switch (selection) {
+                case 0:
+                    return true;
+                case 1:
+                    return false;
+                default:
+                    System.out.println("Invalid selection, please choose 0 for Yes or 1 for No.");
             }
         } while (true);
     }
