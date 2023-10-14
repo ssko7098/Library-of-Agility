@@ -53,4 +53,8 @@ public class Admin {
             throw new RuntimeException(e);
         }
     }
+
+    public static void changePassword() {
+        System.out.println("Change Password");
+    }
 }

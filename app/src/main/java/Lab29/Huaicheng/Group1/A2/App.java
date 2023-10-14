@@ -95,7 +95,7 @@ public class App {
                             "GO BACK",
                             "Show Email Adresses",
                             "Show Phone Numbers",
-                            "Show Passwords",
+                            "Change User Password",
                     },
                     "Please enter a selection");
 
@@ -109,13 +109,17 @@ public class App {
                     viewUsers(3);
                     break;
                 case 3:
-                    viewUsers(4);
+                    changePassword();
                     break;
 
                 default:
                     // Can't get here
             }
         } while (-1 == selection);
+
+    }
+
+    private static void changePassword() {
 
     }
 
