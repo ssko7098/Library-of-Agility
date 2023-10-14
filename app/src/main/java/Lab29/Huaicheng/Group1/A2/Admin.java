@@ -31,6 +31,27 @@ public class Admin {
         return false;
     }
 
+    public static boolean checkUsername(String username) {
+        JSONParser parser = new JSONParser();
+        JSONArray users;
+
+        try {
+            users = (JSONArray) parser.parse(new FileReader("users.json"));
+            for (int i = 0; i < users.size(); i++) {
+                JSONObject user = (JSONObject) users.get(i);
+
+                if (username.equals(user.get("username").toString())) {
+                    return true;
+                }
+            }
+        } catch (IOException | ParseException e) {
+            throw new RuntimeException(e);
+        }
+
+        // User does not exist or is an admin, so cannot be deleted.
+        return false;
+    }
+
     public static void deleteUser(String username) {
         JSONParser parser = new JSONParser();
         JSONArray users;
@@ -53,8 +74,31 @@ public class Admin {
             throw new RuntimeException(e);
         }
     }
+    public static void updatePassword(String username, String password) {
+        JSONParser parser = new JSONParser();
+        JSONArray users;
 
-    public static void changePassword() {
-        System.out.println("Change Password");
+        try {
+            users = (JSONArray) parser.parse(new FileReader("users.json"));
+            for (int i = 0; i < users.size(); i++) {
+                JSONObject user = (JSONObject) users.get(i);
+
+                if (username.equals(user.get("username").toString())) {
+                    String newpassword = Encryptor.encryptString(password);
+                    user.replace("password", newpassword);
+                }
+            }
+        } catch (IOException | ParseException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            FileWriter file = new FileWriter("users.json");
+            file.write(users.toJSONString());
+            file.flush();
+            file.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        }
     }
-}
