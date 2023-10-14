@@ -219,7 +219,6 @@ public class ViewUtils {
         for(int i=0; i<users.size(); i++) {
             JSONObject user = (JSONObject) users.get(i);
             String name = (String) user.get("full name");
-            String password = (String) user.get("password");
             String email = (String) user.get("email address");
             boolean isAdmin = (boolean) user.get("isAdmin");
             String phoneNumber = (String) user.get("phone number");
@@ -236,8 +235,6 @@ public class ViewUtils {
                 extra = email;
             } else if (displayKey == 3) {
                 extra = phoneNumber;
-            } else if (displayKey == 4){
-                extra = password;
             }
 
             System.out.println(name + " (" + username + "): " + extra);
