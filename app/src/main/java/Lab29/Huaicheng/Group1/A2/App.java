@@ -46,6 +46,7 @@ public class App {
             switch (selection) {
                 case 0:
                     // exit the application
+                    System.exit(0);
                     return;
                 case 1:
                     loginMenu();
@@ -462,14 +463,15 @@ public class App {
                     ViewUtils.viewAllScrolls(),
                     "Please enter a selection");
 
-            switch (selection) {
-                case 0 -> {
+            if (selection == 0) {
+                try {
+                    initMenu();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
                 }
-                case 1 -> {
-                }
-                default -> {
-                }
-                // Can't get here
+            } else {
+                ScrollDisplay.readScroll(ViewUtils.viewAllScrolls()[selection]);
+                selection = -1;
             }
         } while (-1 == selection);
     }

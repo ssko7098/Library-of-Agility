@@ -10,7 +10,7 @@ public class ScrollDisplay {
 
     public static void readScroll(String scrollName) {
         try {
-            File myObj = new File("app/src/main/resources/" + scrollName + ".txt");
+            File myObj = new File("src/main/resources/" + scrollName + ".txt");
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();

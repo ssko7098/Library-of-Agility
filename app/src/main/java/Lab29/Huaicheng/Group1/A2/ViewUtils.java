@@ -261,6 +261,7 @@ public class ViewUtils {
         // Get the absolute path
         Path absolutePath = directory.toAbsolutePath();
         List<String> fileNames = new ArrayList<>();
+        fileNames.add("GO BACK");
 
         try {
             DirectoryStream<Path> stream = Files.newDirectoryStream(absolutePath, "*.txt");
