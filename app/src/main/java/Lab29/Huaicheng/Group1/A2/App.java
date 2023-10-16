@@ -250,6 +250,14 @@ public class App {
                     break;
 
                 case 1:
+                    String fileName = ViewUtils.getStringOnSameLine("Enter Scroll Name: ");
+                    if (fileName != null) {
+                        ViewUtils.addScroll(fileName, "0101010");
+                    } else {
+                        System.out.println("Invalid Input");
+                        digitalScrollManagementMenu();
+                        break;
+                    }
                     // EMPTY
                 default:
                     // Can't get here
