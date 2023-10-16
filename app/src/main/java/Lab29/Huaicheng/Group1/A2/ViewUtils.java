@@ -294,5 +294,10 @@ public class ViewUtils {
 
     public static void addScroll(String scrollName) {
         File f = new File("src/main/resources/" + scrollName + ".txt");
+        if (f.exists()) {
+            // File Exists
+        } else {
+            // File Doesn't Exist
+        }
     }
 }
