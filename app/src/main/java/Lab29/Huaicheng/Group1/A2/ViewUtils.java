@@ -292,17 +292,22 @@ public class ViewUtils {
         }
     }
 
-    public static void addScroll(String scrollName) {
+    public static void addScroll(String scrollName, String scrollContent) {
         File f = new File("src/main/resources/" + scrollName + ".txt");
         if (f.exists()) {
-            // File Exists
+            System.out.println("File with that name already exists");
         } else {
-            success = f.createNewFile();
-            if (success) {
-                System.out.printf("New Scroll Created: ", f);
-            } else {
-                System.out.printf("New Scroll Failed: ", f);
+            try {
+                Boolean success = f.createNewFile();
+                if (success) {
+                    System.out.printf("New Scroll Created: ", f);
+                } else {
+                    System.out.printf("New Scroll Failed: ", f);
+                }
+            } catch (IOException e) {
+                System.out.println("Scroll creation cannot occur");
             }
+
         }
     }
 }
