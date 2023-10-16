@@ -291,4 +291,8 @@ public class ViewUtils {
             System.out.println("Scroll not found. Please enter a valid scroll name from the list above");
         }
     }
+
+    public static void addScroll(String scrollName) {
+        
+    }
 }
