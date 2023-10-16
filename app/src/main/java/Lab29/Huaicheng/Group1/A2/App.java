@@ -1,5 +1,6 @@
 package Lab29.Huaicheng.Group1.A2;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -205,20 +206,19 @@ public class App {
                 case 1:
                     //TODO change to user profile screen
                     if(userType.equals("guest")) {
+                        ScrollMenu();
                         //TODO change to scroll seeker screen
                     }
-
-                    updateUserMenu();
+                    else {
+                        updateUserMenu();
+                    }
                     break;
                 case 2:
-                    if(userType.equals("guest")) {
-                        //TODO change to scroll seeker screen
-                    }
-
                     //TODO change to digital scroll management screen
                     break;
                 case 3:
                     //TODO change to scroll seeker screen
+                    ScrollMenu();
                     break;
                 case 4:
                     //TODO change to user management screen
@@ -452,5 +452,25 @@ public class App {
                     System.out.println("Invalid selection, please choose 0 for Yes or 1 for No.");
             }
         } while (true);
+    }
+
+    private static void ScrollMenu() {
+        int selection;
+
+        do {
+            selection = ViewUtils.displayMenu("\nMake Selection:",
+                    ViewUtils.viewAllScrolls(),
+                    "Please enter a selection");
+
+            switch (selection) {
+                case 0 -> {
+                }
+                case 1 -> {
+                }
+                default -> {
+                }
+                // Can't get here
+            }
+        } while (-1 == selection);
     }
 }
