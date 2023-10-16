@@ -216,6 +216,7 @@ public class App {
                     break;
                 case 2:
                     //TODO change to digital scroll management screen
+                    digitalScrollManagementMenu();
                     break;
                 case 3:
                     //TODO change to scroll seeker screen
@@ -226,6 +227,46 @@ public class App {
                     adminMenu();
                     break;
 
+                default:
+                    // Can't get here
+            }
+        } while (-1 == selection);
+    }
+
+    private static void digitalScrollManagementMenu() throws IOException {
+        int selection;
+
+        do {
+            selection = ViewUtils.displayMenu("\nMake Selection:",
+                    new String[]{
+                            "GO BACK",
+                            "Add Scroll",
+                    },
+                    "Please enter a selection");
+
+            switch (selection) {
+                case 0:
+                    initMenu();
+                    break;
+
+                case 1:
+                    String fileName = ViewUtils.getStringOnSameLine("Enter Scroll Name: ");
+                    if (fileName != null) {
+                        String fileText = "";
+                        String fileLine = "!";
+                        fileLine = ViewUtils.getStringOnSameLine("\n\nEnter Scroll Text Line by Line!\nEnter a '!' to indicate input is complete:\n");
+                        while (!fileLine.equals("!")) {
+                            fileText = fileText + fileLine;
+                            fileLine = ViewUtils.getStringOnSameLine("");
+                            fileText = fileText + "\n";
+                        }
+                        ViewUtils.addScroll(fileName, fileText);
+                    } else {
+                        System.out.println("Invalid Input");
+                        digitalScrollManagementMenu();
+                        break;
+                    }
+                    // EMPTY
                 default:
                     // Can't get here
             }
