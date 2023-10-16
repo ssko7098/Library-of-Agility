@@ -216,6 +216,7 @@ public class App {
                     break;
                 case 2:
                     //TODO change to digital scroll management screen
+                    digitalScrollManagementMenu();
                     break;
                 case 3:
                     //TODO change to scroll seeker screen
@@ -226,6 +227,30 @@ public class App {
                     adminMenu();
                     break;
 
+                default:
+                    // Can't get here
+            }
+        } while (-1 == selection);
+    }
+
+    private static void digitalScrollManagementMenu() throws IOException {
+        int selection;
+
+        do {
+            selection = ViewUtils.displayMenu("\nMake Selection:",
+                    new String[]{
+                            "GO BACK",
+                            "Add Scroll",
+                    },
+                    "Please enter a selection");
+
+            switch (selection) {
+                case 0:
+                    initMenu();
+                    break;
+
+                case 1:
+                    // EMPTY
                 default:
                     // Can't get here
             }
