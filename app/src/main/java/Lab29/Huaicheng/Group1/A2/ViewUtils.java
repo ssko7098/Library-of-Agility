@@ -291,4 +291,18 @@ public class ViewUtils {
             System.out.println("Scroll not found. Please enter a valid scroll name from the list above");
         }
     }
+
+    public static void addScroll(String scrollName) {
+        File f = new File("src/main/resources/" + scrollName + ".txt");
+        if (f.exists()) {
+            // File Exists
+        } else {
+            success = f.createNewFile();
+            if (success) {
+                System.out.printf("New Scroll Created: ", f);
+            } else {
+                System.out.printf("New Scroll Failed: ", f);
+            }
+        }
+    }
 }
