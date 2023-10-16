@@ -74,6 +74,8 @@ public class Admin {
             throw new RuntimeException(e);
         }
     }
+
+    @SuppressWarnings("unchecked")
     public static void updatePassword(String username, String password) {
         JSONParser parser = new JSONParser();
         JSONArray users;

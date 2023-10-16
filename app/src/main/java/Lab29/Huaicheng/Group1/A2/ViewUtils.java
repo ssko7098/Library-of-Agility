@@ -5,8 +5,17 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class ViewUtils {
@@ -245,5 +254,27 @@ public class ViewUtils {
 
 //            System.out.println("\n");
         }
+    }
+
+    public static String[] viewAllScrolls() {
+        Path directory = Paths.get("src/main/resources"); // Relative path
+        // Get the absolute path
+        Path absolutePath = directory.toAbsolutePath();
+        List<String> fileNames = new ArrayList<>();
+        fileNames.add("GO BACK");
+
+        try {
+            DirectoryStream<Path> stream = Files.newDirectoryStream(absolutePath, "*.txt");
+            for (Path file : stream) {
+                String fileName = file.getFileName().toString();
+                fileName = fileName.substring(0, fileName.lastIndexOf('.')); // Remove .txt extension
+                fileNames.add(fileName);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return fileNames.toArray(new String[0]);
     }
 }

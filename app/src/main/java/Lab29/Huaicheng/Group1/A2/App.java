@@ -1,5 +1,6 @@
 package Lab29.Huaicheng.Group1.A2;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -45,6 +46,7 @@ public class App {
             switch (selection) {
                 case 0:
                     // exit the application
+                    System.exit(0);
                     return;
                 case 1:
                     loginMenu();
@@ -205,20 +207,19 @@ public class App {
                 case 1:
                     //TODO change to user profile screen
                     if(userType.equals("guest")) {
+                        ScrollMenu();
                         //TODO change to scroll seeker screen
                     }
-
-                    updateUserMenu();
+                    else {
+                        updateUserMenu();
+                    }
                     break;
                 case 2:
-                    if(userType.equals("guest")) {
-                        //TODO change to scroll seeker screen
-                    }
-
                     //TODO change to digital scroll management screen
                     break;
                 case 3:
                     //TODO change to scroll seeker screen
+                    ScrollMenu();
                     break;
                 case 4:
                     //TODO change to user management screen
@@ -452,5 +453,26 @@ public class App {
                     System.out.println("Invalid selection, please choose 0 for Yes or 1 for No.");
             }
         } while (true);
+    }
+
+    private static void ScrollMenu() {
+        int selection;
+
+        do {
+            selection = ViewUtils.displayMenu("\nMake Selection:",
+                    ViewUtils.viewAllScrolls(),
+                    "Please enter a selection");
+
+            if (selection == 0) {
+                try {
+                    initMenu();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            } else {
+                ScrollDisplay.readScroll(ViewUtils.viewAllScrolls()[selection]);
+                selection = -1;
+            }
+        } while (-1 == selection);
     }
 }
