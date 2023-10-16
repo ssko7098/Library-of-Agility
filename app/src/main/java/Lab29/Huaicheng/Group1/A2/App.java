@@ -252,7 +252,15 @@ public class App {
                 case 1:
                     String fileName = ViewUtils.getStringOnSameLine("Enter Scroll Name: ");
                     if (fileName != null) {
-                        ViewUtils.addScroll(fileName, "0101010");
+                        String fileText = "";
+                        String fileLine = "!";
+                        fileLine = ViewUtils.getStringOnSameLine("\n\nEnter Scroll Text Line by Line!\nEnter a '!' to indicate input is complete:\n");
+                        while (!fileLine.equals("!")) {
+                            fileText = fileText + fileLine;
+                            fileLine = ViewUtils.getStringOnSameLine("");
+                            fileText = fileText + "\n";
+                        }
+                        ViewUtils.addScroll(fileName, fileText);
                     } else {
                         System.out.println("Invalid Input");
                         digitalScrollManagementMenu();
