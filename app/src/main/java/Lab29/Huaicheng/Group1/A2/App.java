@@ -266,7 +266,7 @@ public class App {
                         digitalScrollManagementMenu();
                         break;
                     }
-                    // EMPTY
+                    digitalScrollManagementMenu()
                 default:
                     // Can't get here
             }
