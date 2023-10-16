@@ -20,6 +20,7 @@ import java.util.Scanner;
 
 public class ViewUtils {
     static int displayMenu(String header, String[] options, String prompt) {
+        System.out.print("\033[H\033[2J");
         System.out.println("\n" + header);
 
         for (int i = 0; i < options.length; i++) {

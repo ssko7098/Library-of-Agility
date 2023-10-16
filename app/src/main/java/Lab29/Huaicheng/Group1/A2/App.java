@@ -263,7 +263,7 @@ public class App {
                         if (fileLine.equals("!")) {
                             ViewUtils.addScroll(fileName, fileText);
                         } else {
-                            System.out.println("Scroll Upload Ceased")
+                            System.out.println("Scroll Upload Ceased");
                         }
                     } else {
                         System.out.println("Invalid Input");
