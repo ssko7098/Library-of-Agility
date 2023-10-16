@@ -254,19 +254,23 @@ public class App {
                     if (fileName != null) {
                         String fileText = "";
                         String fileLine = "!";
-                        fileLine = ViewUtils.getStringOnSameLine("\n\nEnter Scroll Text Line by Line!\nEnter a '!' to indicate input is complete:\n");
-                        while (!fileLine.equals("!")) {
+                        fileLine = ViewUtils.getStringOnSameLine("\n\nEnter Scroll Text Line by Line!\nEnter a '?' to indicate cancelation of scroll upload\nEnter a '!' to indicate input is complete:\n");
+                        while (!fileLine.equals("!") && !fileLine.equals("?")) {
                             fileText = fileText + fileLine;
                             fileLine = ViewUtils.getStringOnSameLine("");
                             fileText = fileText + "\n";
                         }
-                        ViewUtils.addScroll(fileName, fileText);
+                        if (fileLine.equals("!")) {
+                            ViewUtils.addScroll(fileName, fileText);
+                        } else {
+                            System.out.println("Scroll Upload Ceased")
+                        }
                     } else {
                         System.out.println("Invalid Input");
                         digitalScrollManagementMenu();
                         break;
                     }
-                    digitalScrollManagementMenu()
+                    digitalScrollManagementMenu();
                 default:
                     // Can't get here
             }
