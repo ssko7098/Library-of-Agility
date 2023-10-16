@@ -470,7 +470,7 @@ public class App {
                     throw new RuntimeException(e);
                 }
             } else {
-                ScrollDisplay.readScroll(ViewUtils.viewAllScrolls()[selection]);
+                ViewUtils.readScroll(ViewUtils.viewAllScrolls()[selection]);
                 selection = -1;
             }
         } while (-1 == selection);
