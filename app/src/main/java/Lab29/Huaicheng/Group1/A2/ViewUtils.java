@@ -297,7 +297,12 @@ public class ViewUtils {
         if (f.exists()) {
             // File Exists
         } else {
-            // File Doesn't Exist
+            success = f.createNewFile();
+            if (success) {
+                System.out.printf("New Scroll Created: ", f);
+            } else {
+                System.out.printf("New Scroll Failed: ", f);
+            }
         }
     }
 }
