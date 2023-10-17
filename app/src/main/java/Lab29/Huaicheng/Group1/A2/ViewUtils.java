@@ -77,6 +77,10 @@ public class ViewUtils {
         return response;
     }
 
+    static Boolean isBinary(String line) {
+        return true;
+    }
+
     static int getInt(String prompt) {
 
         int response;
