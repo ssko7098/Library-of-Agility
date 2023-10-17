@@ -75,6 +75,18 @@ public class ViewUtils {
         return response;
     }
 
+    static Boolean isBinary(String s) {
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            char zero = '0';
+            char one = '1';
+            if (c != zero && c != one) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     static int getInt(String prompt) {
 
         int response;

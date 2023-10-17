@@ -258,8 +258,14 @@ public class App {
                         while (!fileLine.equals("!") && !fileLine.equals("?")) {
                             fileText = fileText + fileLine;
                             fileLine = ViewUtils.getStringOnSameLine("");
-                            // add IF for binary line (characters only 0 and 1)
-                            fileText = fileText + "\n";
+                            if (ViewUtils.isBinary(fileLine)) {
+                                fileText = fileText + "\n";
+                            } else {
+                                if (!fileLine.equals("!") && !fileLine.equals("?")) {
+                                    System.out.println("\n\nNon Binary Line Entered");
+                                    fileLine = "?";
+                                }
+                            }
                         }
                         if (fileLine.equals("!")) {
                             ViewUtils.addScroll(fileName, fileText);
