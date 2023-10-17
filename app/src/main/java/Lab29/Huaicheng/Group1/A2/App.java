@@ -261,7 +261,10 @@ public class App {
                             if (ViewUtils.isBinary(fileLine)) {
                                 fileText = fileText + "\n";
                             } else {
-
+                                if (!fileLine.equals("!") && !fileLine.equals("?")) {
+                                    System.out.println("\n\nNon Binary Line Entered");
+                                    fileLine = "?";
+                                }
                             }
                         }
                         if (fileLine.equals("!")) {
