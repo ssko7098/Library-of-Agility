@@ -318,6 +318,14 @@ public class ViewUtils {
             } catch (IOException e) {
                 System.out.println("Scroll creation cannot occur");
             }
+            try {
+                FileWriter fileToWrite = new FileWriter("src/main/resources/" + scrollName + ".txt");
+                fileToWrite.write(scrollContent);
+                fileToWrite.close();
+                System.out.println("Successfully wrote to the scroll.");
+            } catch (IOException e) {
+                System.out.println("Scroll writing cannot occur");
+            }
         }
     }
 
