@@ -5,10 +5,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -301,6 +298,7 @@ public class ViewUtils {
             try {
                 Boolean success = f.createNewFile();
                 if (success) {
+                    addScrollToJSON(scrollName, Login.getUser().getUsername());
                     System.out.printf("New Scroll Created: ", f);
                 } else {
                     System.out.printf("New Scroll Failed: ", f);
@@ -308,7 +306,34 @@ public class ViewUtils {
             } catch (IOException e) {
                 System.out.println("Scroll creation cannot occur");
             }
-
         }
+    }
+
+    public static void addScrollToJSON(String scrollName, String uploaderUsername){
+        JSONParser parser = new JSONParser();
+        JSONArray scrolls;
+
+        try {
+            scrolls = (JSONArray) parser.parse(new FileReader("scrolls.json"));
+        } catch (IOException | ParseException e) {
+            throw new RuntimeException(e);
+        }
+        JSONObject scrollDetails = new JSONObject();
+
+        scrollDetails.put("scrollName", scrollName);
+        scrollDetails.put("Uploader", uploaderUsername);
+        scrollDetails.put("Date", java.time.LocalDate.now().toString());
+
+        scrolls.add(scrollDetails);
+
+        try {
+            FileWriter file = new FileWriter("scrolls.json");
+            file.write(scrolls.toJSONString());
+            file.flush();
+            file.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }
