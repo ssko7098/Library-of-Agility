@@ -222,7 +222,49 @@ public class AsciiArt {
         startOfLetter.put('0',630);
         endOfLetter.put('0',640);
 
-
-
+    }
+    public char getLetterL1(int index){
+        char[] char1 = line1.toCharArray();
+        return char1[index];
+    }
+    public char getLetterL2(int index){
+        char[] char1 = line2.toCharArray();
+        return char1[index];
+    }
+    public char getLetterL3(int index){
+        char[] char1 = line3.toCharArray();
+        return char1[index];
+    }
+    public char getLetterL4(int index){
+        char[] char1 = line4.toCharArray();
+        return char1[index];
+    }
+    public char getLetterL5(int index){
+        char[] char1 = line5.toCharArray();
+        return char1[index];
+    }
+    public char getLetterL6(int index){
+        char[] char1 = line6.toCharArray();
+        return char1[index];
+    }
+    public char getLetterL7(int index){
+        char[] char1 = line7.toCharArray();
+        return char1[index];
+    }
+    public char getLetterL8(int index){
+        char[] char1 = line8.toCharArray();
+        return char1[index];
+    }
+    public char getLetterL9(int index){
+        char[] char1 = line9.toCharArray();
+        return char1[index];
+    }
+    public char getLetterL10(int index){
+        char[] char1 = line10.toCharArray();
+        return char1[index];
+    }
+    public char getLetterL11(int index){
+        char[] char1 = line11.toCharArray();
+        return char1[index];
     }
 }
