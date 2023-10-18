@@ -80,6 +80,7 @@ public class ViewUtils {
             char c = s.charAt(i);
             char zero = '0';
             char one = '1';
+            // issue with Binary Check
             if (c != zero && c != one) {
                 return false;
             }
@@ -157,7 +158,7 @@ public class ViewUtils {
 
             check = getBoolean("Are you sure you want your new Password to be: " + test + "?");
 
-        }while(!check);
+        } while(!check);
 
         Login.getUser().setPassword(test);
     }
@@ -302,8 +303,17 @@ public class ViewUtils {
         }
     }
 
-    public static void addScroll(String scrollName, String scrollContent) {
-        File f = new File("src/main/resources/" + scrollName + ".txt");
+    public static Boolean checkDirectory(String directoryPathway) {
+        File f = new File(directoryPathway);
+        if (f.exists()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static void addScroll(String scrollName, String scrollContent, String scrollPath) {
+        File f = new File(scrollPath + scrollName + ".txt");
         if (f.exists()) {
             System.out.println("File with that name already exists");
         } else {
@@ -319,7 +329,7 @@ public class ViewUtils {
                 System.out.println("Scroll creation cannot occur");
             }
             try {
-                FileWriter fileToWrite = new FileWriter("src/main/resources/" + scrollName + ".txt");
+                FileWriter fileToWrite = new FileWriter(scrollPath + scrollName + ".txt");
                 fileToWrite.write(scrollContent);
                 fileToWrite.close();
                 System.out.println("Successfully wrote to the scroll.");
