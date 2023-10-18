@@ -302,6 +302,15 @@ public class ViewUtils {
         }
     }
 
+    public static void checkDirectory(String directoryPathway) {
+        File f = new File(directoryPathway);
+        if (f.exists()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public static void addScroll(String scrollName, String scrollContent) {
         File f = new File("src/main/resources/" + scrollName + ".txt");
         if (f.exists()) {
