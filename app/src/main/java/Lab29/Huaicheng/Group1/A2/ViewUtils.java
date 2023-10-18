@@ -256,34 +256,9 @@ public class ViewUtils {
             }
 
             System.out.println(name + " (" + username + "): " + extra);
-
-//            for(Object entry: user.entrySet()) {
-//                System.out.println(entry.toString());
-//            }
-
-//            System.out.println("\n");
         }
     }
 
-    //code used in scroll seeker to retrieve all file names
-//        Path directory = Paths.get("src/main/resources"); // Relative path
-//        // Get the absolute path
-//        Path absolutePath = directory.toAbsolutePath();
-//        List<String> fileNames = new ArrayList<>();
-//        fileNames.add("GO BACK");
-//
-//        try {
-//            DirectoryStream<Path> stream = Files.newDirectoryStream(absolutePath, "*.txt");
-//            for (Path file : stream) {
-//                String fileName = file.getFileName().toString();
-//                fileName = fileName.substring(0, fileName.lastIndexOf('.')); // Remove .txt extension
-//                fileNames.add(fileName);
-//            }
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        return fileNames.toArray(new String[0]);
     public static String[] viewAllScrollsNames() {
         List<String> scrollNames = new ArrayList<>();
         scrollNames.add("GO BACK");
@@ -351,16 +326,19 @@ public class ViewUtils {
 
     public static Boolean checkDirectory(String directoryPathway) {
         File f = new File(directoryPathway);
-        if (f.exists()) {
-            return true;
-        } else {
-            return false;
-        }
+        return f.exists();
+    }
+
+    public static boolean checkScrollNameExists(String scrollName) {
+        // the scroll name is meant to be a primary key, so we need to check
+        // whether it already exists.
+        File f = new File("src/main/resources/" + scrollName + ".txt");
+        return f.exists();
     }
 
     public static void addScroll(String scrollName, String scrollContent, String scrollPath) {
         File f = new File(scrollPath + scrollName + ".txt");
-        if (f.exists()) {
+        if (f.exists() || checkScrollNameExists(scrollName)) {
             System.out.println("File with that name already exists");
         } else {
             try {
@@ -385,6 +363,7 @@ public class ViewUtils {
         }
     }
 
+    @SuppressWarnings("unchecked")
     public static void addScrollToJSON(String scrollName, String uploaderUsername){
         JSONParser parser = new JSONParser();
         JSONArray scrolls;
