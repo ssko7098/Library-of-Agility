@@ -349,12 +349,32 @@ public class ViewUtils {
             throw new RuntimeException(e);
         }
 
+        if(!checkBinary(result)) {
+            return null;
+        }
+
         return String.join("\n", result);
 
     }
 
+    public static boolean checkBinary(ArrayList<String> contents) {
+
+        for(String line : contents) {
+            char[] charArray = line.toCharArray();
+
+            for(char c : charArray) {
+                if(c != '1' && c != '0') {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+
+    }
+
     public static void addScroll(String scrollName, String scrollContent, String scrollPath) {
-        File f = new File(scrollPath + scrollName + ".txt");
+        File f = new File("src/main/resources/" + scrollName + ".txt");
         if (checkScrollNameExists(scrollName)) {
             System.out.println("File with that name already exists");
         } else {
