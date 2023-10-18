@@ -251,6 +251,19 @@ public class App {
 
                 case 1:
                     String fileName = ViewUtils.getStringOnSameLine("Enter Scroll Name: ");
+                    Boolean invalidDirectory = true;
+                    while (invalidDirectory) {
+                        String directoryAdress = ViewUtils.getStringOnSameLine("Enter Directory Path\nEnter a '#' to indicate defult directory: ");
+                        invalidDirectory = false;
+                        if (directoryAdress.equals("#")) {
+                            directoryAdress = "src/main/resources/";
+                        } else {
+                            if (!ViewUtils.checkDirectory(directoryAdress)) {
+                                invalidDirectory = true;
+                            }
+                        }
+                    }
+                    
                     if (fileName != null) {
                         String fileText = "";
                         String fileLine = "!";
