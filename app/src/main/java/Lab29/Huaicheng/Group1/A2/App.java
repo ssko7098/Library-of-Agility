@@ -535,7 +535,7 @@ public class App {
 
         do {
             selection = ViewUtils.displayMenu("\nMake Selection:",
-                    ViewUtils.viewAllScrolls(),
+                    ViewUtils.viewAllScrollsDetails(),
                     "Please enter a selection");
 
             if (selection == 0) {
@@ -545,7 +545,7 @@ public class App {
                     throw new RuntimeException(e);
                 }
             } else {
-                ViewUtils.readScroll(ViewUtils.viewAllScrolls()[selection]);
+                ViewUtils.readScroll(ViewUtils.viewAllScrollsNames()[selection]);
                 selection = -1;
             }
         } while (-1 == selection);

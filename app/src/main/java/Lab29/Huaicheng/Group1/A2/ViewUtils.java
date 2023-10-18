@@ -265,7 +265,7 @@ public class ViewUtils {
         }
     }
 
-    public static String[] viewAllScrolls() {
+    public static String[] viewAllScrollsNames() {
         Path directory = Paths.get("src/main/resources"); // Relative path
         // Get the absolute path
         Path absolutePath = directory.toAbsolutePath();
@@ -283,8 +283,37 @@ public class ViewUtils {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return fileNames.toArray(new String[0]);
+    }
+
+    public static String[] viewAllScrollsDetails() {
+        //Path directory = Paths.get("src/main/resources"); // Relative path
+        // Get the absolute path
+        //Path absolutePath = directory.toAbsolutePath();
+        List<String> scrollDetails = new ArrayList<>();
+        scrollDetails.add("GO BACK");
+
+        JSONParser parser = new JSONParser();
+        JSONArray scrolls;
+        try {
+            scrolls = (JSONArray) parser.parse(new FileReader("scrolls.json"));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+        for (int i=0; i<scrolls.size(); i++) {
+            JSONObject scroll = (JSONObject) scrolls.get(i);
+            String scrollString;
+
+            scrollString = scroll.get("scrollName").toString() + ". Uploaded by "
+                    + scroll.get("Uploader").toString() + " on " + scroll.get("Date");
+
+            scrollDetails.add(scrollString);
+        }
+        return scrollDetails.toArray(new String[0]);
     }
 
     public static void readScroll(String scrollName) {
