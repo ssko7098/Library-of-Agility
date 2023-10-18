@@ -37,5 +37,192 @@ public class AsciiArt {
         this.startOfLetter = new HashMap<>();
         this.endOfLetter = new HashMap<>();
         startOfLetter.put('a', 0);
+        endOfLetter.put('a',8);
+
+        startOfLetter.put('b',9);
+        endOfLetter.put('b',17);
+
+        startOfLetter.put('c',18);
+        endOfLetter.put('c',26);
+
+        startOfLetter.put('d',26);
+        endOfLetter.put('d',34);
+
+        startOfLetter.put('e',35);
+        endOfLetter.put('e',43);
+
+        startOfLetter.put('f',44);
+        endOfLetter.put('f',50);
+
+        startOfLetter.put('g',50);
+        endOfLetter.put('g',58);
+
+        startOfLetter.put('h',59);
+        endOfLetter.put('h',67);
+
+        startOfLetter.put('i',68);
+        endOfLetter.put('i',71);
+
+        startOfLetter.put('j',77);
+        endOfLetter.put('j',83);
+
+        startOfLetter.put('k',84);
+        endOfLetter.put('k',92);
+
+        startOfLetter.put('l',93);
+        endOfLetter.put('l',96);
+
+        startOfLetter.put('m',97);
+        endOfLetter.put('m',110);
+
+        startOfLetter.put('n',111);
+        endOfLetter.put('n',119);
+
+        startOfLetter.put('o',120);
+        endOfLetter.put('o',128);
+
+        startOfLetter.put('p',129);
+        endOfLetter.put('p',137);
+
+        startOfLetter.put('q',138);
+        endOfLetter.put('q',146);
+
+        startOfLetter.put('r',147);
+        endOfLetter.put('r',154);
+
+        startOfLetter.put('s',155);
+        endOfLetter.put('s',163);
+
+        startOfLetter.put('t',164);
+        endOfLetter.put('t',170);
+
+        startOfLetter.put('u',171);
+        endOfLetter.put('u',179);
+
+        startOfLetter.put('v',180);
+        endOfLetter.put('v',188);
+
+        startOfLetter.put('w',189);
+        endOfLetter.put('w',202);
+
+        startOfLetter.put('x',203);
+        endOfLetter.put('x',211);
+
+        startOfLetter.put('y',212);
+        endOfLetter.put('y',220);
+
+        startOfLetter.put('z',221);
+        endOfLetter.put('z',229);
+
+        startOfLetter.put('A',235);
+        endOfLetter.put('A',247);
+
+        startOfLetter.put('B',248);
+        endOfLetter.put('B',258);
+
+        startOfLetter.put('C',259);
+        endOfLetter.put('C',269);
+
+        startOfLetter.put('D',270);
+        endOfLetter.put('D',280);
+
+        startOfLetter.put('E',281);
+        endOfLetter.put('E',291);
+
+        startOfLetter.put('F',292);
+        endOfLetter.put('F',301);
+
+        startOfLetter.put('G',302);
+        endOfLetter.put('G',312);
+
+        startOfLetter.put('H',313);
+        endOfLetter.put('H',323);
+
+        startOfLetter.put('I',324);
+        endOfLetter.put('I',331);
+
+        startOfLetter.put('J',337);
+        endOfLetter.put('J',345);
+
+        startOfLetter.put('K',346);
+        endOfLetter.put('K',356);
+
+        startOfLetter.put('L',357);
+        endOfLetter.put('L',366);
+
+        startOfLetter.put('M',367);
+        endOfLetter.put('M',380);
+
+        startOfLetter.put('N',381);
+        endOfLetter.put('N',392);
+
+        startOfLetter.put('O',393);
+        endOfLetter.put('O',404);
+
+        startOfLetter.put('P',405);
+        endOfLetter.put('P',415);
+
+        startOfLetter.put('Q',416);
+        endOfLetter.put('Q',427);
+
+        startOfLetter.put('R',428);
+        endOfLetter.put('R',438);
+
+        startOfLetter.put('S',439);
+        endOfLetter.put('S',449);
+
+        startOfLetter.put('T',449);
+        endOfLetter.put('T',460);
+
+        startOfLetter.put('U',461);
+        endOfLetter.put('U',472);
+
+        startOfLetter.put('V',473);
+        endOfLetter.put('V',484);
+
+        startOfLetter.put('W',485);
+        endOfLetter.put('W',498);
+
+        startOfLetter.put('X',499);
+        endOfLetter.put('X',510);
+
+        startOfLetter.put('Y',511);
+        endOfLetter.put('Y',522);
+
+        startOfLetter.put('Z',523);
+        endOfLetter.put('Z',534);
+
+        startOfLetter.put('1',535);
+        endOfLetter.put('1',542);
+
+        startOfLetter.put('2',543);
+        endOfLetter.put('2',553);
+
+        startOfLetter.put('3',554);
+        endOfLetter.put('3',564);
+
+        startOfLetter.put('4',565);
+        endOfLetter.put('4',575);
+
+        startOfLetter.put('5',576);
+        endOfLetter.put('5',586);
+
+        startOfLetter.put('6',587);
+        endOfLetter.put('6',597);
+
+        startOfLetter.put('7',598);
+        endOfLetter.put('7',607);
+
+        startOfLetter.put('8',608);
+        endOfLetter.put('8',618);
+
+        startOfLetter.put('9',619);
+        endOfLetter.put('9',629);
+
+        startOfLetter.put('0',630);
+        endOfLetter.put('0',640);
+
+
+
     }
 }
