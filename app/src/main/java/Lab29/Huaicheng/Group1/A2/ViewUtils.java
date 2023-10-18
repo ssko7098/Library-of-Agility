@@ -265,6 +265,7 @@ public class ViewUtils {
         }
     }
 
+    //code used in scroll seeker to retrieve all file names
     public static String[] viewAllScrollsNames() {
         Path directory = Paths.get("src/main/resources"); // Relative path
         // Get the absolute path
@@ -286,10 +287,8 @@ public class ViewUtils {
         return fileNames.toArray(new String[0]);
     }
 
+    //code which is used in scroll seeker to display file names and details in a string
     public static String[] viewAllScrollsDetails() {
-        //Path directory = Paths.get("src/main/resources"); // Relative path
-        // Get the absolute path
-        //Path absolutePath = directory.toAbsolutePath();
         List<String> scrollDetails = new ArrayList<>();
         scrollDetails.add("GO BACK");
 
