@@ -252,8 +252,9 @@ public class App {
                 case 1:
                     String fileName = ViewUtils.getStringOnSameLine("Enter Scroll Name: ");
                     Boolean invalidDirectory = true;
+                    String directoryAdress = "";
                     while (invalidDirectory) {
-                        String directoryAdress = ViewUtils.getStringOnSameLine("Enter Directory Path\nEnter a '#' to indicate defult directory: ");
+                        directoryAdress = ViewUtils.getStringOnSameLine("Enter Directory Path\nEnter a '#' to indicate defult directory: ");
                         invalidDirectory = false;
                         if (directoryAdress.equals("#")) {
                             directoryAdress = "src/main/resources/";
@@ -263,7 +264,7 @@ public class App {
                             }
                         }
                     }
-                    
+
                     if (fileName != null) {
                         String fileText = "";
                         String fileLine = "!";
@@ -281,7 +282,7 @@ public class App {
                             }
                         }
                         if (fileLine.equals("!")) {
-                            ViewUtils.addScroll(fileName, fileText);
+                            ViewUtils.addScroll(fileName, fileText, directoryAdress);
                         } else {
                             System.out.println("Scroll Upload Ceased");
                         }
