@@ -282,4 +282,18 @@ public class AsciiArt {
             sb11.append(getLetterL11(i));
         }
     }
+
+    public void letterSpace() {
+        sb1.append("  ");
+        sb2.append("  ");
+        sb3.append("  ");
+        sb4.append("  ");
+        sb5.append("  ");
+        sb6.append("  ");
+        sb7.append("  ");
+        sb8.append("  ");
+        sb9.append("  ");
+        sb10.append("  ");
+        sb11.append("  ");
+    }
 }
