@@ -31,6 +31,30 @@ public class AdminTest {
         user1.setEmailAddress("ethan@gmail.com");
         user1.setFullName("Ethan Acevksi");
 
+        Login.createNewUser(user1);
+        Admin.updatePassword(user1.getUsername(),"1234");
+
+        String newPass = null;
+        JSONParser parser = new JSONParser();
+        JSONArray users;
+
+        try {
+            users = (JSONArray) parser.parse(new FileReader("users.json"));
+            for (int i = 0; i < users.size(); i++) {
+                JSONObject user = (JSONObject) users.get(i);
+                if (user1.getUsername().equals(user.get("username").toString())) {
+                    newPass = user.get("password").toString();
+                }
+            }
+        } catch (IOException | ParseException e) {
+            throw new RuntimeException(e);
+        }
+        if(newPass != null) {
+            Assertions.assertNotEquals(Encryptor.encryptString(oldPass),newPass);
+        }
+
+        Admin.deleteUser(user1.getUsername());
+
     }
 
 
