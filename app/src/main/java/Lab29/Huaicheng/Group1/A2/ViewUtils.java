@@ -76,12 +76,10 @@ public class ViewUtils {
     }
 
     static Boolean isBinary(String s) {
-        for (int i = 0; i < s.length(); i++) {
+        for (int i = 0; i != s.length(); i++) {
             char c = s.charAt(i);
-            char zero = '0';
-            char one = '1';
             // issue with Binary Check
-            if (c != zero && c != one) {
+            if (c != '1' && c != '0') {
                 return false;
             }
         }

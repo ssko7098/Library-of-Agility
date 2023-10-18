@@ -270,9 +270,9 @@ public class App {
                         String fileLine = "!";
                         fileLine = ViewUtils.getStringOnSameLine("\n\nEnter Scroll Text Line by Line!\nEnter a '?' to indicate cancelation of scroll upload\nEnter a '!' to indicate input is complete:\n");
                         while (!fileLine.equals("!") && !fileLine.equals("?")) {
-                            fileText = fileText + fileLine;
-                            fileLine = ViewUtils.getStringOnSameLine("");
                             if (ViewUtils.isBinary(fileLine)) {
+                                fileText = fileText + fileLine;
+                                fileLine = ViewUtils.getStringOnSameLine("");
                                 fileText = fileText + "\n";
                             } else {
                                 if (!fileLine.equals("!") && !fileLine.equals("?")) {
