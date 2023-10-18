@@ -12,17 +12,22 @@ import java.nio.file.StandardCopyOption;
 
 public class FileUploaderWithDialog {
 
+    private static JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView());
+    private static FileNameExtensionFilter filter = new FileNameExtensionFilter("Text Files", "txt");
+
     public static String chooseFile() {
-        JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView());
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("Text Files", "txt");
+        fileChooser.setAcceptAllFileFilterUsed(false);
         fileChooser.setFileFilter(filter);
 
         int returnValue = fileChooser.showOpenDialog(null);
 
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
+            fileChooser.cancelSelection();
             return selectedFile.getPath();
         }
+
+        fileChooser.cancelSelection();
 
         return null;
     }
