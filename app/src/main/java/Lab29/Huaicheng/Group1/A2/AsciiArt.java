@@ -267,4 +267,19 @@ public class AsciiArt {
         char[] char1 = line11.toCharArray();
         return char1[index];
     }
+    public void appendLetter(char letter){
+        for (int i=startOfLetter.get(letter); i < endOfLetter.get(letter); i++){
+            sb1.append(getLetterL1(i));
+            sb2.append(getLetterL2(i));
+            sb3.append(getLetterL3(i));
+            sb4.append(getLetterL4(i));
+            sb5.append(getLetterL5(i));
+            sb6.append(getLetterL6(i));
+            sb7.append(getLetterL7(i));
+            sb8.append(getLetterL8(i));
+            sb9.append(getLetterL9(i));
+            sb10.append(getLetterL10(i));
+            sb11.append(getLetterL11(i));
+        }
+    }
 }
