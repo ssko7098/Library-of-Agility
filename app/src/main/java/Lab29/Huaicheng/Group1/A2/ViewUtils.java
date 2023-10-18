@@ -266,25 +266,44 @@ public class ViewUtils {
     }
 
     //code used in scroll seeker to retrieve all file names
+//        Path directory = Paths.get("src/main/resources"); // Relative path
+//        // Get the absolute path
+//        Path absolutePath = directory.toAbsolutePath();
+//        List<String> fileNames = new ArrayList<>();
+//        fileNames.add("GO BACK");
+//
+//        try {
+//            DirectoryStream<Path> stream = Files.newDirectoryStream(absolutePath, "*.txt");
+//            for (Path file : stream) {
+//                String fileName = file.getFileName().toString();
+//                fileName = fileName.substring(0, fileName.lastIndexOf('.')); // Remove .txt extension
+//                fileNames.add(fileName);
+//            }
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        return fileNames.toArray(new String[0]);
     public static String[] viewAllScrollsNames() {
-        Path directory = Paths.get("src/main/resources"); // Relative path
-        // Get the absolute path
-        Path absolutePath = directory.toAbsolutePath();
-        List<String> fileNames = new ArrayList<>();
-        fileNames.add("GO BACK");
+        List<String> scrollNames = new ArrayList<>();
+        scrollNames.add("GO BACK");
 
+        JSONParser parser = new JSONParser();
+        JSONArray scrolls;
         try {
-            DirectoryStream<Path> stream = Files.newDirectoryStream(absolutePath, "*.txt");
-            for (Path file : stream) {
-                String fileName = file.getFileName().toString();
-                fileName = fileName.substring(0, fileName.lastIndexOf('.')); // Remove .txt extension
-                fileNames.add(fileName);
-            }
-
+            scrolls = (JSONArray) parser.parse(new FileReader("scrolls.json"));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
         }
-        return fileNames.toArray(new String[0]);
+        for (int i=0; i<scrolls.size(); i++) {
+            JSONObject scroll = (JSONObject) scrolls.get(i);
+            scrollNames.add(scroll.get("scrollName").toString());
+        }
+        return scrollNames.toArray(new String[0]);
     }
 
     //code which is used in scroll seeker to display file names and details in a string
