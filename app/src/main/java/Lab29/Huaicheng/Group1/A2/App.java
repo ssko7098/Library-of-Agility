@@ -305,6 +305,11 @@ public class App {
                         }
                         else {
                             String fileText = ViewUtils.readUploadedScroll(directoryAdress);
+                            if(fileText == null) {
+                                System.out.println("The file you have chosen is not a binary file. Please try again");
+                                selection = -1;
+                                break;
+                            }
                             ViewUtils.addScroll(fileName, fileText, directoryAdress);
                         }
                     } else {
