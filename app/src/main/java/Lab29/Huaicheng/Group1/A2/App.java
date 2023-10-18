@@ -259,58 +259,90 @@ public class App {
                     break;
 
                 case 1:
+                    uploadScrollMenu();
+                    break;
+
+                default:
+                    // Can't get here
+            }
+        } while (-1 == selection);
+    }
+
+    private static void uploadScrollMenu() throws IOException {
+        int selection = -1;
+
+        do{
+            selection = ViewUtils.displayMenu("\nMake Selection:",
+                    new String[]{
+                            "GO BACK",
+                            "Upload Scroll",
+                            "Write Scroll Here",
+                    }, "Please enter a selection");
+
+            switch(selection) {
+                case 0:
+                    digitalScrollManagementMenu();
+
+                case 1:
                     String fileName = ViewUtils.getStringOnSameLine("Enter Scroll Name: ");
                     boolean invalidDirectory = true;
                     String directoryAdress = "";
 
-                    boolean uploadedScroll = false;
-
                     while (invalidDirectory) {
-                        directoryAdress = ViewUtils.getStringOnSameLine("Enter Directory Path\nEnter a '#' to type the contents of the scroll here: ");
+                        directoryAdress = FileUploaderWithDialog.chooseFile();
                         invalidDirectory = false;
-                        if (directoryAdress.equals("#")) {
-                            directoryAdress = "src/main/resources/";
-                        } else {
-                            if (!ViewUtils.checkDirectory(directoryAdress)) {
-                                invalidDirectory = true;
-                            }
-                            else {
-                                uploadedScroll = true;
-                            }
+                        if(directoryAdress == null) {
+                            selection = -1;
+                            break;
+                        }
+                        if (!ViewUtils.checkDirectory(directoryAdress)) {
+                            invalidDirectory = true;
                         }
                     }
 
                     if (fileName != null) {
-                        if(!uploadedScroll) {
-                            String fileText = "";
-                            String fileLine = "!";
-                            fileLine = ViewUtils.getStringOnSameLine("\n\nEnter Scroll Text Line by Line!\nEnter a '?' on a new line to indicate cancellation of scroll upload\nEnter a '!' on a new line to indicate input is complete:\n");
-                            while (!fileLine.equals("!") && !fileLine.equals("?")) {
-                                if (ViewUtils.isBinary(fileLine)) {
-                                    fileText = fileText + fileLine;
-                                    fileLine = ViewUtils.getStringOnSameLine("");
-                                    fileText = fileText + "\n";
-                                } else {
-                                    if (!fileLine.equals("!") && !fileLine.equals("?")) {
-                                        System.out.println("\n\nNon Binary Line Entered");
-                                        fileLine = "?";
-                                    }
+                        String fileText;
+                        try{
+                            fileText = ViewUtils.readUploadedScroll(directoryAdress);
+                        }catch(NullPointerException e) {
+                            System.out.println("The file you have chosen is not a binary file. Please try again");
+                            selection = -1;
+                            break;
+                        }
+
+                        ViewUtils.addScroll(fileName, fileText, directoryAdress);
+
+                    } else {
+                        System.out.println("Invalid Input");
+                        digitalScrollManagementMenu();
+                        break;
+                    }
+                    digitalScrollManagementMenu();
+
+                case 2:
+                    String name = ViewUtils.getStringOnSameLine("Enter Scroll Name: ");
+                    String directory = "src/main/resources/";
+
+                    if (name != null) {
+                        String fileText = "";
+                        String fileLine = "!";
+                        fileLine = ViewUtils.getStringOnSameLine("\n\nEnter Scroll Text Line by Line!\nEnter a '?' on a new line to indicate cancellation of scroll upload\nEnter a '!' on a new line to indicate input is complete:\n");
+                        while (!fileLine.equals("!") && !fileLine.equals("?")) {
+                            if (ViewUtils.isBinary(fileLine)) {
+                                fileText = fileText + fileLine;
+                                fileLine = ViewUtils.getStringOnSameLine("");
+                                fileText = fileText + "\n";
+                            } else {
+                                if (!fileLine.equals("!") && !fileLine.equals("?")) {
+                                    System.out.println("\n\nNon Binary Line Entered");
+                                    fileLine = "?";
                                 }
                             }
-                            if (fileLine.equals("!")) {
-                                ViewUtils.addScroll(fileName, fileText, directoryAdress);
-                            } else {
-                                System.out.println("Scroll Upload Ceased");
-                            }
                         }
-                        else {
-                            String fileText = ViewUtils.readUploadedScroll(directoryAdress);
-                            if(fileText == null) {
-                                System.out.println("The file you have chosen is not a binary file. Please try again");
-                                selection = -1;
-                                break;
-                            }
-                            ViewUtils.addScroll(fileName, fileText, directoryAdress);
+                        if (fileLine.equals("!")) {
+                            ViewUtils.addScroll(name, fileText, directory);
+                        } else {
+                            System.out.println("Scroll Upload Ceased");
                         }
                     } else {
                         System.out.println("Invalid Input");
@@ -318,10 +350,9 @@ public class App {
                         break;
                     }
                     digitalScrollManagementMenu();
-                default:
-                    // Can't get here
             }
-        } while (-1 == selection);
+
+        }while(selection == -1);
     }
 
     private static void updateUserMenu() throws IOException {

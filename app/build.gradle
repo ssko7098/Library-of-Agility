@@ -51,7 +51,8 @@ jacocoTestReport {
             fileTree(dir: it, exclude: [
                     "**/App.class",
                     "**/ViewUtils.class",
-                    "**/AsciiArt.class"
+                    "**/AsciiArt.class",
+                    "**/FileUploaderWithDialog.class"
             ])
         }))
     }
