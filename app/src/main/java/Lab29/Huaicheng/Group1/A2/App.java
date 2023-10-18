@@ -302,9 +302,16 @@ public class App {
 
                     if (fileName != null) {
                         String fileText;
+
                         try{
                             fileText = ViewUtils.readUploadedScroll(directoryAdress);
                         }catch(NullPointerException e) {
+                            System.out.println("The file you have chosen is not a binary file. Please try again");
+                            selection = -1;
+                            break;
+                        }
+
+                        if(fileText == null) {
                             System.out.println("The file you have chosen is not a binary file. Please try again");
                             selection = -1;
                             break;
