@@ -27,14 +27,23 @@ public class App {
 
     private static String userType = "non-admin";
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
+        AsciiArt art = new AsciiArt();
+        art.draw("Welcome To");
+        Thread.sleep(3000);
+        art.draw("The Library");
+        Thread.sleep(1500);
+        art.draw("Of Agility");
+        Thread.sleep(1500);
+        System.out.print("\033[H\033[2J");
+        Thread.sleep(200);
         existingUserMenu();
     }
 
     private static void existingUserMenu() throws IOException {
         int selection = -1;
         do {
-            selection = ViewUtils.displayMenu("Welcome to the Library of Agility!",
+            selection = ViewUtils.displayMenu("Welcome to the Library of Agility! \nPlease select from the following options:",
                     new String[]{
                             "EXIT",
                             "Existing User",
