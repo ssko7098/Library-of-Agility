@@ -268,7 +268,7 @@ public class App {
                     if (fileName != null) {
                         String fileText = "";
                         String fileLine = "!";
-                        fileLine = ViewUtils.getStringOnSameLine("\n\nEnter Scroll Text Line by Line!\nEnter a '?' to indicate cancelation of scroll upload\nEnter a '!' to indicate input is complete:\n");
+                        fileLine = ViewUtils.getStringOnSameLine("\n\nEnter Scroll Text Line by Line!\nEnter a '?' on a new line to indicate cancelation of scroll upload\nEnter a '!' on a new line to indicate input is complete:\n");
                         while (!fileLine.equals("!") && !fileLine.equals("?")) {
                             if (ViewUtils.isBinary(fileLine)) {
                                 fileText = fileText + fileLine;
