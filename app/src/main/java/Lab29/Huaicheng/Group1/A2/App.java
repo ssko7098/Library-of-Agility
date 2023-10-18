@@ -260,10 +260,13 @@ public class App {
 
                 case 1:
                     String fileName = ViewUtils.getStringOnSameLine("Enter Scroll Name: ");
-                    Boolean invalidDirectory = true;
+                    boolean invalidDirectory = true;
                     String directoryAdress = "";
+
+                    boolean uploadedScroll = false;
+
                     while (invalidDirectory) {
-                        directoryAdress = ViewUtils.getStringOnSameLine("Enter Directory Path\nEnter a '#' to indicate default directory: ");
+                        directoryAdress = ViewUtils.getStringOnSameLine("Enter Directory Path\nEnter a '#' to type the contents of the scroll here: ");
                         invalidDirectory = false;
                         if (directoryAdress.equals("#")) {
                             directoryAdress = "src/main/resources/";
@@ -271,29 +274,38 @@ public class App {
                             if (!ViewUtils.checkDirectory(directoryAdress)) {
                                 invalidDirectory = true;
                             }
+                            else {
+                                uploadedScroll = true;
+                            }
                         }
                     }
 
                     if (fileName != null) {
-                        String fileText = "";
-                        String fileLine = "!";
-                        fileLine = ViewUtils.getStringOnSameLine("\n\nEnter Scroll Text Line by Line!\nEnter a '?' on a new line to indicate cancellation of scroll upload\nEnter a '!' on a new line to indicate input is complete:\n");
-                        while (!fileLine.equals("!") && !fileLine.equals("?")) {
-                            if (ViewUtils.isBinary(fileLine)) {
-                                fileText = fileText + fileLine;
-                                fileLine = ViewUtils.getStringOnSameLine("");
-                                fileText = fileText + "\n";
-                            } else {
-                                if (!fileLine.equals("!") && !fileLine.equals("?")) {
-                                    System.out.println("\n\nNon Binary Line Entered");
-                                    fileLine = "?";
+                        if(!uploadedScroll) {
+                            String fileText = "";
+                            String fileLine = "!";
+                            fileLine = ViewUtils.getStringOnSameLine("\n\nEnter Scroll Text Line by Line!\nEnter a '?' on a new line to indicate cancellation of scroll upload\nEnter a '!' on a new line to indicate input is complete:\n");
+                            while (!fileLine.equals("!") && !fileLine.equals("?")) {
+                                if (ViewUtils.isBinary(fileLine)) {
+                                    fileText = fileText + fileLine;
+                                    fileLine = ViewUtils.getStringOnSameLine("");
+                                    fileText = fileText + "\n";
+                                } else {
+                                    if (!fileLine.equals("!") && !fileLine.equals("?")) {
+                                        System.out.println("\n\nNon Binary Line Entered");
+                                        fileLine = "?";
+                                    }
                                 }
                             }
+                            if (fileLine.equals("!")) {
+                                ViewUtils.addScroll(fileName, fileText, directoryAdress);
+                            } else {
+                                System.out.println("Scroll Upload Ceased");
+                            }
                         }
-                        if (fileLine.equals("!")) {
+                        else {
+                            String fileText = ViewUtils.readUploadedScroll(directoryAdress);
                             ViewUtils.addScroll(fileName, fileText, directoryAdress);
-                        } else {
-                            System.out.println("Scroll Upload Ceased");
                         }
                     } else {
                         System.out.println("Invalid Input");

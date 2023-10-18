@@ -336,13 +336,30 @@ public class ViewUtils {
         return f.exists();
     }
 
+    public static String readUploadedScroll(String scrollPath) {
+        File f = new File(scrollPath);
+        ArrayList<String> result = new ArrayList<>();
+
+        try {
+            Scanner scanner = new Scanner(f);
+            while(scanner.hasNextLine()) {
+                result.add(scanner.nextLine());
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        return String.join("\n", result);
+
+    }
+
     public static void addScroll(String scrollName, String scrollContent, String scrollPath) {
         File f = new File(scrollPath + scrollName + ".txt");
-        if (f.exists() || checkScrollNameExists(scrollName)) {
+        if (checkScrollNameExists(scrollName)) {
             System.out.println("File with that name already exists");
         } else {
             try {
-                Boolean success = f.createNewFile();
+                boolean success = f.createNewFile();
                 if (success) {
                     addScrollToJSON(scrollName, Login.getUser().getUsername());
                     System.out.printf("New Scroll Created: ", f);
@@ -353,7 +370,7 @@ public class ViewUtils {
                 System.out.println("Scroll creation cannot occur");
             }
             try {
-                FileWriter fileToWrite = new FileWriter(scrollPath + scrollName + ".txt");
+                FileWriter fileToWrite = new FileWriter("src/main/resources/" + scrollName + ".txt");
                 fileToWrite.write(scrollContent);
                 fileToWrite.close();
                 System.out.println("Successfully wrote to the scroll.");
