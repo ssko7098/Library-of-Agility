@@ -56,6 +56,24 @@ public class AdminTest {
         Admin.deleteUser(user1.getUsername());
 
     }
+    @Test
+    public void checkUsernameTest() throws IOException {
+        String oldPass = "123";
+        User user1 = new User("userTest");
+        user1.setPassword(oldPass);
+        user1.setPhoneNumber("0413857586");
+        user1.setEmailAddress("ethan@gmail.com");
+        user1.setFullName("Ethan Acevksi");
+
+        Login.createNewUser(user1);
+
+        Boolean success = Admin.checkUsername(user1.getUsername());
+
+        Assertions.assertTrue(success);
+
+        Admin.deleteUser(user1.getUsername());
+
+    }
 
 
 
