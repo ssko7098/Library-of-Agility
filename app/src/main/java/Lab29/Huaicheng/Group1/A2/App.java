@@ -546,7 +546,13 @@ public class App {
                 }
             } else {
                 ViewUtils.readScroll(ViewUtils.viewAllScrollsNames()[selection]);
+                System.out.println("\nTemporary Display of Scroll for 5 seconds");
                 selection = -1;
+            }
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
             }
         } while (-1 == selection);
     }

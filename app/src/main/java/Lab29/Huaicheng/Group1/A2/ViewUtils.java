@@ -328,6 +328,7 @@ public class ViewUtils {
         } catch (FileNotFoundException e) {
             System.out.println("Scroll not found. Please enter a valid scroll name from the list above");
         }
+
     }
 
     public static Boolean checkDirectory(String directoryPathway) {
