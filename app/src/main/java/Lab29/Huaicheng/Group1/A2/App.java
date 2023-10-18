@@ -545,6 +545,7 @@ public class App {
                     throw new RuntimeException(e);
                 }
             } else {
+                System.out.println("Scroll Content for " + ViewUtils.viewAllScrollsNames()[selection] + ":");
                 ViewUtils.readScroll(ViewUtils.viewAllScrollsNames()[selection]);
                 System.out.println("\nTemporary Display of Scroll for 5 seconds");
                 selection = -1;
