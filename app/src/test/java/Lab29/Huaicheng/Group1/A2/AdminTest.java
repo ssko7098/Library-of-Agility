@@ -77,8 +77,8 @@ public class AdminTest {
     @Test
     public void checkUsernameDoesntExist() throws IOException {
         //Test for admin doesn't exist
-        Boolean success = Admin.checkUsername("null");
-        Assertions.assertTrue(success);
+        boolean success = Admin.checkUsername("null");
+        Assertions.assertFalse(success);
     }
 
 
