@@ -223,6 +223,42 @@ public class AsciiArt {
         endOfLetter.put('0',640);
 
     }
+    public void draw(String text){
+        char[] letters = text.toCharArray();
+        for(char c : letters){
+            if (c == ' '){
+                newWordSpace();
+            }else {
+                appendLetter(c);
+                letterSpace();
+            }
+
+        }
+        System.out.println(sb1.toString());
+        System.out.println(sb2.toString());
+        System.out.println(sb3.toString());
+        System.out.println(sb4.toString());
+        System.out.println(sb5.toString());
+        System.out.println(sb6.toString());
+        System.out.println(sb7.toString());
+        System.out.println(sb8.toString());
+        System.out.println(sb9.toString());
+        System.out.println(sb10.toString());
+        System.out.println(sb11.toString());
+
+        sb1.delete(0,sb1.length());
+        sb2.delete(0,sb2.length());
+        sb3.delete(0,sb3.length());
+        sb4.delete(0,sb4.length());
+        sb5.delete(0,sb5.length());
+        sb6.delete(0,sb6.length());
+        sb7.delete(0,sb7.length());
+        sb8.delete(0,sb8.length());
+        sb9.delete(0,sb9.length());
+        sb10.delete(0,sb10.length());
+        sb11.delete(0,sb11.length());
+    }
+
     public char getLetterL1(int index){
         char[] char1 = line1.toCharArray();
         return char1[index];
