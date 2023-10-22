@@ -443,4 +443,69 @@ public class ViewUtils {
         }
 
     }
+
+    public static void editFile(String filePath) {
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(filePath));
+            String[] lines = reader.lines().toArray(String[]::new);
+
+            System.out.println("Current content:");
+            for (int i = 0; i < lines.length; i++) {
+                System.out.println(i + 1 + ": " + lines[i]);
+            }
+
+            System.out.println("\nEnter the line number to edit (type 'exit' to save and exit):");
+            BufferedReader userInputReader = new BufferedReader(new InputStreamReader(System.in));
+            String userInput;
+            while (!(userInput = userInputReader.readLine()).equals("exit")) {
+                try {
+                    int lineNumber = Integer.parseInt(userInput);
+                    if (lineNumber > 0 && lineNumber <= lines.length) {
+                        System.out.println("Enter new content for line " + lineNumber + ":");
+                        String newContent = userInputReader.readLine();
+                        lines[lineNumber - 1] = newContent;
+                    } else {
+                        System.out.println("Invalid line number. Please try again.");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid input. Please enter a number or 'exit'.");
+                }
+            }
+
+            BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
+            for (String line : lines) {
+                writer.write(line);
+                writer.newLine();
+            }
+
+            reader.close();
+            writer.close();
+        } catch (IOException e) {
+            System.err.println("Error: " + e.getMessage());
+        }
+    }
+
+    public static String[] viewAllScrollsFromUser(String username) {
+        List<String> scrollNames = new ArrayList<>();
+        scrollNames.add("GO BACK");
+
+        JSONParser parser = new JSONParser();
+        JSONArray scrolls;
+        try {
+            scrolls = (JSONArray) parser.parse(new FileReader("scrolls.json"));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+        for (int i=0; i<scrolls.size(); i++) {
+            JSONObject scroll = (JSONObject) scrolls.get(i);
+            if(scroll.get("Uploader").toString().equals(username)) {
+                scrollNames.add(scroll.get("scrollName").toString());
+            }
+        }
+        return scrollNames.toArray(new String[0]);
+    }
 }
