@@ -508,4 +508,34 @@ public class ViewUtils {
         }
         return scrollNames.toArray(new String[0]);
     }
+
+    public static void deleteScroll(String filePath, String scrollName) {
+        File scrollFile = new File(filePath);
+        scrollFile.delete();
+
+        JSONParser parser = new JSONParser();
+        JSONArray scrolls;
+
+        try {
+            scrolls = (JSONArray) parser.parse(new FileReader("scrolls.json"));
+        } catch (IOException | ParseException e) {
+            throw new RuntimeException(e);
+        }
+
+        for(int i=0; i<scrolls.size(); i++) {
+            JSONObject scroll = (JSONObject) scrolls.get(i);
+            if(scroll.get("scrollName").equals(scrollName) && scroll.get("Uploader").equals(Login.getUser().getUsername())) {
+                scrolls.remove(scroll);
+            }
+        }
+
+        try {
+            FileWriter file = new FileWriter("scrolls.json");
+            file.write(scrolls.toJSONString());
+            file.flush();
+            file.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
