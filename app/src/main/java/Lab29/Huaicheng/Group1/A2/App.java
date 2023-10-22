@@ -251,6 +251,7 @@ public class App {
                             "GO BACK",
                             "Add Scroll",
                             "Edit Scroll",
+                            "Delete Scroll",
                     },
                     "Please enter a selection");
 
@@ -265,6 +266,10 @@ public class App {
 
                 case 2:
                     editScrollMenu();
+                    break;
+
+                case 3:
+                    deleteScrollMenu();
                     break;
 
                 default:
@@ -288,7 +293,29 @@ public class App {
             else {
                 String scrollName = ViewUtils.viewAllScrollsFromUser(Login.getUser().getUsername())[selection];
                 ViewUtils.editFile("src/main/resources/" + Login.getUser().getUsername() + "/" + scrollName + ".txt");
-                editScrollMenu();
+                digitalScrollManagementMenu();
+                break;
+            }
+
+        } while (-1 == selection);
+    }
+
+    private static void deleteScrollMenu() throws IOException {
+        int selection;
+
+        do {
+            selection = ViewUtils.displayMenu("\nMake Selection:",
+                    ViewUtils.viewAllScrollsFromUser(Login.getUser().getUsername()),
+                    "Please enter a selection");
+
+            if (selection == 0) {
+                digitalScrollManagementMenu();
+                break;
+            }
+            else {
+                String scrollName = ViewUtils.viewAllScrollsFromUser(Login.getUser().getUsername())[selection];
+                ViewUtils.deleteScroll("src/main/resources/" + Login.getUser().getUsername() + "/" + scrollName + ".txt", scrollName);
+                digitalScrollManagementMenu();
                 break;
             }
 
