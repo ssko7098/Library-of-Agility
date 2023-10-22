@@ -250,6 +250,7 @@ public class App {
                     new String[]{
                             "GO BACK",
                             "Add Scroll",
+                            "Edit Scroll",
                     },
                     "Please enter a selection");
 
@@ -262,9 +263,35 @@ public class App {
                     uploadScrollMenu();
                     break;
 
+                case 2:
+                    editScrollMenu();
+                    break;
+
                 default:
                     // Can't get here
             }
+        } while (-1 == selection);
+    }
+
+    private static void editScrollMenu() throws IOException {
+        int selection;
+
+        do {
+            selection = ViewUtils.displayMenu("\nMake Selection:",
+                    ViewUtils.viewAllScrollsFromUser(Login.getUser().getUsername()),
+                    "Please enter a selection");
+
+            if (selection == 0) {
+                digitalScrollManagementMenu();
+                break;
+            }
+            else {
+                String scrollName = ViewUtils.viewAllScrollsFromUser(Login.getUser().getUsername())[selection];
+                ViewUtils.editFile("src/main/resources/" + Login.getUser().getUsername() + "/" + scrollName + ".txt");
+                editScrollMenu();
+                break;
+            }
+
         } while (-1 == selection);
     }
 
