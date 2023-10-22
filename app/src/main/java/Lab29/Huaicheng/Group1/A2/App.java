@@ -601,7 +601,10 @@ public class App {
                 }
             } else {
                 System.out.println("Scroll Content for " + ViewUtils.viewAllScrollsNames()[selection] + ":");
-                ViewUtils.readScroll(ViewUtils.viewAllScrollsNames()[selection]);
+
+                String username = ViewUtils.viewAllScrollsDetails()[selection].split(" ")[3];
+
+                ViewUtils.readScroll(ViewUtils.viewAllScrollsNames()[selection], username);
                 System.out.println("\nTemporary Display of Scroll for 5 seconds");
                 selection = -1;
             }
