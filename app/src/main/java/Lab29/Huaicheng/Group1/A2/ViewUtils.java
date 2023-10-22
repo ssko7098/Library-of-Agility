@@ -309,9 +309,9 @@ public class ViewUtils {
         return scrollDetails.toArray(new String[0]);
     }
 
-    public static void readScroll(String scrollName) {
+    public static void readScroll(String scrollName, String username) {
         try {
-            File myObj = new File("src/main/resources/" + scrollName + ".txt");
+            File myObj = new File("src/main/resources/" + username + "/" + scrollName + ".txt");
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
@@ -332,7 +332,7 @@ public class ViewUtils {
     public static boolean checkScrollNameExists(String scrollName) {
         // the scroll name is meant to be a primary key, so we need to check
         // whether it already exists.
-        File f = new File("src/main/resources/" + scrollName + ".txt");
+        File f = new File("src/main/resources/" + Login.getUser().getUsername() + "/" + scrollName + ".txt");
         return f.exists();
     }
 
@@ -374,7 +374,22 @@ public class ViewUtils {
     }
 
     public static void addScroll(String scrollName, String scrollContent, String scrollPath) {
-        File f = new File("src/main/resources/" + scrollName + ".txt");
+        String directory = "src/main/resources/" + Login.getUser().getUsername();
+
+        try {
+
+            Path path = Paths.get(directory);
+
+            Files.createDirectories(path);
+
+            System.out.println("Directory is created!");
+
+        } catch (IOException e) {
+            System.err.println("Failed to create directory!" + e.getMessage());
+        }
+
+        File f = new File(directory + "/" + scrollName + ".txt");
+
         if (checkScrollNameExists(scrollName)) {
             System.out.println("File with that name already exists");
         } else {
@@ -390,7 +405,7 @@ public class ViewUtils {
                 System.out.println("Scroll creation cannot occur");
             }
             try {
-                FileWriter fileToWrite = new FileWriter("src/main/resources/" + scrollName + ".txt");
+                FileWriter fileToWrite = new FileWriter(directory + "/" + scrollName + ".txt");
                 fileToWrite.write(scrollContent);
                 fileToWrite.close();
                 System.out.println("Successfully wrote to the scroll.");
