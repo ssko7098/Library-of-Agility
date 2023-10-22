@@ -104,7 +104,7 @@ public class App {
             selection = ViewUtils.displayMenu("\nMake Selection",
                     new String[]{
                             "GO BACK",
-                            "Show Email Adresses",
+                            "Show Email Addresses",
                             "Show Phone Numbers",
                             "Change User Password",
                     },
@@ -343,7 +343,7 @@ public class App {
                     String directoryAdress = "";
 
                     while (invalidDirectory) {
-                        directoryAdress = FileUploaderWithDialog.chooseFile();
+                        directoryAdress = FileSaveAndDownload.chooseFile();
                         invalidDirectory = false;
                         if(directoryAdress == null) {
                             selection = -1;
@@ -660,6 +660,15 @@ public class App {
 
                 ViewUtils.readScroll(ViewUtils.viewAllScrollsNames()[selection], username);
                 System.out.println("\nTemporary Display of Scroll for 5 seconds");
+
+                if(!userType.equals("guest")) {
+                    boolean download = ViewUtils.getBoolean("Do you want to download this scroll?");
+
+                    if(download) {
+                        FileSaveAndDownload.downloadFile(ViewUtils.viewAllScrollsNames()[selection], username);
+                    }
+                }
+
                 selection = -1;
             }
             try {
@@ -669,4 +678,6 @@ public class App {
             }
         } while (-1 == selection);
     }
+
+
 }
