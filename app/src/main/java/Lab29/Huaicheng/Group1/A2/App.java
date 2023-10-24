@@ -501,6 +501,7 @@ public class App {
                     break;
 
                 case 4:
+                    viewStats();
                     selection = -1;
                     break;
 
@@ -509,6 +510,30 @@ public class App {
             }
         } while (-1 == selection);
     }
+
+    private static void viewStats() throws IOException {
+        int selection;
+        do {
+            selection = ViewUtils.displayMenu("\nMake Selection:",
+                    new String[]{
+                            "Go Back",
+                            "Total Scrolls: ",
+                            "Total Downloads: ",
+                            "Total Uploads: ",
+
+
+                    },
+                    "Viewing Scroll Statistics)");
+
+            switch (selection) {
+                case 0:
+                    adminMenu();
+                default:
+                    System.out.println("Invalid selection, please choose 0 to go back.");
+            }
+        } while (true);
+    }
+
 
 
     private static void adminOrUser() throws IOException {
