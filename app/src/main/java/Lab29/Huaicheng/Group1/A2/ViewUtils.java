@@ -285,6 +285,7 @@ public class ViewUtils {
     public static String[] viewAllScrollsDetails() {
         List<String> scrollDetails = new ArrayList<>();
         scrollDetails.add("GO BACK");
+        scrollDetails.add("Search");
 
         JSONParser parser = new JSONParser();
         JSONArray scrolls;

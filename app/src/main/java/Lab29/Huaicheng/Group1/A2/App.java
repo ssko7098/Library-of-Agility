@@ -653,6 +653,8 @@ public class App {
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
+            } else if (selection == 1) {
+                searchScrolls();
             } else {
                 System.out.println("Scroll Content for " + ViewUtils.viewAllScrollsNames()[selection] + ":");
 
@@ -678,6 +680,41 @@ public class App {
             }
         } while (-1 == selection);
     }
+    private static void searchScrolls() {
+        int selection;
 
+        do {
+            selection = ViewUtils.displayMenu("\nMake Selection:",
+                    new String[]{
+                            "GO BACK",
+                            "Search using Scroll Name",
+                            "Search using Scroll Uploader",
+                            "Search using Date",
+                    },
+                    "Please enter a selection");
 
+            switch (selection) {
+                case 0:
+                    ScrollMenu();
+                    break;
+
+                case 1:
+                    searchUsingName();
+                    selection = -1;
+                    break;
+                case 2:
+                    searchUsingUploader();
+                    selection = -1;
+                    break;
+                case 3:
+                    searchUsingDate();
+                    selection = -1;
+                    break;
+                default:
+            }
+        } while (-1 == selection);
+    }
+    private static void searchUsingName() {}
+    private static void searchUsingUploader() {}
+    private static void searchUsingDate() {}
 }
