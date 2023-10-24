@@ -103,4 +103,31 @@ public class Admin {
         }
 
         }
+
+    public static int getScrollNumber() {
+        int scrollNumber;
+        JSONParser parser = new JSONParser();
+        JSONArray scrolls;
+
+        try {
+            scrolls = (JSONArray) parser.parse(new FileReader("scrolls.json"));
+        } catch (IOException | ParseException e) {
+            throw new RuntimeException(e);
+        }
+
+        scrollNumber = scrolls.size();
+
+        System.out.println("Number of Scrolls: " + scrollNumber);
+        return scrollNumber;
     }
+
+    public static int getDownloadNumber() {
+        int downloadNumber = 0;
+        return downloadNumber;
+    }
+
+    public static int getUploadNumber() {
+        int uploadNumber = 0;
+        return uploadNumber;
+    }
+}
