@@ -516,20 +516,19 @@ public class App {
         do {
             selection = ViewUtils.displayMenu("\nMake Selection:",
                     new String[]{
-                            "Go Back",
-                            "Total Scrolls: ",
-                            "Total Downloads: ",
-                            "Total Uploads: ",
-
-
+                            "GO BACK",
                     },
-                    "Viewing Scroll Statistics)");
+                    "Total Scrolls: " + Admin.getScrollNumber() + "\nTotal Downloads: " + Admin.getDownloadNumber() +
+                    "\nTotal Uploads: " + Admin.getUploadNumber());
 
             switch (selection) {
                 case 0:
                     adminMenu();
+                    break;
                 default:
-                    System.out.println("Invalid selection, please choose 0 to go back.");
+                    if (selection != -1) {
+                        System.out.println("Invalid selection, please choose 0 to go back.");
+                    }
             }
         } while (true);
     }
