@@ -103,4 +103,19 @@ public class Admin {
         }
 
         }
+
+    public static int getScrollNumber() {
+        int scrollNumber = 0;
+        return scrollNumber;
     }
+
+    public static int getDownloadNumber() {
+        int downloadNumber = 0;
+        return downloadNumber;
+    }
+
+    public static int getUploadNumber() {
+        int uploadNumber = 0;
+        return uploadNumber;
+    }
+}
