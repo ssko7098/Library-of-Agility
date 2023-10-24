@@ -105,7 +105,19 @@ public class Admin {
         }
 
     public static int getScrollNumber() {
-        int scrollNumber = 0;
+        int scrollNumber;
+        JSONParser parser = new JSONParser();
+        JSONArray scrolls;
+
+        try {
+            scrolls = (JSONArray) parser.parse(new FileReader("scrolls.json"));
+        } catch (IOException | ParseException e) {
+            throw new RuntimeException(e);
+        }
+
+        scrollNumber = scrolls.size();
+
+        System.out.println("Number of Scrolls: " + scrollNumber);
         return scrollNumber;
     }
 
