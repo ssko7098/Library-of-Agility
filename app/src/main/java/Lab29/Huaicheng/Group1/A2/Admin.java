@@ -104,11 +104,36 @@ public class Admin {
 
         }
 
+    public static void setScrollUploadNumber(int number) {
+        JSONParser parser = new JSONParser();
+        JSONArray stats;
+
+        try {
+            stats = (JSONArray) parser.parse(new FileReader("statistics.json"));
+            for (int i = 0; i < stats.size(); i++) {
+                JSONObject stat = (JSONObject) stats.get(i);
+                if (stat.containsKey("uploads")) {
+                    long uploads = (long) stat.get("uploads");
+                    stat.put("uploads", uploads + number);
+                }
+            }
+        } catch (IOException | ParseException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            FileWriter file = new FileWriter("statistics.json");
+            file.write(stats.toJSONString());
+            file.flush();
+            file.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static int getScrollNumber() {
         int scrollNumber;
         JSONParser parser = new JSONParser();
         JSONArray scrolls;
-
         try {
             scrolls = (JSONArray) parser.parse(new FileReader("scrolls.json"));
         } catch (IOException | ParseException e) {
@@ -116,8 +141,6 @@ public class Admin {
         }
 
         scrollNumber = scrolls.size();
-
-        System.out.println("Number of Scrolls: " + scrollNumber);
         return scrollNumber;
     }
 
