@@ -224,9 +224,7 @@ public class ViewUtils {
 
         try {
             users = (JSONArray) parser.parse(new FileReader("users.json"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ParseException e) {
+        } catch (IOException | ParseException e) {
             throw new RuntimeException(e);
         }
 
@@ -263,11 +261,7 @@ public class ViewUtils {
         JSONArray scrolls;
         try {
             scrolls = (JSONArray) parser.parse(new FileReader("scrolls.json"));
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ParseException e) {
+        } catch (ParseException | IOException e) {
             throw new RuntimeException(e);
         }
         for (int i=0; i<scrolls.size(); i++) {
@@ -287,11 +281,7 @@ public class ViewUtils {
         JSONArray scrolls;
         try {
             scrolls = (JSONArray) parser.parse(new FileReader("scrolls.json"));
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ParseException e) {
+        } catch (ParseException | IOException e) {
             throw new RuntimeException(e);
         }
         for (int i=0; i<scrolls.size(); i++) {
@@ -314,11 +304,7 @@ public class ViewUtils {
         JSONArray scrolls;
         try {
             scrolls = (JSONArray) parser.parse(new FileReader("scrolls.json"));
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ParseException e) {
+        } catch (IOException | ParseException e) {
             throw new RuntimeException(e);
         }
 
@@ -461,7 +447,7 @@ public class ViewUtils {
                 System.out.println("Successfully wrote to the scroll.");
                 System.out.println();
                 System.out.println("Please enter '!' on a new line to return to the menu");
-                Boolean temp = false;
+                boolean temp = false;
                 while(!temp) {
                     String searchTerm = ViewUtils.getStringOnSameLine("");
                     if (searchTerm.contains("!")) {
@@ -474,6 +460,7 @@ public class ViewUtils {
         }
     }
 
+    @SuppressWarnings("unchecked")
     public static void addScrollToJSON(String scrollName, String uploaderUsername){
         JSONParser parser = new JSONParser();
         JSONArray scrolls;
@@ -551,11 +538,7 @@ public class ViewUtils {
         JSONArray scrolls;
         try {
             scrolls = (JSONArray) parser.parse(new FileReader("scrolls.json"));
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ParseException e) {
+        } catch (IOException | ParseException e) {
             throw new RuntimeException(e);
         }
         for (int i=0; i<scrolls.size(); i++) {
