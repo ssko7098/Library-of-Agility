@@ -350,6 +350,11 @@ public class ViewUtils {
                 }
             }
         }
+
+        if(scrollDetails.size() == 1) {
+            return null;
+        }
+
         return scrollDetails.toArray(new String[0]);
     }
 
