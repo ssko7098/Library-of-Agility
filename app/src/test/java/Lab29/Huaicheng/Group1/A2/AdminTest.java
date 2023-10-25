@@ -81,6 +81,22 @@ public class AdminTest {
         Assertions.assertFalse(success);
     }
 
+    @Test
+    public void checkDownloadNumber() throws IOException {
+        int dnOld = Admin.getDownloadNumber();
+        Admin.setScrollDownloadNumber(1);
+        int dnNew = Admin.getDownloadNumber();
+        Admin.setScrollDownloadNumber(-1);
+        Assertions.assertTrue((dnOld == (dnNew - 1)));
+    }
 
+    @Test
+    public void checkUploadNumber() throws IOException {
+        int unOld = Admin.getUploadNumber();
+        Admin.setScrollUploadNumber(1);
+        int unNew = Admin.getUploadNumber();
+        Admin.setScrollUploadNumber(-1);
+        Assertions.assertTrue((unOld == (unNew - 1)));
+    }
 
 }
