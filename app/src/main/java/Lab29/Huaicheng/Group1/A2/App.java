@@ -313,13 +313,40 @@ public class App {
                 break;
             }
             else {
-                String scrollName = ViewUtils.viewAllScrollsFromUser(Login.getUser().getUsername())[selection];
-                ViewUtils.deleteScroll("src/main/resources/" + Login.getUser().getUsername() + "/" + scrollName + ".txt", scrollName);
-                digitalScrollManagementMenu();
-                break;
+                if (confirmScrollDeletion()){
+                    String scrollName = ViewUtils.viewAllScrollsFromUser(Login.getUser().getUsername())[selection];
+                    ViewUtils.deleteScroll("src/main/resources/" + Login.getUser().getUsername() + "/" + scrollName + ".txt", scrollName);
+                    System.out.println("Scroll deleted successfully!");
+                    digitalScrollManagementMenu();
+                } else {
+                    System.out.println("Scroll deletion cancelled.");
+                    digitalScrollManagementMenu();
+                }
+
             }
 
         } while (-1 == selection);
+    }
+
+    private static boolean confirmScrollDeletion() {
+        int selection;
+        do {
+            selection = ViewUtils.displayMenu("\nMake Selection:",
+                    new String[]{
+                            "Yes",
+                            "No",
+                    },
+                    "Are you sure you want to delete this scroll?");
+
+            switch (selection) {
+                case 0:
+                    return true;
+                case 1:
+                    return false;
+                default:
+                    System.out.println("Invalid selection, please choose 0 for Yes or 1 for No.");
+            }
+        } while (true);
     }
 
     private static void uploadScrollMenu() throws IOException {
