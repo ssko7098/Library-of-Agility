@@ -17,7 +17,7 @@ public class App {
             "Manage my Profile",
             "Digital Scroll Management",
             "Scroll Seeker",
-            "User Management (Special admin access)"
+            "Special admin access"
     };
 
     private static String[] guest = new String[]{
@@ -666,18 +666,18 @@ public class App {
             } else if (selection == 1) {
                 searchScrolls();
             } else {
-                System.out.println("Scroll Content for " + ViewUtils.viewAllScrollsNames()[selection] + ":");
+                System.out.println("Scroll Content for " + ViewUtils.viewAllScrollsNames()[selection - 1] + ":");
 
                 String username = ViewUtils.viewAllScrollsDetails()[selection].split(" ")[3];
 
-                ViewUtils.readScroll(ViewUtils.viewAllScrollsNames()[selection], username);
+                ViewUtils.readScroll(ViewUtils.viewAllScrollsNames()[selection - 1], username);
                 System.out.println("\nTemporary Display of Scroll for 5 seconds");
 
                 if(!userType.equals("guest")) {
                     boolean download = ViewUtils.getBoolean("Do you want to download this scroll?");
 
                     if(download) {
-                        FileSaveAndDownload.downloadFile(ViewUtils.viewAllScrollsNames()[selection], username);
+                        FileSaveAndDownload.downloadFile(ViewUtils.viewAllScrollsNames()[selection - 1], username);
                     }
                 }
 
