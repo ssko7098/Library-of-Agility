@@ -173,6 +173,20 @@ public class Admin {
 
     public static int getDownloadNumber() {
         int downloadNumber = 0;
+        JSONParser parser = new JSONParser();
+        JSONArray stats;
+        try {
+            stats = (JSONArray) parser.parse(new FileReader("statistics.json"));
+            for (Object o : stats) {
+                JSONObject stat = (JSONObject) o;
+                if (stat.containsKey("downloads")) {
+                    downloadNumber = ((Long) stat.get("downloads")).intValue();
+                    break;
+                }
+            }
+        } catch (IOException | ParseException e) {
+            throw new RuntimeException(e);
+        }
         return downloadNumber;
     }
 
