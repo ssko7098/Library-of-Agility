@@ -102,7 +102,7 @@ public class Admin {
             throw new RuntimeException(e);
         }
 
-        }
+    }
 
     public static void setScrollUploadNumber(int number) {
         JSONParser parser = new JSONParser();
@@ -130,6 +130,33 @@ public class Admin {
         }
     }
 
+    public static void setScrollDownloadNumber(int number) {
+        JSONParser parser = new JSONParser();
+        JSONArray stats;
+
+        try {
+            stats = (JSONArray) parser.parse(new FileReader("statistics.json"));
+            for (int i = 0; i < stats.size(); i++) {
+                JSONObject stat = (JSONObject) stats.get(i);
+                if (stat.containsKey("downloads")) {
+                    long uploads = (long) stat.get("downloads");
+                    stat.put("downloads", uploads + number);
+                }
+            }
+        } catch (IOException | ParseException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            FileWriter file = new FileWriter("statistics.json");
+            file.write(stats.toJSONString());
+            file.flush();
+            file.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
     public static int getScrollNumber() {
         int scrollNumber;
         JSONParser parser = new JSONParser();
@@ -146,6 +173,20 @@ public class Admin {
 
     public static int getDownloadNumber() {
         int downloadNumber = 0;
+        JSONParser parser = new JSONParser();
+        JSONArray stats;
+        try {
+            stats = (JSONArray) parser.parse(new FileReader("statistics.json"));
+            for (Object o : stats) {
+                JSONObject stat = (JSONObject) o;
+                if (stat.containsKey("downloads")) {
+                    downloadNumber = ((Long) stat.get("downloads")).intValue();
+                    break;
+                }
+            }
+        } catch (IOException | ParseException e) {
+            throw new RuntimeException(e);
+        }
         return downloadNumber;
     }
 
@@ -167,4 +208,5 @@ public class Admin {
         }
         return uploadNumber;
     }
+
 }

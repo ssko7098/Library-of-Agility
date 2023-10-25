@@ -54,6 +54,7 @@ public class FileSaveAndDownload {
         if (returnValueDownload == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
             String destinationPath = selectedFile.getPath();
+            Admin.setScrollDownloadNumber(1);
 
             String sourcePath = "src/main/resources/" + uploader + "/" + scrollName + ".txt";
             downloadToDestination(sourcePath, destinationPath);
