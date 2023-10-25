@@ -62,8 +62,6 @@ public class App {
                     break;
                 case 2:
                     createUserMenu(false);
-
-                    //TODO change to new user registration screen
                     break;
                 case 3:
                     Login.login("guest", "guest");
@@ -728,25 +726,28 @@ public class App {
         int selection;
 
         do {
-            Scanner scanner = new Scanner(System.in);
-            System.out.print("Search: ");
-            String searchTerm = null;
-            if (scanner.hasNextLine()) {
-                searchTerm = scanner.nextLine();
+            System.out.println("Enter '!' to quit search");
+            String searchTerm = ViewUtils.getStringOnSameLine("Search: ");
+
+            if(searchTerm.equals("!")) {
+                searchScrolls();
             }
-            //ViewUtils.viewScrollsDetailsUsingSearch(searchTerm, "name");
+
+            String[] searchResult = ViewUtils.viewScrollsDetailsUsingSearch(searchTerm, "name");
+
+            if(searchResult == null) {
+                System.out.println("No scrolls found with that name.");
+                searchUsingName();
+            }
+
             selection = ViewUtils.displayMenu("\nMake Selection:",
-                    ViewUtils.viewScrollsDetailsUsingSearch(searchTerm, "name"),
-                    "Please enter a selection");
+                        searchResult, "Please enter a selection");
 
             if (selection == 0) {
                 searchScrolls();
             } else {
-                System.out.println("Scroll Content for " + ViewUtils.viewScrollsDetailsUsingSearch(searchTerm, "name")[selection].split(" ")[0] + ":");
-
                 String username = ViewUtils.viewScrollsDetailsUsingSearch(searchTerm, "name")[selection].split(" ")[4];
-                System.out.println(username);
-                System.out.println(ViewUtils.viewScrollsDetailsUsingSearch(searchTerm, "name")[selection].split(" ")[0]);
+                System.out.println("Scroll Content for " + username + "'s " + ViewUtils.viewScrollsDetailsUsingSearch(searchTerm, "name")[selection].split(" ")[0] + ":");
                 ViewUtils.readScroll(ViewUtils.viewScrollsDetailsUsingSearch(searchTerm, "name")[selection].split(" ")[0], username);
                 System.out.println("\nTemporary Display of Scroll for 5 seconds");
 
@@ -767,28 +768,32 @@ public class App {
             }
         } while (-1 == selection);
     }
+
     private static void searchUsingUploader() {int selection;
 
         do {
-            Scanner scanner = new Scanner(System.in);
-            System.out.print("Search: ");
-            String searchTerm = null;
-            if (scanner.hasNextLine()) {
-                searchTerm = scanner.nextLine();
+            System.out.println("Enter '!' to quit search");
+            String searchTerm = ViewUtils.getStringOnSameLine("Search: ");
+
+            if(searchTerm.equals("!")) {
+                searchScrolls();
             }
-            //ViewUtils.viewScrollsDetailsUsingSearch(searchTerm, "name");
+
+            String[] searchResult = ViewUtils.viewScrollsDetailsUsingSearch(searchTerm, "uploader");
+
+            if(searchResult == null) {
+                System.out.println("No scrolls found uploaded by that user.");
+                searchUsingUploader();
+            }
+
             selection = ViewUtils.displayMenu("\nMake Selection:",
-                    ViewUtils.viewScrollsDetailsUsingSearch(searchTerm, "uploader"),
-                    "Please enter a selection");
+                    searchResult,"Please enter a selection");
 
             if (selection == 0) {
                 searchScrolls();
             } else {
-                System.out.println("Scroll Content for " + ViewUtils.viewScrollsDetailsUsingSearch(searchTerm, "uploader")[selection].split(" ")[0] + ":");
-
                 String username = ViewUtils.viewScrollsDetailsUsingSearch(searchTerm, "uploader")[selection].split(" ")[4];
-                System.out.println(username);
-                System.out.println(ViewUtils.viewScrollsDetailsUsingSearch(searchTerm, "uploader")[selection].split(" ")[0]);
+                System.out.println("Scroll Content for " + username + "'s " + ViewUtils.viewScrollsDetailsUsingSearch(searchTerm, "uploader")[selection].split(" ")[0] + ":");
                 ViewUtils.readScroll(ViewUtils.viewScrollsDetailsUsingSearch(searchTerm, "uploader")[selection].split(" ")[0], username);
                 System.out.println("\nTemporary Display of Scroll for 5 seconds");
 
@@ -811,25 +816,29 @@ public class App {
     private static void searchUsingDate() {int selection;
 
         do {
-            Scanner scanner = new Scanner(System.in);
-            System.out.print("Search: ");
-            String searchTerm = null;
-            if (scanner.hasNextLine()) {
-                searchTerm = scanner.nextLine();
+            System.out.println("Enter '!' to quit search");
+            String searchTerm = ViewUtils.getStringOnSameLine("Search: ");
+
+            if(searchTerm.equals("!")) {
+                searchScrolls();
             }
-            //ViewUtils.viewScrollsDetailsUsingSearch(searchTerm, "name");
+
+            String[] searchResult = ViewUtils.viewScrollsDetailsUsingSearch(searchTerm, "date");
+
+            if(searchResult == null) {
+                System.out.println("No scrolls found with that date.");
+                searchUsingDate();
+            }
+
             selection = ViewUtils.displayMenu("\nMake Selection:",
-                    ViewUtils.viewScrollsDetailsUsingSearch(searchTerm, "date"),
+                    searchResult,
                     "Please enter a selection");
 
             if (selection == 0) {
                 searchScrolls();
             } else {
-                System.out.println("Scroll Content for " + ViewUtils.viewScrollsDetailsUsingSearch(searchTerm, "date")[selection].split(" ")[0] + ":");
-
                 String username = ViewUtils.viewScrollsDetailsUsingSearch(searchTerm, "date")[selection].split(" ")[4];
-                System.out.println(username);
-                System.out.println(ViewUtils.viewScrollsDetailsUsingSearch(searchTerm, "date")[selection].split(" ")[0]);
+                System.out.println("Scroll Content for " + username + "'s " + ViewUtils.viewScrollsDetailsUsingSearch(searchTerm, "date")[selection].split(" ")[0] + ":");
                 ViewUtils.readScroll(ViewUtils.viewScrollsDetailsUsingSearch(searchTerm, "date")[selection].split(" ")[0], username);
                 System.out.println("\nTemporary Display of Scroll for 5 seconds");
 
