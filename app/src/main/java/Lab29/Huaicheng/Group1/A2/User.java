@@ -5,6 +5,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -58,7 +59,9 @@ public class User {
         boolean check = Login.checkUsernameExists(username);
 
         if(check) {
-            updateUsernameToJSONFile(this.username);
+            updateDirectory(this.username, username);
+            updateScrollsUploader(this.username, username);
+            updateUsernameToJSONFile(username);
             this.username = username;
         }
     }
@@ -160,6 +163,52 @@ public class User {
         try {
             FileWriter file = new FileWriter("users.json");
             file.write(users.toJSONString());
+            file.flush();
+            file.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void updateDirectory(String oldUsername, String newUsername) {
+        String currentDirectory = "src/main/resources/" + oldUsername;
+        String newDirectory = "src/main/resources/" + newUsername;
+
+        // Create File objects for old and new directories
+        File oldDir = new File(currentDirectory);
+        File newDir = new File(newDirectory);
+
+        // Rename the directory
+        boolean success = oldDir.renameTo(newDir);
+
+        if (success) {
+            System.out.println("Directory renamed successfully.");
+        } else {
+            System.out.println("Failed to rename the directory.");
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    public void updateScrollsUploader(String oldUsername, String newUsername) {
+        JSONParser parser = new JSONParser();
+        JSONArray scrolls;
+
+        try {
+            scrolls = (JSONArray) parser.parse(new FileReader("scrolls.json"));
+        } catch (IOException | ParseException e) {
+            throw new RuntimeException(e);
+        }
+
+        for(int i=0; i<scrolls.size(); i++) {
+            JSONObject scroll = (JSONObject) scrolls.get(i);
+            if(scroll.get("Uploader").equals(oldUsername)) {
+                scroll.put("Uploader", newUsername);
+            }
+        }
+
+        try {
+            FileWriter file = new FileWriter("scrolls.json");
+            file.write(scrolls.toJSONString());
             file.flush();
             file.close();
         } catch (IOException e) {

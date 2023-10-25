@@ -442,7 +442,7 @@ public class App {
 
                 case 1:
                     String username = ViewUtils.checkUsernameInput();
-                    Login.getUser().updateUsernameToJSONFile(username);
+                    Login.getUser().setUsername(username);
 
                     selection = -1;
                     break;
