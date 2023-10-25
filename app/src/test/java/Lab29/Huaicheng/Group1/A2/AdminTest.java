@@ -84,6 +84,10 @@ public class AdminTest {
     @Test
     public void checkDownloadNumber() throws IOException {
         int dnOld = Admin.getDownloadNumber();
+        Admin.setScrollDownloadNumber(1);
+        int dnNew = Admin.getDownloadNumber();
+        Admin.setScrollDownloadNumber(-1);
+        Assertions.assertTrue((dnOld == (dnNew - 1)));
     }
 
 }
