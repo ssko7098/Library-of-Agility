@@ -151,6 +151,20 @@ public class Admin {
 
     public static int getUploadNumber() {
         int uploadNumber = 0;
+        JSONParser parser = new JSONParser();
+        JSONArray stats;
+        try {
+            stats = (JSONArray) parser.parse(new FileReader("statistics.json"));
+            for (Object o : stats) {
+                JSONObject stat = (JSONObject) o;
+                if (stat.containsKey("uploads")) {
+                    uploadNumber = ((Long) stat.get("uploads")).intValue();
+                    break;
+                }
+            }
+        } catch (IOException | ParseException e) {
+            throw new RuntimeException(e);
+        }
         return uploadNumber;
     }
 }
