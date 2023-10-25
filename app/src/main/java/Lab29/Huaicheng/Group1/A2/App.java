@@ -677,6 +677,15 @@ public class App {
                         FileSaveAndDownload.downloadFile(ViewUtils.viewAllScrollsNames()[selection - 1], username);
                     }
                 }
+                //System.out.println();
+                System.out.println("Once you have finished previewing the scroll, enter '!' on a separate line to return to the selection menu");
+                Boolean temp = false;
+                while(!temp) {
+                    String searchTerm = ViewUtils.getStringOnSameLine("");
+                    if (searchTerm.contains("!")) {
+                        temp = true;
+                    }
+                }
 
                 selection = -1;
             }
