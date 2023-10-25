@@ -669,7 +669,6 @@ public class App {
                 String username = ViewUtils.viewAllScrollsDetails()[selection].split(" ")[3];
 
                 ViewUtils.readScroll(ViewUtils.viewAllScrollsNames()[selection - 1], username);
-                System.out.println("\nTemporary Display of Scroll for 5 seconds");
 
                 if(!userType.equals("guest")) {
                     boolean download = ViewUtils.getBoolean("Do you want to download this scroll?");
@@ -678,13 +677,17 @@ public class App {
                         FileSaveAndDownload.downloadFile(ViewUtils.viewAllScrollsNames()[selection - 1], username);
                     }
                 }
+                //System.out.println();
+                System.out.println("Once you have finished previewing the scroll, enter '!' on a separate line to return to the selection menu");
+                Boolean temp = false;
+                while(!temp) {
+                    String searchTerm = ViewUtils.getStringOnSameLine("");
+                    if (searchTerm.contains("!")) {
+                        temp = true;
+                    }
+                }
 
                 selection = -1;
-            }
-            try {
-                Thread.sleep(5000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
             }
         } while (-1 == selection);
     }
@@ -749,7 +752,6 @@ public class App {
                 String username = ViewUtils.viewScrollsDetailsUsingSearch(searchTerm, "name")[selection].split(" ")[4];
                 System.out.println("Scroll Content for " + username + "'s " + ViewUtils.viewScrollsDetailsUsingSearch(searchTerm, "name")[selection].split(" ")[0] + ":");
                 ViewUtils.readScroll(ViewUtils.viewScrollsDetailsUsingSearch(searchTerm, "name")[selection].split(" ")[0], username);
-                System.out.println("\nTemporary Display of Scroll for 5 seconds");
 
                 if(!userType.equals("guest")) {
                     boolean download = ViewUtils.getBoolean("Do you want to download this scroll?");
@@ -760,11 +762,7 @@ public class App {
                 }
 
                 selection = -1;
-            }
-            try {
-                Thread.sleep(5000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+                System.out.println();
             }
         } while (-1 == selection);
     }
@@ -795,7 +793,6 @@ public class App {
                 String username = ViewUtils.viewScrollsDetailsUsingSearch(searchTerm, "uploader")[selection].split(" ")[4];
                 System.out.println("Scroll Content for " + username + "'s " + ViewUtils.viewScrollsDetailsUsingSearch(searchTerm, "uploader")[selection].split(" ")[0] + ":");
                 ViewUtils.readScroll(ViewUtils.viewScrollsDetailsUsingSearch(searchTerm, "uploader")[selection].split(" ")[0], username);
-                System.out.println("\nTemporary Display of Scroll for 5 seconds");
 
                 if(!userType.equals("guest")) {
                     boolean download = ViewUtils.getBoolean("Do you want to download this scroll?");
@@ -806,11 +803,7 @@ public class App {
                 }
 
                 selection = -1;
-            }
-            try {
-                Thread.sleep(5000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+                System.out.println();
             }
         } while (-1 == selection);}
     private static void searchUsingDate() {int selection;
@@ -840,7 +833,6 @@ public class App {
                 String username = ViewUtils.viewScrollsDetailsUsingSearch(searchTerm, "date")[selection].split(" ")[4];
                 System.out.println("Scroll Content for " + username + "'s " + ViewUtils.viewScrollsDetailsUsingSearch(searchTerm, "date")[selection].split(" ")[0] + ":");
                 ViewUtils.readScroll(ViewUtils.viewScrollsDetailsUsingSearch(searchTerm, "date")[selection].split(" ")[0], username);
-                System.out.println("\nTemporary Display of Scroll for 5 seconds");
 
                 if(!userType.equals("guest")) {
                     boolean download = ViewUtils.getBoolean("Do you want to download this scroll?");
@@ -849,13 +841,8 @@ public class App {
                         FileSaveAndDownload.downloadFile(ViewUtils.viewScrollsDetailsUsingSearch(searchTerm, "date")[selection], username);
                     }
                 }
-
                 selection = -1;
-            }
-            try {
-                Thread.sleep(5000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+                System.out.println();
             }
         } while (-1 == selection);}
 }
