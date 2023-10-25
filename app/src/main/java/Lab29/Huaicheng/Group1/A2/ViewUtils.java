@@ -397,6 +397,7 @@ public class ViewUtils {
             try {
                 boolean success = f.createNewFile();
                 if (success) {
+                    Admin.setScrollUploadNumber(1);
                     addScrollToJSON(scrollName, Login.getUser().getUsername());
                     System.out.printf("New Scroll Created: ", f);
                 } else {
@@ -416,7 +417,6 @@ public class ViewUtils {
         }
     }
 
-    @SuppressWarnings("unchecked")
     public static void addScrollToJSON(String scrollName, String uploaderUsername){
         JSONParser parser = new JSONParser();
         JSONArray scrolls;
