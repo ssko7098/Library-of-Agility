@@ -10,10 +10,7 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class ViewUtils {
     static int displayMenu(String header, String[] options, String prompt) {
@@ -306,6 +303,53 @@ public class ViewUtils {
                     + scroll.get("Uploader").toString() + " on " + scroll.get("Date");
 
             scrollDetails.add(scrollString);
+        }
+        return scrollDetails.toArray(new String[0]);
+    }
+
+    public static String[] viewScrollsDetailsUsingSearch(String search, String searchBy) {
+        List<String> scrollDetails = new ArrayList<>();
+        scrollDetails.add("GO BACK");
+
+        JSONParser parser = new JSONParser();
+        JSONArray scrolls;
+        try {
+            scrolls = (JSONArray) parser.parse(new FileReader("scrolls.json"));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+
+        for (int i=0; i<scrolls.size(); i++) {
+            JSONObject scroll = (JSONObject) scrolls.get(i);
+            String scrollString;
+            if (Objects.equals(searchBy, "name")){
+                if ((Objects.equals(search, scroll.get("scrollName").toString()))) {
+                    scrollString = scroll.get("scrollName").toString() + " - Uploaded by "
+                            + scroll.get("Uploader").toString() + " on " + scroll.get("Date");
+
+                    scrollDetails.add(scrollString);
+                }
+            }
+            if (Objects.equals(searchBy, "uploader")){
+                if ((Objects.equals(search, scroll.get("Uploader").toString()))) {
+                    scrollString = scroll.get("scrollName").toString() + " - Uploaded by "
+                            + scroll.get("Uploader").toString() + " on " + scroll.get("Date");
+
+                    scrollDetails.add(scrollString);
+                }
+            }
+            if (Objects.equals(searchBy, "date")){
+                if ((Objects.equals(search, scroll.get("Date").toString()))) {
+                    scrollString = scroll.get("scrollName").toString() + " - Uploaded by "
+                            + scroll.get("Uploader").toString() + " on " + scroll.get("Date");
+
+                    scrollDetails.add(scrollString);
+                }
+            }
         }
         return scrollDetails.toArray(new String[0]);
     }

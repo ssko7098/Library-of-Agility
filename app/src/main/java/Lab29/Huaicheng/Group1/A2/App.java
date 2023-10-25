@@ -714,7 +714,50 @@ public class App {
             }
         } while (-1 == selection);
     }
-    private static void searchUsingName() {}
+    private static void searchUsingName() {
+        int selection;
+
+        do {
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("Search: ");
+            String searchTerm = null;
+            if (scanner.hasNextLine()) {
+                searchTerm = scanner.nextLine();
+            }
+            //ViewUtils.viewScrollsDetailsUsingSearch(searchTerm, "name");
+            selection = ViewUtils.displayMenu("\nMake Selection:",
+                    ViewUtils.viewScrollsDetailsUsingSearch(searchTerm, "name"),
+                    "Please enter a selection");
+
+            if (selection == 0) {
+                searchScrolls();
+            } else {
+                System.out.println("Scroll Content for " + ViewUtils.viewScrollsDetailsUsingSearch(searchTerm, "name")[selection].split(" ")[0] + ":");
+
+                String username = ViewUtils.viewScrollsDetailsUsingSearch(searchTerm, "name")[selection].split(" ")[4];
+                System.out.println(username);
+                System.out.println(ViewUtils.viewScrollsDetailsUsingSearch(searchTerm, "name")[selection].split(" ")[0]);
+                ViewUtils.readScroll(ViewUtils.viewScrollsDetailsUsingSearch(searchTerm, "name")[selection].split(" ")[0], username);
+                System.out.println("\nTemporary Display of Scroll for 5 seconds");
+
+                if(!userType.equals("guest")) {
+                    boolean download = ViewUtils.getBoolean("Do you want to download this scroll?");
+
+                    if(download) {
+                        FileSaveAndDownload.downloadFile(ViewUtils.viewScrollsDetailsUsingSearch(searchTerm, "name")[selection], username);
+                    }
+                }
+
+                selection = -1;
+            }
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        } while (-1 == selection);
+
+    }
     private static void searchUsingUploader() {}
     private static void searchUsingDate() {}
 }
