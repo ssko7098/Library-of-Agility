@@ -313,7 +313,7 @@ public class App {
                 break;
             }
             else {
-                if (confirmScrollDeletion()){
+                if (ViewUtils.getBoolean("Are you sure you want to delete this scroll?")){
                     String scrollName = ViewUtils.viewAllScrollsFromUser(Login.getUser().getUsername())[selection];
                     ViewUtils.deleteScroll("src/main/resources/" + Login.getUser().getUsername() + "/" + scrollName + ".txt", scrollName);
                     System.out.println("Scroll deleted successfully!");
@@ -326,27 +326,6 @@ public class App {
             }
 
         } while (-1 == selection);
-    }
-
-    private static boolean confirmScrollDeletion() {
-        int selection;
-        do {
-            selection = ViewUtils.displayMenu("\nMake Selection:",
-                    new String[]{
-                            "Yes",
-                            "No",
-                    },
-                    "Are you sure you want to delete this scroll?");
-
-            switch (selection) {
-                case 0:
-                    return true;
-                case 1:
-                    return false;
-                default:
-                    System.out.println("Invalid selection, please choose 0 for Yes or 1 for No.");
-            }
-        } while (true);
     }
 
     private static void uploadScrollMenu() throws IOException {
@@ -653,13 +632,13 @@ public class App {
             if (!deletable) {
                 System.out.println("\nUser not found!");
                 changePassword();
-            }else {
+            } else {
                 System.out.println("Enter new password for user: " + username);
                 String password = null;
                 if (scanner.hasNextLine()) {
                     password = scanner.nextLine();
                 }
-                if (confirmChangePassword(username)) {
+                if (ViewUtils.getBoolean("Are you sure you want to update " + username + "'s password?")) {
                     Admin.updatePassword(username, password);
                     System.out.println("User password updated successfully!");
                 } else {
@@ -668,26 +647,6 @@ public class App {
             }
         }
 
-    }
-    private static boolean confirmChangePassword(String username) {
-        int selection;
-        do {
-            selection = ViewUtils.displayMenu("\nMake Selection:",
-                    new String[]{
-                            "Yes",
-                            "No",
-                    },
-                    "Are you sure you want to update user '" + username + "' password?");
-
-            switch (selection) {
-                case 0:
-                    return true;
-                case 1:
-                    return false;
-                default:
-                    System.out.println("Invalid selection, please choose 0 for Yes or 1 for No.");
-            }
-        } while (true);
     }
 
     private static void ScrollMenu() {

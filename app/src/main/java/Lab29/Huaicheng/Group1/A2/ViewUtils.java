@@ -151,8 +151,7 @@ public class ViewUtils {
         String test;
 
         do {
-            test = ViewUtils.getString("Your current password is " + Login.getUser().getPassword() +
-                    ". Please enter your new Password:");
+            test = ViewUtils.getString("Please enter your new Password:");
 
             check = getBoolean("Are you sure you want your new Password to be: " + test + "?");
 
