@@ -52,7 +52,7 @@ jacocoTestReport {
                     "**/App.class",
                     "**/ViewUtils.class",
                     "**/AsciiArt.class",
-                    "**/FileUploaderWithDialog.class"
+                    "**/FileSaveAndDownload.class"
             ])
         }))
     }
