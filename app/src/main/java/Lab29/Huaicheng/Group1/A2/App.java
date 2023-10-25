@@ -669,7 +669,6 @@ public class App {
                 String username = ViewUtils.viewAllScrollsDetails()[selection].split(" ")[3];
 
                 ViewUtils.readScroll(ViewUtils.viewAllScrollsNames()[selection - 1], username);
-                System.out.println("\nTemporary Display of Scroll for 5 seconds");
 
                 if(!userType.equals("guest")) {
                     boolean download = ViewUtils.getBoolean("Do you want to download this scroll?");
@@ -680,11 +679,6 @@ public class App {
                 }
 
                 selection = -1;
-            }
-            try {
-                Thread.sleep(5000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
             }
         } while (-1 == selection);
     }

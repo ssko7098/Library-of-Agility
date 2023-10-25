@@ -459,6 +459,15 @@ public class ViewUtils {
                 fileToWrite.write(scrollContent);
                 fileToWrite.close();
                 System.out.println("Successfully wrote to the scroll.");
+                System.out.println();
+                System.out.println("Please enter '!' on a new line to return to the menu");
+                Boolean temp = false;
+                while(!temp) {
+                    String searchTerm = ViewUtils.getStringOnSameLine("");
+                    if (searchTerm.contains("!")) {
+                        temp = true;
+                    }
+                }
             } catch (IOException e) {
                 System.out.println("Scroll writing cannot occur");
             }
