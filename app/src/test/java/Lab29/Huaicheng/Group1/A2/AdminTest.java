@@ -90,4 +90,13 @@ public class AdminTest {
         Assertions.assertTrue((dnOld == (dnNew - 1)));
     }
 
+    @Test
+    public void checkUploadNumber() throws IOException {
+        int unOld = Admin.getUploadNumber();
+        Admin.setScrollUploadNumber(1);
+        int unNew = Admin.getUploadNumber();
+        Admin.setScrollUploadNumber(-1);
+        Assertions.assertTrue((unOld == (unNew - 1)));
+    }
+
 }
