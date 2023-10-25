@@ -99,4 +99,10 @@ public class AdminTest {
         Assertions.assertTrue((unOld == (unNew - 1)));
     }
 
+    @Test
+    public void scrollNumberTest() throws IOException {
+        int sn = Admin.getScrollNumber();
+        Assertions.assertTrue((sn > -1));
+    }
+
 }
