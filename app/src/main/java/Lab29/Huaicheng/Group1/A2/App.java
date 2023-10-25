@@ -749,7 +749,6 @@ public class App {
                 String username = ViewUtils.viewScrollsDetailsUsingSearch(searchTerm, "name")[selection].split(" ")[4];
                 System.out.println("Scroll Content for " + username + "'s " + ViewUtils.viewScrollsDetailsUsingSearch(searchTerm, "name")[selection].split(" ")[0] + ":");
                 ViewUtils.readScroll(ViewUtils.viewScrollsDetailsUsingSearch(searchTerm, "name")[selection].split(" ")[0], username);
-                System.out.println("\nTemporary Display of Scroll for 5 seconds");
 
                 if(!userType.equals("guest")) {
                     boolean download = ViewUtils.getBoolean("Do you want to download this scroll?");
@@ -760,11 +759,7 @@ public class App {
                 }
 
                 selection = -1;
-            }
-            try {
-                Thread.sleep(5000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+                System.out.println();
             }
         } while (-1 == selection);
     }
