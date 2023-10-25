@@ -212,25 +212,20 @@ public class App {
                     existingUserMenu();
 
                 case 1:
-                    //TODO change to user profile screen
                     if(userType.equals("guest")) {
                         ScrollMenu();
-                        //TODO change to scroll seeker screen
                     }
                     else {
                         updateUserMenu();
                     }
                     break;
                 case 2:
-                    //TODO change to digital scroll management screen
                     digitalScrollManagementMenu();
                     break;
                 case 3:
-                    //TODO change to scroll seeker screen
                     ScrollMenu();
                     break;
                 case 4:
-                    //TODO change to user management screen
                     adminMenu();
                     break;
 
@@ -679,7 +674,7 @@ public class App {
                 }
                 //System.out.println();
                 System.out.println("Once you have finished previewing the scroll, enter '!' on a separate line to return to the selection menu");
-                Boolean temp = false;
+                boolean temp = false;
                 while(!temp) {
                     String searchTerm = ViewUtils.getStringOnSameLine("");
                     if (searchTerm.contains("!")) {

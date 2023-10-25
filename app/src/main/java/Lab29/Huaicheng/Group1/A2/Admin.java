@@ -104,6 +104,7 @@ public class Admin {
 
     }
 
+    @SuppressWarnings("unchecked")
     public static void setScrollUploadNumber(int number) {
         JSONParser parser = new JSONParser();
         JSONArray stats;
@@ -130,6 +131,7 @@ public class Admin {
         }
     }
 
+    @SuppressWarnings("unchecked")
     public static void setScrollDownloadNumber(int number) {
         JSONParser parser = new JSONParser();
         JSONArray stats;
