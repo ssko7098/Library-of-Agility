@@ -81,6 +81,9 @@ public class AdminTest {
         Assertions.assertFalse(success);
     }
 
-
+    @Test
+    public void checkDownloadNumber() throws IOException {
+        int dnOld = Admin.getDownloadNumber();
+    }
 
 }
