@@ -519,8 +519,13 @@ public class ViewUtils {
 
             BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
             for (String line : lines) {
-                writer.write(line);
-                writer.newLine();
+                if(!line.contains("1") && !line.contains("0")) {
+                    System.out.println("Scroll must only contain binary digits");
+                }
+                else {
+                    writer.write(line);
+                    writer.newLine();
+                }
             }
 
             reader.close();
