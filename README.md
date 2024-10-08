@@ -3,8 +3,8 @@
 Welcome to the Library of Agility, developed as part of the SOFT2412 Agile Software Development Project. This system allows users to manage digital scrolls (binary files) through a command-line interface (CLI) with features for both general users and administrators.
 
 ## Admin Login Details
-username = `admin`
-password = `123`
+* username = `admin`  
+* password = `123`
 
 ## Table of Contents
 - [System Overview](#system-overview)
